@@ -14,9 +14,34 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+
     @Override
-    public User queryByEmailPsw(String email, String password, String username, Date joindate) {
-        return userMapper.queryByEmailPsw(email,password,username,joindate);
+    public User queryByEmail(String email) {
+
+        return userMapper.queryByEmail(email);
+    }
+
+    @Override
+    public Integer updatejoindate(String email) {
+        return userMapper.updatejoindate(email);
+    }
+    /**
+     * 登录
+     * @param email
+     * @param password
+     * @return
+     */
+    @Override
+    public User queryByEmailPsw(String email, String password ) {
+        User user=userMapper.queryByEmailPsw(email,password);
+        System.out.println("登录：获得账号信息"+user);
+        if(user!=null){
+            Integer i=userMapper.updatejoindate(user.getEmail());
+            if(i>0){
+                System.out.println("登录:成功修改登录时间");
+            }
+        }
+        return user;
     }
 
     @Override
@@ -24,13 +49,20 @@ public class UserServiceImpl implements UserService {
         return userMapper.actication(email);
     }
 
+    /**
+     * 注册
+     * @param user
+     * @return
+     */
     @Override
     public Integer insert(User user) {
-        return userMapper.insert(user);
-    }
-
-    @Override
-    public User queryByEmail(Integer email) {
-        return userMapper.queryByEmail(email);
+        Integer i=userMapper.insert(user);
+        if(i>0){
+            System.out.println("注册:注册成功");
+            return i;
+        }else{
+            System.out.println("注册:注册失败");
+            return i;
+        }
     }
 }
