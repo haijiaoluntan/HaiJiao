@@ -20,7 +20,13 @@ spring:
     default-encoding: UTF-8
     username: 2573005408@qq.com
     password: mntpnvuznxexdjeg
-    properties: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
     host: smtp.qq.com
 
 mybatis:
