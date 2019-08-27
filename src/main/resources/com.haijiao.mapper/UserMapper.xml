@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- namespace:命名空间，该值与接口保持一致 -->
+<mapper namespace="com.haijiao.mapper.UserMapper">
+    <!-- 开启二级缓存，默认情况下没有有开启的 -->
+    <cache/>
+
+    <resultMap type="User" id="userMap">
+        <id property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="sex" column="sex"/>
+        <result property="eid" column="eid"/>
+        <result property="picture" column="picture"/>
+        <result property="level" column="level"/>
+        <result property="exp" column="exp"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="joindate" column="joindate"/>
+        <result property="signature" column="signature"/>
+        <result property="balance" column="balance"/>
+        <result property="start_date" column="start_date"/>
+        <result property="end_date" column="end_date"/>
+        <result property="email" column="email"/>
+        <result property="act" column="act"/>
+        <result property="actcode" column="actcode"/>
+    </resultMap>
+
+
+    <select id="queryByEmailPsw" resultMap="userMap">
+        select * from user where email=#{email} and password=#{password};
+    </select>
+
+    <insert id="insert" parameterType="User">
+        insert into user(eid,password,username,joindate) values(#{eid},#{password},#{username},#{joinTime});
+    </insert>
+
+    <update id="activation" parameterType="java.lang.String">
+        update user set act=1 where email=#{email};
+    </update>
+
+    <select id="queryByEmail" resultMap="userMap">
+        select * from user where email=#{email}
+    </select>
+
+    <update id="update" parameterType="User">
+        update user
+        set username=#{username},sex=#{sex},province=#{province},city=#{city},signature=#{signature}
+        where email=#{email};
+    </update>
+
+</mapper>

@@ -11,7 +11,6 @@ public class User implements Serializable {
     private String password;
     private String phone;
     private String sex;
-    private Integer eid;
     private String picture;
     private Integer level;
     private Integer exp;
@@ -24,7 +23,9 @@ public class User implements Serializable {
     private Date end_date;
     private String signature;
     private Double balance;
-
+    private  String  email;
+    private  Integer act;
+    private  String actcode;
     public User() {
     }
 
@@ -58,14 +59,6 @@ public class User implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public Integer getEid() {
-        return eid;
-    }
-
-    public void setEid(Integer eid) {
-        this.eid = eid;
     }
 
     public String getPicture() {
@@ -148,12 +141,35 @@ public class User implements Serializable {
         this.end_date = end_date;
     }
 
-    public User(String username, String password, String phone, String sex, Integer eid, String picture, Integer level, Integer exp, Integer province, Integer city, Date joindate, Date start_date, Date end_date, String signature, Double balance) {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getAct() {
+        return act;
+    }
+
+    public void setAct(Integer act) {
+        this.act = act;
+    }
+
+    public String getActcode() {
+        return actcode;
+    }
+
+    public void setActcode(String actcode) {
+        this.actcode = actcode;
+    }
+
+    public User(String username, String password, String phone, String sex, String picture, Integer level, Integer exp, Integer province, Integer city, Date joindate, Date start_date, Date end_date, String signature, Double balance, String email, Integer act, String actcode) {
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.sex = sex;
-        this.eid = eid;
         this.picture = picture;
         this.level = level;
         this.exp = exp;
@@ -164,6 +180,9 @@ public class User implements Serializable {
         this.end_date = end_date;
         this.signature = signature;
         this.balance = balance;
+        this.email = email;
+        this.act = act;
+        this.actcode = actcode;
     }
 
     @Override
@@ -173,7 +192,6 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", sex='" + sex + '\'' +
-                ", eid=" + eid +
                 ", picture='" + picture + '\'' +
                 ", level=" + level +
                 ", exp=" + exp +
@@ -184,6 +202,9 @@ public class User implements Serializable {
                 ", end_date=" + end_date +
                 ", signature='" + signature + '\'' +
                 ", balance=" + balance +
+                ", email='" + email + '\'' +
+                ", act=" + act +
+                ", actcode='" + actcode + '\'' +
                 '}';
     }
 }
