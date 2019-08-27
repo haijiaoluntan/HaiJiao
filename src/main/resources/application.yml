@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: Nhtmbyy123
+    url: jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/logs
+  redis:
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+  mail:
+    default-encoding: UTF-8
+    username: 2573005408@qq.com
+    password: mntpnvuznxexdjeg
+    properties: true
+    host: smtp.qq.com
+
+mybatis:
+  type-aliases-package: com.haijiao.pojo
+  mapper-locations: classpath:/com.haijiao.mapper/*.xml
+
+logging:
+  level:
+    com.haijiao.mapper: debug
+
+jwt:
+  secret: haijiaoluntan
+  expiration: 6400
+auth:
+  header: Authorization
