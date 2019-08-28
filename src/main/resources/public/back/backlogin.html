@@ -5,11 +5,11 @@
     <title>海角论坛</title>
     <meta charset="UTF-8">
 
-    <link rel="shortcut icon" type="images/jpeg" href="images/hai-logo.jpg" />
-    <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="shortcut icon" type="images/jpeg" href="../images/hai-logo.jpg" />
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/animate.min.css">
     <style>
         form {
             position: relative;
@@ -86,36 +86,22 @@
             <div style="display: none; ">
                 <form id="registerForm">
                     <div class="inputs ">
-                        <input type="text " name="username " id="registerInputUsername" placeholder="姓名 " autocomplete="off">
-                        <div class="register-input-email">
-                            <input class="inputElem" type="text" name="email" id="registerInputEmail" placeholder="邮箱 " required autofocus autocomplete="off" onkeyup="autoCompleteEmail('register-input-email','register-complete-email','registerInputEmail')">
-                            <ul id="register-complete-email">
-
-                            </ul>
-                        </div>
-                        <input type="password" name="password " id="registerInputPassword" placeholder="密码（不少于6位） " autocomplete="new-password">
-                        <input type="password" name="password-confirm " id="registerInputPassword-confirm" placeholder="确认密码" autocomplete="new-password">
+                        <input type="text " name="phone " id="logPhone" placeholder="手机号" autocomplete="off">
+                        <input type="text " name="yanzm " id="yanzm" placeholder="验证码" autocomplete="off">
                         <span id="regi-username-error"></span>
                         <span id="regi-email-error"></span>
-                        <span id="regi-password-error"></span>
-                        <span id="regi-password-confirm-error"></span>
                     </div>
                 </form>
                 <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
                 <br>
-                <button id="registerButton" type="button ">手机登录</button>
+                <button id="registerButton" type="button ">登录</button>
                 <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
             </div>
             <div id="login-container">
                 <form id="loginForm">
                     <div class="inputs ">
-                        <div class="login-input-email">
-                            <input class="inputElem" type="text" name="email" id="loginInputEmail" placeholder="邮箱" required autofocus autocomplete="off" onkeyup="autoCompleteEmail('login-input-email','login-complete-email','loginInputEmail')">
-                            <ul id="login-complete-email">
-
-                            </ul>
-                        </div>
-                        <input type="password" name="password" id="loginInputPassword" placeholder="密码 " autocomplete="new-password">
+                        <input type="text" name="name" id="logName" placeholder="账号" autocomplete="new-name">
+                        <input type="password" name="password" id="logPassword" placeholder="密码 " autocomplete="new-password">
                         <span id="login-email-error "></span>
                         <span id="login-password-error "></span>
                     </div>
@@ -130,10 +116,10 @@
     </div>
 
     <!--基础js-->
-    <script type="text/javascript " src="js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript " src="layer/2.4/layer.js"></script>
-    <script type="text/javascript " src="js/login.js "></script> 
-    <script type="text/javascript " src="js/jwt.js"></script> 
+    <script type="text/javascript " src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript " src="../layer/2.4/layer.js"></script>
+    <script type="text/javascript " src="../js/login.js "></script>
+    <script type="text/javascript " src="../js/jwt.js"></script>
     <!--飘钱动态  -->
     <script>
         const NUMBER_OF_LEAVES = 15;
@@ -167,7 +153,7 @@
     {
         var leafDiv = document.createElement('div');
         var image = document.createElement('img');
-        image.src = 'images/cash' + randomInteger(3, 7) + '.png';
+        image.src = '../images/cash' + randomInteger(3, 7) + '.png';
         leafDiv.style.top = "-100px";
         leafDiv.style.left = pixelValue(randomInteger(0, width));
         var spinAnimationName = (Math.random() < 0.5) ? 'clockwiseSpin' : 'counterclockwiseSpinAndFlip';
