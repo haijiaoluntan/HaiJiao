@@ -1,0 +1,121 @@
+body {
+    background: rgba(56, 52, 52, 0.75);
+}
+
+.collection-container {
+    position: absolute;
+    top: 2%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+}
+
+
+/*-----------new collect-----------*/
+
+.collection-container .new-collect-contai {
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 15px;
+    margin-left: 25px;
+    border: none;
+    border-radius: 25px;
+    max-width: 325px;
+    max-height: 50px;
+    background: rgb(75, 75, 75);
+}
+
+.new-collect-name {
+    padding: 10px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 15px;
+    margin-left: 25px;
+    border: none;
+    border-radius: 5px;
+    max-width: 325px;
+    max-height: 50px;
+    display: none;
+}
+
+.new-collect-name input {
+    padding: 5px 10px;
+    max-width: 155px;
+    min-height: 24px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+}
+
+.new-collect-contai:hover {
+    background: rgb(51, 51, 51);
+}
+
+.new-collect-name button {
+    width: 55px;
+    height: 27px;
+    border: none;
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(37, 160, 78);
+    display: inline-block;
+}
+
+.new-collect-name button:hover {
+    background: rgb(116, 163, 132);
+}
+
+
+/*---------my-collects---------*/
+
+.collection-container .my-collect {
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 15px;
+    margin-left: 25px;
+    border: none;
+    border-radius: 5px;
+    width: 325px;
+    max-height: 50px;
+    background: rgb(75, 75, 75);
+}
+
+.my-collect:hover {
+    background: rgb(51, 51, 51);
+}
+
+.collection-container .my-collect-answer {
+    padding: 5px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 15px;
+    margin-left: 25px;
+    border: none;
+    border-radius: 5px;
+    width: 325px;
+    max-height: 36px;
+    background: rgb(175, 175, 175);
+}
+
+.my-collect-answers {
+    display: block;
+}

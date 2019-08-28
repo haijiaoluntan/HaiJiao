@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>海角论坛</title>
+    <meta charset="UTF-8">
+
+    <link rel="shortcut icon" type="images/jpeg" href="images/hai-logo.jpg" />
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <style>
+        form {
+            position: relative;
+        }
+        
+        #regi-username-error {
+            position: absolute;
+            top: 11px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #regi-email-error {
+            position: absolute;
+            top: 61px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #regi-password-error {
+            position: absolute;
+            top: 111px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #regi-password-confirm-error {
+            position: absolute;
+            top: 161px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #login-email-error {
+            position: absolute;
+            top: 13px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #login-password-error {
+            position: absolute;
+            top: 61px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="moneybox" id="leafContainer"></div>
+    <div id="WebGL-output"></div>
+    <div id="Stats-output"></div>
+    <div class="wrap ">
+        <header>
+            <h1>海角论坛</h1>
+            <h5>自由,开放的社交论坛</h5>
+            <p>在海角认识世界</p>
+        </header>
+        <section>
+            <div id="login-container">
+                <form id="loginForm">
+                    <div class="inputs ">
+                        <input type="text" name="phone" id="regphone" placeholder="手机号" autocomplete="new-password">
+                        <input type="text" name="yanzm" id="yanzm" placeholder="验证码" autocomplete="new-password"> 
+                        <button v-on="click:onSubmit" class="get-captcha_button" style="display:inline">获取手机验证码</button>
+                        <input type="password" name="password" id="regPassword" placeholder="密码 " autocomplete="new-password">
+                        <input type="password" name="passwordto" id="regPasswordto" placeholder="确认密码 " autocomplete="new-password">
+                        <span id="login-email-error "></span>
+                        <span id="login-password-error "></span>
+                    </div>
+                    <h6>账号有了,犹豫什么去<span style="color: blue" onclick="tobacklog()">登录</span>啊！</h6>
+                    <br>
+                    <input id="loginButton" type="button" value="登录"> 
+                    <!--<a href="https://api.weibo.com/oauth2/authorize?client_id=968565512&response_type=code&redirect_uri=http://naivee.me/weiboLogin ">微博登录</a>-->
+                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
+                </form>
+            </div> 
+        </section>
+    </div> 
+    <script type="text/javascript " src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript " src="layer/2.4/layer.js"></script>
+    <script type="text/javascript " src="js/login.js "></script> 
+    <script type="text/javascript " src="js/jwt.js"></script> 
+
+    <script>
+        const NUMBER_OF_LEAVES = 15;
+      const width=window.screen.width;
+    function init(){
+        var container = document.getElementById('leafContainer');
+        for (var i = 0; i < NUMBER_OF_LEAVES; i++) 
+        {
+            container.appendChild(createALeaf());
+        }
+
+    }
+    function randomInteger(low, high)
+    {
+        return low + Math.floor(Math.random() * (high - low));
+    }
+    function randomFloat(low, high)
+    {
+        return low + Math.random() * (high - low);
+    }
+    function pixelValue(value)
+    {
+        return value + 'px';
+    }
+
+    function durationValue(value)
+    {
+        return value + 's';
+    }
+    function createALeaf()
+    {
+        var leafDiv = document.createElement('div');
+        var image = document.createElement('img');
+        image.src = 'images/cash' + randomInteger(3, 7) + '.png';
+        leafDiv.style.top = "-100px";
+        leafDiv.style.left = pixelValue(randomInteger(0, width));
+        var spinAnimationName = (Math.random() < 0.5) ? 'clockwiseSpin' : 'counterclockwiseSpinAndFlip';
+        leafDiv.style.webkitAnimationName = 'fade, drop';
+        image.style.webkitAnimationName = spinAnimationName;
+        var fadeAndDropDuration = durationValue(randomFloat(3, 9));
+        var spinDuration = durationValue(randomFloat(3, 7));
+        leafDiv.style.webkitAnimationDuration = fadeAndDropDuration + ', ' + fadeAndDropDuration;
+        var leafDelay = durationValue(randomFloat(0, 0));
+        leafDiv.style.webkitAnimationDelay = leafDelay + ', ' + leafDelay;
+        image.style.webkitAnimationDuration = spinDuration;
+        leafDiv.appendChild(image);
+        return leafDiv;
+    }
+    window.addEventListener('load', init, false);
+    </script>
+
+    <script>
+        $(function() {
+
+            /* 注册处理 */
+            var registerButton = $("#registerButton");
+            var registerForm = $("#registerForm");
+            var registerInputUsername = $("#registerInputUsername");
+            var registerInputEmail = $("#registerInputEmail");
+            var registerInputPassword = $("#registerInputPassword");
+            var registerInputPasswordConfirm = $("#registerInputPassword-confirm");
+
+            /*	注册校验*/
+            registerInputUsername.blur(function() {
+                var value = $(this).val();
+                if (value.length < 1 || value.length > 30) {
+                    $("#regi-username-error ").text("用户名长度须在1-30个字符以内 ");
+                } else {
+                    $("#regi-username-error ").text(" ");
+                }
+            });
+            registerInputEmail.blur(function() {
+                var value = $(this).val();
+                var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (!reg.test(value)) {
+                    $("#regi-email-error ").text("请输入正确的邮箱 ");
+                } else {
+                    $("#regi-email-error ").text(" ");
+                }
+            });
+            registerInputPassword.blur(function() {
+                var value = $(this).val();
+                var reg = /[a-zA-Z0-9]{6,10}/;
+                if (!reg.test(value)) {
+                    $("#regi-password-error").text("密码长度须在6-20个字符 ");
+                } else {
+                    $("#regi-password-error").text(" ");
+                }
+            });
+            registerInputPasswordConfirm.blur(function() {
+                var value = $(this).val();
+                var psw = registerInputPassword.val();
+                if (value != psw) {
+                    $("#regi-password-confirm-error").text("两次密码不一致");
+                } else {
+                    $("#regi-password-confirm-error").text(" ");
+                }
+            })
+
+            /* 注册处理 */
+            registerButton.on("click", function() {
+                var form = new FormData();
+                form.append("username", registerInputUsername.val());
+                form.append("email", registerInputEmail.val());
+                form.append("password", registerInputPassword.val());
+                $.ajax({
+                    url: "manifold/user",
+                    type: "post",
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    dataType: 'text',
+                    success: function(response) {
+                        window.location.href = 'emailcheck.html' + '?email=' + response;
+                    }
+                });
+            });
+        });
+        function tobacklog() {
+            location.href = 'backlogin.html';
+        }
+    </script>
+
+</body>
+
+</html>
