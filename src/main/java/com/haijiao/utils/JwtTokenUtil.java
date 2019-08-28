@@ -34,10 +34,9 @@ public class JwtTokenUtil {
 	 * 创建JWT token
 	 * 
 	 * @param uid
-	 * @param pwd
 	 * @return
 	 */
-	public String createJwt(String uid, String pwd) {
+	public String createJwt(String uid) {
 		Date now = clock.now();
 		// 添加JWT的包含部分，有三部分：头部（header）、载荷（payload）、签证（signature）.
 		JwtBuilder jwtBuilder = Jwts.builder().setHeaderParam("typ", "JWT").setIssuedAt(now) // 设置jwt创建时间
@@ -45,10 +44,7 @@ public class JwtTokenUtil {
 				.setExpiration(calculateExpirationDate(now)) // 设置失效时间
 				.setSubject("uid")
 				.claim("realname", "匿名")//通过claim()方法可添加若干属性，也可以添加一个对象
-				.claim("username","用户名")
-				.claim("eid","邮箱id")
-				.claim("sex", "性别")
-				.claim("weight","100kg")
+				.claim("sex", "不详")
 				.signWith(SignatureAlgorithm.HS512, secret);// 设置加密算法、指定密钥
 		return jwtBuilder.compact();
 
@@ -63,23 +59,6 @@ public class JwtTokenUtil {
 		//根据密钥解析token,解析成功返回Claims;解析不成功会抛出异常
 		Claims c = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 		return c;
-	}
-
-	/*
-	获取用户名通过token
-	 */
-	public String getUsernameByToken(String token){
-		System.err.println("token"+token);
-			try {
-				if(token!=null){
-					Claims claims=parseJWT(token);
-					String username=claims.getIssuer();
-					return username;
-				}
-			}catch (Exception e){
-				e.printStackTrace();
-			}
-			return  null;
 	}
 
 	/**
