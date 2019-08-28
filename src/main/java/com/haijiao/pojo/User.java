@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
+    
+    private static final long serialVersionUID = 4344380176085309393L;
+    private Integer uid;
     private String username;
     private String password;
     private String phone;
@@ -16,19 +19,35 @@ public class User implements Serializable {
     private Integer exp;
     private Integer province;
     private Integer city;
+    
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date joindate;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date start_date;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date end_date;
     private String signature;
     private Double balance;
     private  String  email;
     private  Integer act;
     private  String actcode;
+    
     public User() {
     }
-
+    
+    public Integer getUid() {
+        return uid;
+    }
+    
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+    
     public String getUsername() {
         return username;
     }
