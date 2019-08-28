@@ -26,7 +26,7 @@ public class User implements Serializable {
     
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date start_date;    //上次登录时间
+    private Date loginDate;    //上次登录时间
     
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -144,12 +144,12 @@ public class User implements Serializable {
         this.balance = balance;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getLoginDate() {
+        return loginDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setLoginDate(Date loginDate) {
+        this.loginDate = loginDate;
     }
 
     public Date getEnd_date() {
@@ -184,7 +184,7 @@ public class User implements Serializable {
         this.actcode = actcode;
     }
 
-    public User(String username, String password, String phone, String sex, String picture, Integer level, Integer exp, Integer province, Integer city, Date joindate, Date start_date, Date end_date, String signature, Double balance, String email, Integer act, String actcode) {
+    public User(String username, String password, String phone, String sex, String picture, Integer level, Integer exp, Integer province, Integer city, Date joindate, Date loginDate, Date end_date, String signature, Double balance, String email, Integer act, String actcode) {
         this.username = username;
         this.password = password;
         this.phone = phone;
@@ -195,7 +195,7 @@ public class User implements Serializable {
         this.province = province;
         this.city = city;
         this.joindate = joindate;
-        this.start_date = start_date;
+        this.loginDate = loginDate;
         this.end_date = end_date;
         this.signature = signature;
         this.balance = balance;
@@ -217,7 +217,7 @@ public class User implements Serializable {
                 ", province=" + province +
                 ", city=" + city +
                 ", joindate=" + joindate +
-                ", start_date=" + start_date +
+                ", loginDate=" + loginDate +
                 ", end_date=" + end_date +
                 ", signature='" + signature + '\'' +
                 ", balance=" + balance +

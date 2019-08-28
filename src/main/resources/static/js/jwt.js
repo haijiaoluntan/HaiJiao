@@ -1,8 +1,4 @@
-/**
- * @author Quanlijian
- * jwt有关
- */
-//const HOST_URL = "http://127.0.0.1:8086/api/";
+const HOST_URL = "http://127.0.0.1:8080/haijiao/"
 const TOKEN_KEY = "jwtToken";
 
 /**

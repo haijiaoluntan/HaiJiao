@@ -22,7 +22,7 @@
         <result property="joindate" column="joindate"/>
         <result property="signature" column="signature"/>
         <result property="balance" column="balance"/>
-        <result property="start_date" column="start_date"/>
+        <result property="loginDate" column="loginDate"/>
         <result property="end_date" column="end_date"/>
         <result property="email" column="email"/>
         <result property="act" column="act"/>
