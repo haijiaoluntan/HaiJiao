@@ -10,57 +10,65 @@ import java.util.Date;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-
+    
     @Autowired
     private UserMapper userMapper;
-
-
+    
+    
     @Override
     public User queryByEmail(String email) {
-
+        
         return userMapper.queryByEmail(email);
     }
-
+    
     @Override
-    public Integer updatejoindate(String email) {
-        return userMapper.updatejoindate(email);
+    public Integer updateLoginDate(Integer uid) {
+        return userMapper.updateLoginDate(uid);
     }
+    
+    @Override
+    public User queryByUsername(String username) {
+        return userMapper.queryByUsername(username);
+    }
+    
     /**
      * 登录
+     *
      * @param email
      * @param password
      * @return
      */
     @Override
-    public User queryByEmailPsw(String email, String password ) {
-        User user=userMapper.queryByEmailPsw(email,password);
-        System.out.println("登录：获得账号信息"+user);
-        if(user!=null){
-            Integer i=userMapper.updatejoindate(user.getEmail());
-            if(i>0){
+    public User queryByEmailPsw(String email, String password) {
+        User user = userMapper.queryByEmailPsw(email, password);
+        System.out.println("登录：获得账号信息" + user);
+        if (user != null) {
+            Integer i = userMapper.updateLoginDate(user.getUid());
+            if (i > 0) {
                 System.out.println("登录:成功修改登录时间");
             }
         }
         return user;
     }
-
+    
     @Override
     public Integer actication(String email) {
         return userMapper.actication(email);
     }
-
+    
     /**
      * 注册
+     *
      * @param user
      * @return
      */
     @Override
     public Integer insert(User user) {
-        Integer i=userMapper.insert(user);
-        if(i>0){
+        Integer i = userMapper.insert(user);
+        if (i > 0) {
             System.out.println("注册:注册成功");
             return i;
-        }else{
+        } else {
             System.out.println("注册:注册失败");
             return i;
         }
