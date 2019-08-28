@@ -9,33 +9,33 @@ import java.util.Date;
 public class User implements Serializable {
     
     private static final long serialVersionUID = 4344380176085309393L;
-    private Integer uid;
-    private String username;
-    private String password;
-    private String phone;
-    private String sex;
-    private String picture;
-    private Integer level;
-    private Integer exp;
-    private Integer province;
-    private Integer city;
+    private Integer uid;        //用户id
+    private String username;    //昵称
+    private String password;    //密码
+    private String phone;       //手机号
+    private String sex;         //性别
+    private String picture;     //头像url
+    private Integer level;      //等级
+    private Integer exp;        //经验值
+    private Integer province;   //省份
+    private Integer city;       //城市
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    private Date joindate;
+    private Date joindate;      //账号创建时间
     
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date start_date;
+    private Date start_date;    //上次登录时间
     
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date end_date;
-    private String signature;
-    private Double balance;
-    private  String  email;
-    private  Integer act;
-    private  String actcode;
+    private Date end_date;      //上次下线时间
+    private String signature;   //个性签名
+    private Double balance;     //账户余额
+    private String email;       //绑定邮箱
+    private Integer act;        //邮箱是否激活
+    private String actcode;     //邮箱激活码
     
     public User() {
     }
