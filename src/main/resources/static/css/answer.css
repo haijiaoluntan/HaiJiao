@@ -1,0 +1,489 @@
+/*回答*/
+
+.answer-container {
+    margin: 20px 20px;
+    min-width: 635px;
+    min-height: 500px;
+}
+
+.answer-box {
+    position: relative;
+}
+
+.answer-box::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 90%;
+    background: #333;
+    left: 30px;
+    top: 15px;
+}
+
+.answer {
+    margin: 20px 10px;
+    padding: 10px 10px;
+    width: 595px;
+    min-height: 200px;
+    border: none;
+    border-radius: 30px 10px 30px 30px/55px 10px 55px 55px;
+    background: rgb(250, 250, 250);
+    box-shadow: -5px 5px rgb(100, 100, 100);
+}
+
+.answer::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: rgb(250, 250, 250);
+    right: 0px;
+    top: 10px;
+    transform: rotate(45deg);
+}
+
+
+/*回答头*/
+
+.answer .answer-header {
+    margin: 10px 10px;
+    margin-left: 25px;
+    width: 555px;
+    height: 55px;
+    background: rgb(250, 250, 250);
+}
+
+.answer .answer-header .user-avatar {
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    width: 39px;
+    height: 39px;
+    border: none;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.answer .answer-header .user-info {
+    font-size: 16px;
+    color: black;
+    vertical-align: top;
+    padding: 0px 0px;
+    margin-top: 7px;
+    margin-left: 0px;
+    margin-bottom: 7px;
+    width: 475px;
+    height: 41px;
+    border: none;
+    background: rgb(250, 250, 250);
+    display: inline-block;
+}
+
+.answer .answer-header .user-info .user-name {
+    padding: 0px 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 25px;
+    margin-bottom: 0px;
+    width: 400px;
+    height: 20px;
+    border: none;
+    background: rgb(250, 250, 250);
+}
+
+.answer .answer-header .user-info .user-name h5 {
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.answer .answer-header .user-info .user-name button {
+    padding: 0px 0px;
+    width: 75px;
+    max-height: 24px;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(7, 136, 84);
+    display: inline-block;
+}
+
+.answer .answer-header .user-info .user-name button:hover {
+    background: rgb(175, 175, 175);
+}
+
+.answer .answer-header .user-info .user-industry {
+    padding: 0px 0px;
+    margin-top: 1px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    width: 400px;
+    height: 20px;
+    border: none;
+    background: rgb(250, 250, 250);
+}
+
+
+/*回答主体*/
+
+.answer .answer-content {
+    margin: 10px 10px;
+    margin-left: 25px;
+    width: 555px;
+    min-height: 75px;
+    background: rgb(250, 250, 250);
+}
+
+.answer .answer-content figure {
+    text-align: center;
+}
+
+.answer .answer-content img {
+    max-width: 500px;
+    max-height: 900px;
+    border: none;
+    object-fit: cover;
+}
+
+.answer .answer-content button {
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    height: 30px;
+    background: rgb(250, 250, 250);
+    font-size: 16px;
+    color: rgb(57, 56, 56);
+}
+
+.answer .answer-content button:hover {
+    font-weight: bold;
+    color: black;
+}
+
+
+/*回答底*/
+
+.answer .answer-footer {
+    margin: 10px 10px;
+    margin-left: 25px;
+    width: 555px;
+    min-height: 55px;
+    background: rgb(250, 250, 250);
+}
+
+.answer .answer-footer li {
+    float: left;
+    padding: 5px 5px;
+    margin: 7px 5px;
+}
+
+.answer .answer-footer li .button1 {
+    border: none;
+    border-radius: 5px;
+    width: 75px;
+    height: 30px;
+    background: rgb(229, 242, 255);
+    font-size: 16px;
+    color: rgb(0, 132, 255);
+}
+
+.answer .answer-footer li .button1:hover {
+    background: rgb(225, 225, 255);
+    cursor: pointer
+}
+
+.answer .answer-footer li .button2 {
+    border: none;
+    border-radius: 5px;
+    width: 75px;
+    height: 30px;
+    background: rgb(250, 250, 250);
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(95, 95, 95);
+}
+
+.answer .answer-footer li .button2:hover {
+    color: rgb(55, 55, 55);
+    cursor: pointer;
+}
+
+
+/*回答评论*/
+
+.answer .comment-container {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 2px;
+    padding: 10px 10px;
+    width: 545px;
+    min-height: 65px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    display: none;
+}
+
+.answer .comment-container .comment {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    width: 515px;
+    min-height: 65px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+}
+
+
+/*评论头*/
+
+.answer .comment-container .comment .comment-header {
+    padding: 2px 2px;
+    width: 500px;
+    min-height: 35px;
+    border: none;
+    border-radius: 5px;
+}
+
+.answer .comment-container .comment .comment-body {
+    font-size: 16px;
+    font-family: sans-serif;
+    color: black;
+    padding-top: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    width: 500px;
+    min-height: 35px;
+    border: none;
+    border-radius: 5px;
+}
+
+.answer .comment-container .comment .comment-header .com-ava {
+    max-width: 31px;
+    max-height: 31px;
+    border: none;
+    border-radius: 5px;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.answer .comment-container .comment .comment-header .com-ava img {
+    width: 31px;
+    height: 31px;
+    border: none;
+    border-radius: 5px;
+    object-fit: cover;
+    display: inline-block;
+}
+
+.answer .comment-container .comment .comment-header .com-user {
+    margin-top: 5px;
+    max-width: 425px;
+    max-height: 31px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    color: black;
+    vertical-align: top;
+    display: inline-block;
+}
+
+
+/*评论容器-底-编辑新评论*/
+
+.answer .comment-container .comment-container-footer {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 2px;
+    padding: 5px 5px;
+    width: 515px;
+    min-height: 65px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+}
+
+.answer .comment-container .comment-container-footer textarea {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    width: 415px;
+    min-height: 55px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(225, 225, 225);
+    font-size: 14px;
+    color: #333;
+    padding-left: 15px;
+    padding-top: 5px;
+    display: inline-block;
+}
+
+.answer .comment-container .comment-container-footer .subComBtn {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    width: 55px;
+    min-height: 55px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(10, 122, 66);
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.answer .comment-container .comment-container-footer .subComBtn:hover {
+    background: rgb(65, 151, 108);
+}
+
+
+/*新回答*/
+
+
+/*头*/
+
+.new-answer {
+    position: relative;
+}
+
+.new-answer .new-answer-header {
+    margin-left: 45px;
+    margin-right: 15px;
+    margin-top: 20px;
+    padding: 10px 10px;
+    width: 575px;
+    min-height: 55px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+}
+
+.new-answer .new-answer-header .user-avatar {
+    margin-top: 7px;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    width: 39px;
+    height: 39px;
+    border: none;
+    object-fit: cover;
+    background: #333;
+    display: inline-block;
+}
+
+.new-answer .new-answer-header .user-info {
+    font-size: 16px;
+    color: black;
+    vertical-align: top;
+    padding: 0px 0px;
+    margin-top: 7px;
+    margin-left: 0px;
+    margin-bottom: 7px;
+    width: 475px;
+    height: 41px;
+    border: none;
+    background: rgb(250, 250, 250);
+    display: inline-block;
+}
+
+.new-answer .new-answer-header .user-name {
+    padding: 0px 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    width: 300px;
+    height: 20px;
+    border: none;
+    background: rgb(250, 250, 250);
+}
+
+.new-answer .new-answer-header .user-industry {
+    padding: 0px 0px;
+    margin-top: 1px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    width: 300px;
+    height: 20px;
+    border: none;
+    background: rgb(250, 250, 250);
+}
+
+
+/*体*/
+
+.new-answer .new-answer-content {
+    margin-left: 45px;
+    margin-right: 15px;
+    margin-top: 2px;
+    width: 595px;
+    min-height: 175px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+}
+
+.ck-editor {
+    color: #333;
+    min-width: 595px;
+}
+
+.ck-content {
+    min-height: 175px;
+}
+
+
+/*底*/
+
+.new-answer .new-answer-footer {
+    margin-left: 45px;
+    margin-right: 15px;
+    margin-top: 2px;
+    width: 595px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(250, 250, 250);
+}
+
+.new-answer .new-answer-footer .cancelbutton {
+    margin-top: 7px;
+    margin-left: 435px;
+    margin-bottom: 7px;
+    width: 64px;
+    height: 36px;
+    border: none;
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(118, 126, 121);
+}
+
+.new-answer .new-answer-footer .cancelbutton:hover {
+    background: rgb(79, 87, 83);
+}
+
+.new-answer .new-answer-footer .subbutton {
+    margin-top: 7px;
+    margin-left: 15px;
+    margin-bottom: 7px;
+    width: 64px;
+    height: 36px;
+    border: none;
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(37, 160, 78);
+}
+
+.new-answer .new-answer-footer .subbutton:hover {
+    background: rgb(2, 109, 57);
+}

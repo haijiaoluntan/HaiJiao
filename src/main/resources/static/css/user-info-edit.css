@@ -1,0 +1,186 @@
+/*顶层容器*/
+
+.user-info-editor-container {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    width: 80%;
+    height: 90%;
+    background: rgb(110, 110, 110);
+}
+
+.user-info-editor-container h5 {
+    font-size: 16px;
+    color: #fff;
+    display: inline-block;
+}
+
+
+/*顶部头像*/
+
+.user-info-editor-container .top-avatar {
+    margin-left: 37%;
+    margin-top: 10%;
+    margin-bottom: 7%;
+    width: 95px;
+    height: 95px;
+    border: none;
+    border-radius: 7px;
+    background: rgb(126, 39, 39);
+}
+
+.user-info-editor-container .top-avatar img {
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    border: none;
+    object-fit: cover;
+    display: inline-block;
+}
+
+
+/**/
+
+.user-info-editor-container input {
+    padding-left: 15px;
+    width: 275px;
+    height: 35px;
+    border: none;
+    border-radius: 7px;
+    background: rgb(250, 250, 250);
+}
+
+.user-info-editor-container .email-input {
+    position: relative;
+    width: 375px;
+    height: 40px;
+    margin: 10px 25px;
+}
+
+.user-info-editor-container .username-input {
+    position: relative;
+    width: 375px;
+    height: 40px;
+    margin: 10px 25px;
+}
+
+
+/*性别选择*/
+
+.user-info-editor-container .gender-selector {
+    position: relative;
+    width: 375px;
+    height: 40px;
+    margin: 10px 25px;
+}
+
+.user-info-editor-container .gender-selector select,
+option {
+    width: 175px;
+    height: 32px;
+    border-radius: 5px;
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: none;
+    outline: none;
+    /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*将背景改为红色*/
+    background: rgb(250, 250, 250);
+    /*加padding防止文字覆盖*/
+    padding-left: 15px;
+    font-weight: bold;
+}
+
+
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+
+.user-info-editor-container .gender-selector select::-ms-expand {
+    display: none;
+}
+
+
+/*手机*/
+
+.user-info-editor-container .phone-input {
+    position: relative;
+    width: 375px;
+    height: 40px;
+    margin: 10px 25px;
+}
+
+
+/*头像上传*/
+
+.user-info-editor-container .avatar-upload {
+    position: relative;
+    width: 375px;
+    height: 40px;
+    margin: 10px 25px;
+    margin-left: 150px;
+    vertical-align: top;
+}
+
+.upload {
+    padding: 4px 10px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    border: 1px solid #999;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background: rgb(15, 119, 57)
+}
+
+.change {
+    position: absolute;
+    overflow: hidden;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+
+/*行业*/
+
+.user-info-editor-container .industry-input {
+    position: relative;
+    width: 375px;
+    height: 40px;
+    margin: 10px 25px;
+}
+
+
+/*教育履历简介*/
+
+.user-info-editor-container .education-input {
+    position: relative;
+    width: 375px;
+    height: 40px;
+    margin: 10px 25px;
+}
+
+
+/**发布按钮*/
+
+.user-info-editor-container .submit-button {
+    position: absolute;
+    right: 0%;
+    bottom: -7%;
+    width: 75px;
+    height: 32px;
+    border: none;
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(37, 160, 78);
+}
+
+.user-info-editor-container .submit-button:hover {
+    background: rgb(108, 157, 125);
+}

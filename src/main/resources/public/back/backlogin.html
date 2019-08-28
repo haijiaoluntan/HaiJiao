@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>海角论坛</title>
+    <meta charset="UTF-8">
+
+    <link rel="shortcut icon" type="images/jpeg" href="images/hai-logo.jpg" />
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <style>
+        form {
+            position: relative;
+        }
+        
+        #regi-username-error {
+            position: absolute;
+            top: 11px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #regi-email-error {
+            position: absolute;
+            top: 61px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #regi-password-error {
+            position: absolute;
+            top: 111px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #regi-password-confirm-error {
+            position: absolute;
+            top: 161px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #login-email-error {
+            position: absolute;
+            top: 13px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+        
+        #login-password-error {
+            position: absolute;
+            top: 61px;
+            right: 6px;
+            font-size: 14px;
+            color: #c33;
+        }
+    </style>
+</head>
+
+<body>
+    <!--<canvas id="c"></canvas>-->
+    <div class="moneybox" id="leafContainer"></div>
+    <div id="WebGL-output"></div>
+    <div id="Stats-output"></div>
+    <div class="wrap ">
+
+        <header>
+            <h1>海角论坛</h1>
+            <h5>自由,开放的社交论坛</h5>
+            <p>在海角认识世界</p>
+        </header>
+
+        <section> 
+            <ul>
+                <li id="registerHeader ">手机</li>
+                <li id="loginHeader " class="active-header ">密码</li>
+            </ul>
+            <div style="display: none; ">
+                <form id="registerForm">
+                    <div class="inputs ">
+                        <input type="text " name="username " id="registerInputUsername" placeholder="姓名 " autocomplete="off">
+                        <div class="register-input-email">
+                            <input class="inputElem" type="text" name="email" id="registerInputEmail" placeholder="邮箱 " required autofocus autocomplete="off" onkeyup="autoCompleteEmail('register-input-email','register-complete-email','registerInputEmail')">
+                            <ul id="register-complete-email">
+
+                            </ul>
+                        </div>
+                        <input type="password" name="password " id="registerInputPassword" placeholder="密码（不少于6位） " autocomplete="new-password">
+                        <input type="password" name="password-confirm " id="registerInputPassword-confirm" placeholder="确认密码" autocomplete="new-password">
+                        <span id="regi-username-error"></span>
+                        <span id="regi-email-error"></span>
+                        <span id="regi-password-error"></span>
+                        <span id="regi-password-confirm-error"></span>
+                    </div>
+                </form>
+                <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
+                <br>
+                <button id="registerButton" type="button ">手机登录</button>
+                <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
+            </div>
+            <div id="login-container">
+                <form id="loginForm">
+                    <div class="inputs ">
+                        <div class="login-input-email">
+                            <input class="inputElem" type="text" name="email" id="loginInputEmail" placeholder="邮箱" required autofocus autocomplete="off" onkeyup="autoCompleteEmail('login-input-email','login-complete-email','loginInputEmail')">
+                            <ul id="login-complete-email">
+
+                            </ul>
+                        </div>
+                        <input type="password" name="password" id="loginInputPassword" placeholder="密码 " autocomplete="new-password">
+                        <span id="login-email-error "></span>
+                        <span id="login-password-error "></span>
+                    </div>
+                    <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
+                    <br>
+                    <input id="loginButton" type="button" value="登录">
+                    <!-- <div id="wb_connect_btn ">weiboLogin</div> --> 
+                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!--基础js-->
+    <script type="text/javascript " src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript " src="layer/2.4/layer.js"></script>
+    <script type="text/javascript " src="js/login.js "></script> 
+    <script type="text/javascript " src="js/jwt.js"></script> 
+    <!--飘钱动态  -->
+    <script>
+        const NUMBER_OF_LEAVES = 15;
+      const width=window.screen.width;
+    function init(){
+        var container = document.getElementById('leafContainer');
+        for (var i = 0; i < NUMBER_OF_LEAVES; i++) 
+        {
+            container.appendChild(createALeaf());
+        }
+
+    }
+    function randomInteger(low, high)
+    {
+        return low + Math.floor(Math.random() * (high - low));
+    }
+    function randomFloat(low, high)
+    {
+        return low + Math.random() * (high - low);
+    }
+    function pixelValue(value)
+    {
+        return value + 'px';
+    }
+
+    function durationValue(value)
+    {
+        return value + 's';
+    }
+    function createALeaf()
+    {
+        var leafDiv = document.createElement('div');
+        var image = document.createElement('img');
+        image.src = 'images/cash' + randomInteger(3, 7) + '.png';
+        leafDiv.style.top = "-100px";
+        leafDiv.style.left = pixelValue(randomInteger(0, width));
+        var spinAnimationName = (Math.random() < 0.5) ? 'clockwiseSpin' : 'counterclockwiseSpinAndFlip';
+        leafDiv.style.webkitAnimationName = 'fade, drop';
+        image.style.webkitAnimationName = spinAnimationName;
+        var fadeAndDropDuration = durationValue(randomFloat(3, 9));
+        var spinDuration = durationValue(randomFloat(3, 7));
+        leafDiv.style.webkitAnimationDuration = fadeAndDropDuration + ', ' + fadeAndDropDuration;
+        var leafDelay = durationValue(randomFloat(0, 0));
+        leafDiv.style.webkitAnimationDelay = leafDelay + ', ' + leafDelay;
+        image.style.webkitAnimationDuration = spinDuration;
+        leafDiv.appendChild(image);
+        return leafDiv;
+    }
+    window.addEventListener('load', init, false);
+    </script>
+
+    <script>
+        $(function() {
+            /* 登录 */
+            var loginButton = $("#loginButton");
+            var loginForm = $("#loginForm");
+            var loginInputEmail = $("#loginInputEmail");
+            var loginInputPassword = $("#loginInputPassword");
+
+            /* 登录处理 */
+            loginButton.on("click", function() {
+                var email = loginInputEmail.val();
+                var password = loginInputPassword.val();
+                $.ajax({
+                    url: "manifold/user",
+                    type: "get",
+                    data: {
+                        'email': email,
+                        'password': password
+                    },
+                    dataType: 'text',
+                    success: function(responseData) {
+                        if (responseData == 0) {
+                            layer.msg('账号被封禁，无法登陆', {
+                                icon: 2
+                            });
+                        } else if (responseData == 1) {
+                            layer.msg('请检查账号或密码', {
+                                icon: 2
+                            });
+                        } else {
+                            layer.msg('登陆成功', {
+                                time: 1000,
+                                icon: 1
+                            }, function() {
+                                setJwtToken(responseData);
+                                setTimeout("toHomePage();", 500);
+                            });
+                        }
+                    },
+                    error: function(responseData) {
+                        if (responseData == 0) {
+                            layer.msg('账号被封禁，无法登陆', {
+                                icon: 2
+                            });
+                        } else if (responseData == 1) {
+                            layer.msg('请检查账号或密码', {
+                                icon: 2
+                            });
+                        }
+                    }
+                });
+            });
+
+        });
+
+        function tobackreg() {
+            location.href = 'backregister.html';
+        }
+    </script>
+
+</body>
+
+</html>

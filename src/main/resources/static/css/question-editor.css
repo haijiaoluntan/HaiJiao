@@ -1,0 +1,155 @@
+body {
+    background: rgba(56, 52, 52, 0.75);
+}
+
+.question-title-input {
+    color: #333;
+    width: 375px;
+    height: 36px;
+    padding-left: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.question-topic-input {
+    color: #333;
+    width: 125px;
+    height: 27px;
+    font-size: 12px;
+    padding-left: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+#keyword-topic-autocomplete li {
+    color: #fff;
+    width: 125px;
+    height: 27px;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0;
+    padding-left: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: none;
+    border-radius: 10px;
+    background: #2c97df;
+    /*cursor: pointer;*/
+}
+
+#topic-selected li {
+    color: #fff;
+    width: 125px;
+    height: 27px;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 0;
+    padding-left: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: none;
+    border-radius: 10px;
+    background: #2c97df;
+    /*cursor: pointer;*/
+}
+
+.topic-selector {
+    width: 400px;
+    height: 140px;
+    border-radius: 5px;
+}
+
+.topic-selector .li1 {
+    float: left;
+    width: 130px;
+    height: 130px;
+    margin: 5px 5px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.topic-selector .li2 {
+    float: left;
+    width: 230px;
+    height: 150px;
+    margin: 5px 5px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.question-editor-container {
+    position: absolute;
+    top: 1%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+}
+
+.question-editor-container h2 {
+    margin: 10px 3px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.question-editor-container #user_info {
+    margin: 12px 3px;
+    font-size: 18px;
+    color: #fff;
+}
+
+.question-editor-container .goToBtn {
+    position: absolute;
+    right: 0%;
+    top: 15%;
+    width: 150px;
+    height: 36px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(51, 117, 157);
+}
+
+.question-editor-container #user_info img {
+    margin: 0px 15px;
+    width: 39px;
+    height: 39px;
+    border: none;
+    object-fit: cover;
+    display: inline-block;
+}
+
+
+/*编辑器大小设置*/
+
+.ck-editor {
+    color: #333;
+    width: 400px !important;
+}
+
+.ck-content {
+    height: 200px !important;
+}
+
+.question-editor-container .submit-button {
+    position: absolute;
+    right: 0%;
+    bottom: -46%;
+    width: 75px;
+    height: 32px;
+    border: none;
+    border-radius: 7px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: rgb(37, 160, 78);
+}
+
+.question-editor-container .submit-button:hover {
+    background: rgb(116, 163, 132);
+}

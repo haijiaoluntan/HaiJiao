@@ -1,0 +1,231 @@
+/*话题容器*/
+
+.topic-container {
+    width: 875px;
+    top: 15%;
+    left: 15%;
+    padding: 5px 10px;
+    position: absolute;
+}
+
+.topic-container>div {
+    position: absolute;
+    Float: none;
+    transition: 0.7s;
+}
+
+
+/*------father-out---------*/
+
+.topic-container .father-topic-out {
+    transform: translateX(210px) translateY(-500px);
+    transform-origin: 100% 100%;
+    border-radius: 25px;
+    width: 360px;
+    height: 120px;
+    background: #a79393;
+}
+
+.topic-container .father-topic-out:hover {
+    background: #65a3cc;
+}
+
+
+/*------father---------*/
+
+.topic-container .father-topic {
+    transform: translateX(100px) translateY(0px);
+    transform-origin: 100% 100%;
+    border-radius: 36px;
+    width: 520px;
+    height: 120px;
+    font-size: 22px;
+    font-family: sans-serif;
+    background: rgb(55, 197, 122);
+    box-shadow: 0px 0px 15px rgb(71, 71, 71);
+    /*#67cc67--#aae7aa*/
+}
+
+.topic-container .father-topic::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: rgb(55, 197, 122);
+    left: 32px;
+    top: -7px;
+    transform: rotate(45deg);
+    transition: 0.7s;
+}
+
+.topic-container .father-topic:hover {
+    background: rgb(117, 209, 160);
+}
+
+.topic-container .father-topic:hover::before {
+    background: rgb(117, 209, 160);
+}
+
+
+/*------son---------*/
+
+.topic-container .son-topic {
+    transform: translate(0px, 150px);
+    transform-origin: 55% 55%;
+    border-radius: 25px;
+    width: 320px;
+    height: 75px;
+    font-size: 16px;
+    font-family: sans-serif;
+    background: #55b8e6;
+    box-shadow: 0px 0px 15px rgb(71, 71, 71);
+}
+
+.topic-container .son-topic::before {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #55b8e6;
+    left: 22px;
+    top: -6px;
+    transform: rotate(45deg);
+    transition: 0.7s;
+}
+
+.topic-container .son-topic:hover {
+    background: #8fc3e6;
+}
+
+.topic-container .son-topic:hover::before {
+    background: #8fc3e6;
+}
+
+
+/*------son-out---------*/
+
+.topic-container .son-topic-out {
+    transform: translateX(-1000px) translateY(500px);
+    transform-origin: 55% 55%;
+    border-radius: 15px;
+    width: 270px;
+    height: 75px;
+    background: #b65555;
+}
+
+.topic-container .son-topic-out:hover {
+    background: #7fadcc;
+}
+
+
+/*------话题图标--topic-avatar---------*/
+
+.father-topic .topic-avatar {
+    position: relative;
+    top: 15%;
+    left: 5%;
+    display: inline-block;
+}
+
+.son-topic .topic-avatar {
+    position: relative;
+    top: 15%;
+    left: 7%;
+    display: inline-block;
+}
+
+.topic-avatar img {
+    border-radius: 25px;
+}
+
+
+/*---标题---*/
+
+.father-topic .topic-title {
+    position: absolute;
+    top: 10%;
+    left: 18%;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.father-topic .topic-title::before {
+    content: "";
+    position: absolute;
+    width: 175px;
+    height: 2px;
+    bottom: -5px;
+    background: #333;
+}
+
+.son-topic .topic-title {
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    font-weight: bold;
+    display: inline-block;
+}
+
+
+/*-------内容--------*/
+
+.father-topic .topic-content {
+    position: absolute;
+    width: 260px;
+    top: 40%;
+    left: 18%;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.son-topic .topic-content {
+    position: absolute;
+    width: 150px;
+    top: 39%;
+    left: 30%;
+    font-size: 12px;
+    display: inline-block;
+}
+
+
+/**关注按钮*/
+
+.father-topic .topic-follow {
+    position: absolute;
+    width: 150px;
+    top: 20%;
+    left: 81%;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.father-topic .topic-follow button {
+    width: 50px;
+    height: 30px;
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+.son-topic .topic-follow {
+    position: absolute;
+    width: 75px;
+    top: 20%;
+    left: 79%;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.son-topic .topic-follow button {
+    width: 50px;
+    height: 30px;
+    background: #fff;
+    border: none;
+    border-radius: 6px;
+}
+
+.topic-follow button:hover {
+    background: rgba(225, 225, 225, 0.75);
+}
