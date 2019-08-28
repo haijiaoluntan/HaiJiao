@@ -4,12 +4,11 @@
 <head>
     <title>海角论坛</title>
     <meta charset="UTF-8">
-
-    <link rel="shortcut icon" type="images/jpeg" href="images/hai-logo.jpg" />
-    <link rel="stylesheet" type="text/css" href="css/base.css">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="shortcut icon" type="images/jpeg" href="../images/hai-logo.jpg" />
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/animate.min.css">
     <style>
         form {
             position: relative;
@@ -80,8 +79,11 @@
                 <form id="loginForm">
                     <div class="inputs ">
                         <input type="text" name="phone" id="regphone" placeholder="手机号" autocomplete="new-password">
-                        <input type="text" name="yanzm" id="yanzm" placeholder="验证码" autocomplete="new-password"> 
-                        <button v-on="click:onSubmit" class="get-captcha_button" style="display:inline">获取手机验证码</button>
+                        <div>
+                            <input type="text" name="yanzm" id="yanzm" placeholder="验证码" autocomplete="new-password">
+                            <button v-on="click:onSubmit" class="get-captcha_button" style="display:inline">获取手机验证码</button>
+                        </div>
+                        <input type="text" name="regName" id="regName" placeholder="账号" autocomplete="new-password">
                         <input type="password" name="password" id="regPassword" placeholder="密码 " autocomplete="new-password">
                         <input type="password" name="passwordto" id="regPasswordto" placeholder="确认密码 " autocomplete="new-password">
                         <span id="login-email-error "></span>
@@ -96,11 +98,10 @@
             </div> 
         </section>
     </div> 
-    <script type="text/javascript " src="js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript " src="layer/2.4/layer.js"></script>
-    <script type="text/javascript " src="js/login.js "></script> 
-    <script type="text/javascript " src="js/jwt.js"></script> 
-
+    <script type="text/javascript " src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript " src="../layer/2.4/layer.js"></script>
+    <script type="text/javascript " src="../js/login.js "></script>
+    <script type="text/javascript " src="../js/jwt.js"></script>
     <script>
         const NUMBER_OF_LEAVES = 15;
       const width=window.screen.width;
@@ -133,7 +134,7 @@
     {
         var leafDiv = document.createElement('div');
         var image = document.createElement('img');
-        image.src = 'images/cash' + randomInteger(3, 7) + '.png';
+        image.src = '../images/cash' + randomInteger(3, 7) + '.png';
         leafDiv.style.top = "-100px";
         leafDiv.style.left = pixelValue(randomInteger(0, width));
         var spinAnimationName = (Math.random() < 0.5) ? 'clockwiseSpin' : 'counterclockwiseSpinAndFlip';
