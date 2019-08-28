@@ -1,0 +1,27 @@
+body {
+    border-radius: 25px;
+}
+
+body .my-layer-skin {
+    border-radius: 25px;
+    background: rgba(56, 52, 52, 0.75);
+}
+
+body .my-layer-skin .layui-layer-title {
+    background: rgba(56, 52, 52, 0.75);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+body .my-layer-skin .layui-layer-btn {
+    border-top: 1px solid #E9E7E7
+}
+
+body .my-layer-skin .layui-layer-btn a {
+    background: #333;
+}
+
+body .my-layer-skin .layui-layer-btn .layui-layer-btn1 {
+    background: #999;
+}

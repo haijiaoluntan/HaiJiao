@@ -1,0 +1,119 @@
+.question-container {
+    transform: translate3d(5%, 0%, 50px);
+    min-width: 675px;
+    min-height: 575px;
+    padding: 25px 25px;
+    border-radius: 25px;
+    background: rgba(77, 150, 199, 0.75);
+}
+
+.question-description {
+    position: relative;
+    margin: 20px 20px;
+    padding-top: 10px;
+    min-width: 635px;
+    min-height: 275px;
+    border: none;
+    border-radius: 7px;
+    background: rgb(250, 250, 250);
+    overflow: hidden;
+    box-shadow: 0px 0px 5px rgb(71, 71, 71) inset;
+}
+
+.question-description .question-title {
+    margin: 20px 30px;
+    max-width: 575;
+    font-weight: bold;
+    font-size: 22px;
+    background: rgb(250, 250, 250);
+}
+
+.question-description .question-title::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    bottom: -5%;
+    background: rgb(75, 75, 75);
+}
+
+.question-description .question-questioner {
+    max-width: 50%;
+    margin: 20px 30px;
+    font-size: 14px;
+    color: rgb(75, 75, 75);
+    background: rgb(250, 250, 250);
+}
+
+.question-description .question-desc {
+    max-width: 555;
+    margin: 20px 40px;
+    font-size: 16px;
+    color: black;
+    background: rgb(250, 250, 250);
+}
+
+.question-description .question-desc button {
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    height: 30px;
+    background: rgb(250, 250, 250);
+    font-size: 16px;
+    color: rgb(57, 56, 56);
+}
+
+.question-description .question-desc button:hover {
+    font-weight: bold;
+    color: black;
+}
+
+.question-description .question-desc figure {
+    text-align: center;
+}
+
+.question-description .question-desc img {
+    max-width: 500px;
+    max-height: 900px;
+    border: none;
+    object-fit: cover;
+}
+
+.question-date {
+    max-width: 555;
+    margin: 20px 40px;
+    font-size: 14px;
+    font-family: sans-serif;
+    color: rgb(75, 75, 75);
+}
+
+.question-description .question-bottom {
+    max-width: 555;
+    margin: 20px 40px;
+    font-size: 16px;
+    color: black;
+    background: rgb(250, 250, 250);
+}
+
+.question-bottom li {
+    float: left;
+    padding: 10px 5px;
+    margin: 15px 0px;
+}
+
+.question-bottom li button {
+    border-width: 1px;
+    border-color: black;
+    border-radius: 5px;
+    width: 100px;
+    height: 35px;
+    background: #0a9c42;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(250, 250, 250);
+}
+
+.question-bottom li button:hover {
+    color: #333;
+    font-weight: bold;
+    background: rgb(247, 245, 245);
+}

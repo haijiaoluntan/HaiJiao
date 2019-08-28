@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>编辑食物</title>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../layui/layui.js"></script>
+<link rel="stylesheet" href="../layui/css/layui.css" />
+</head>
+<body>
+<div style="margin : 10px;padding:15px">
+		<form class="layui-form" action="">
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">美食名称</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="fname"   lay-verify="required" placeholder="请输入食品名称" autocomplete="off" class="layui-input">
+		    </div>
+		  </div>
+		  <div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">食品简介</label>
+		    <div class="layui-input-block">
+		      <textarea name="intro" placeholder="请输入内容" class="layui-textarea"></textarea>
+		    </div> 
+		  </div> 
+		  <div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">食品价格</label>
+		    <div class="layui-input-block">
+		      <input type="text" name="price" lay-verify="required" placeholder="请输入价格"  class="layui-input">
+		    </div> 
+		  </div> 
+		  <div class="layui-form-item layui-form-text">
+		    <label class="layui-form-label">小贴士</label>
+		    <div class="layui-input-block">
+		      <textarea name="ftip" placeholder="请输入内容" class="layui-textarea"></textarea>
+		    </div>
+		  </div> 
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">菜品分类1</label>
+		    <div class="layui-input-block">
+		      <select name="typeone" id="typeone" lay-verify="required"> 
+		        <option value="" selected=true>请选择类型</option>
+		      </select>
+		    </div>
+		  </div>  
+		  <div class="layui-form-item">
+		    <label class="layui-form-label">菜品分类2</label>
+		    <div class="layui-input-block">
+		      <select name="typetwo" id="typetwo" lay-verify="required"> 
+		        <option value="" selected=true>请选择类型</option>
+		      </select>
+		    </div>
+		  </div> 
+		  <div class="layui-form-item">
+		    <div class="layui-input-block"> 
+		      <button class="layui-btn" lay-submit lay-filter="formDemo" id="uploadPicBtn">立即修改</button>
+		      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		      <button type="button" class="layui-btn" id="uploadPic"><i class="layui-icon">&#xe67c;</i>更换图片</button>
+		      <p id="picname"></p>                     
+			　　　　<!-- 隐藏的input,一个隐藏的input（用于保存文件url） -->
+			　　　　<input type="hidden" id="img_url" name="picture" value=""/>   
+		    </div>
+		  </div>
+	</form>
+</div>
+<script type="text/javascript">
+layui.use('form',function(){
+	var form=layui.form;
+	form.render();
+	loadone();
+	loadtwo();
+	var picturename;
+}); 
+
+layui.use('upload', function(){
+	  var upload = layui.upload;
+	  //执行实例
+	  var uploadInst = upload.render({
+	    elem: '#uploadPic' //绑定元素
+	    ,url: '../upload' //上传接口
+	    ,field:'f'
+	    ,done: function(res){ 
+	      picturename=$("#img_url").val("../images/"+res.data.src);
+	      $("#picname").html('<span style="color: #8f8f8f;">上传成功!!!</span>');
+	    }
+	    ,error: function(){
+	      //请求异常回调
+	    }
+	  });
+	});
+function loadone(){
+	layui.use(['form', 'upload', 'layer'], function () { 
+		var form = layui.form; 
+		$.ajax({
+		url: '../foodadd',
+		dataType: 'json',
+		type: 'get',
+		data:{"type":"one"},
+		success: function (data) { 
+		$.each(data, function (i, v) { 
+		$('#typeone').append(new Option(v.toname, v.toid));
+		});
+		layui.form.render("select");
+		//重新渲染 固定写法
+		}
+		})
+	});
+};
+function loadtwo(){
+	layui.use(['form', 'upload', 'layer'], function () { 
+		var form = layui.form; 
+		$.ajax({
+		url: '../foodadd',
+		dataType: 'json',
+		type: 'get',
+		data:{"type":"two"},
+		success: function (data) { 
+		$.each(data, function (i, v) { 
+		$('#typetwo').append(new Option(v.ttname, v.ttid));
+		});
+		layui.form.render("select");
+		//重新渲染 固定写法
+		}
+		})
+	});
+};
+$("#uploadPicBtn").click(function(){
+	/* 	var fid=parent.PartitionId; */ 
+		var fid=parent.PartitionId; 
+		var fname=$("input[name=fname]").val();
+		var intro=$("textarea[name=intro]").val();
+		var price=$("input[name=price]").val();
+		var ftip=$("textarea[name=ftip]").val(); 
+		var picture=$("#img_url").val();
+		var toid=$("#typeone").val();
+		var ttid=$("#typetwo").val();
+		
+		alert(toid+ttid);
+		console.log(picture);
+		$.ajax({
+			method:"post",
+			url:"../foodadd",
+			data:{"type":"edit","fid":fid,"fname":fname,"intro":intro,"price":price,"ftip":ftip,"picture":picture,"toid":toid,"ttid":ttid},
+			dataType:"text",
+			success:function(data){ 
+				alert("修改完成"); 
+			}
+		}); 
+		var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+		parent.window.location.reload();
+		parent.layer.close(index); 
+	});
+</script>
+<script type="text/javascript">
+$(()=>{
+/* 	var p=location.search;
+	var ps=p.split('=');
+	var fid=ps[1]; */
+	var fid=parent.PartitionId; 
+	$.ajax({
+		method:"post",
+		url:"../foodadd",
+		data:{"type":"sel","fid":fid},
+		success:function(data){  
+			$("input[name=fname]").val(data.fname);
+			$("textarea[name=intro]").val(data.intro);
+			$("input[name=price]").val(data.price);
+			$("textarea[name=ftip]").val(data.ftip); 
+		},
+		dataType:"json"
+	});
+	
+})
+</script>
+</body>
+</html>

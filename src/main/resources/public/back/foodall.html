@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>所有菜管理</title>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../layui/layui.js"></script>
+<link rel="stylesheet" href="../layui/css/layui.css" />
+</head>
+<body>
+	<table id="tb" lay-filter="tbf"></table>
+<script id="barDemo">
+	<div class="layui-btn-container">
+		<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+		<button class="layui-btn layui-btn-sm layui-btn-danger" lay-event="del">删除</button>
+		<button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit" >编辑</button>
+	</div>
+</script>
+<script>
+	layui.use('table',function(){
+		var  table=layui.table;
+		table.render({
+			elem:"#tb",
+			url:"../food",
+			height:'313', 
+			page:{
+				 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+	        ,curr: 1 //设定初始在第 5 页
+	        ,groups: 3//只显示 1 个连续页码
+	        ,first: false //不显示首页
+	        ,last:  false
+			},
+			limit:6,
+			limits:[6,12,18,24,30],
+			request:{
+				pageName:'page',
+				limitName:'pageSize'
+			},
+			cols:[[
+				{field:'fid',title:"菜单编号", sort: true},
+				{field:'fname',title:"菜名", sort: true},
+				{field:'intro',title:"小贴士", sort: true},
+				{field:'price',title:"价格", sort: true}, 
+/* 				{field:'dept',title:"部门", sort: true,templet:function(d){
+					return d.dept.dname
+				}}, */
+				{field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+				]]
+			});
+			table.on('tool(tbf)',function(obj){
+				var data = obj.data;
+				console.log(obj);
+				if (obj.event === 'edit') {
+					var fid=data.fid;
+					window.PartitionId=fid;
+					layer.open({
+						  type: 2, 
+						  title:"修改食品",
+						  area: ['500px', '600px'],
+						  offset: '50px',
+						  closeBtn:1, 
+						  resize:false,
+						  content: 'foodedit.html'
+						});   
+				} else if (obj.event === 'del') {
+					layer.confirm("确定要删除<p style='color:red'>"+data.fname+"</p>吗？", {
+					icon : 0,
+					title : '提示',
+					offset : '150px'
+				}, function(index) {
+					$.ajax({
+						method:"post",
+						url:"../food",
+						data:{"type":"del","fid":data.fid},
+						success:function(){
+							if(encode=1){
+								layer.msg('主人,我删除成功了', {icon: 6}); 
+							}
+						},
+						dataType:"json"
+					});
+					//重新渲染
+		table.render({
+			elem:"#tb",
+			url:"../food",
+			height:'313', 
+			page:{
+				 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+	        ,curr: 1 //设定初始在第 5 页
+	        ,groups: 3//只显示 1 个连续页码
+	        ,first: false //不显示首页
+	        ,last:  false
+			},
+			limit:6,
+			limits:[6,12,18,24,30],
+			request:{
+				pageName:'page',
+				limitName:'pageSize'
+			},
+			cols:[[
+				{field:'fid',title:"菜单编号", sort: true},
+				{field:'fname',title:"菜名", sort: true},
+				{field:'intro',title:"小贴士", sort: true},
+				{field:'price',title:"价格", sort: true}, 
+/* 				{field:'dept',title:"部门", sort: true,templet:function(d){
+					return d.dept.dname
+				}}, */
+				{field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+			]]
+		});
+					layer.closeAll("dialog");
+				})
+			}else if(obj.event==='add'){
+				layer.open({
+					  type: 2, 
+					  title:"添加食品",
+					  area: ['500px', '600px'],
+					  offset:'50px',
+					  closeBtn:1, 
+					  resize:false,
+					  content: 'foodadd.html'
+					}); 
+				$(".layui-laypage-btn").click();
+			} 
+		});
+	})
+</script>
+</body>
+</html>
