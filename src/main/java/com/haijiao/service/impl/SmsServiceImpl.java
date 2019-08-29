@@ -13,6 +13,9 @@ import com.haijiao.config.AliyunSMSConfig;
 import com.haijiao.pojo.Sms;
 import com.haijiao.pojo.SmsQuery;
 import com.haijiao.service.SmsService;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +24,8 @@ import java.util.Date;
 
 @Service
 public class SmsServiceImpl implements SmsService {
+
+    private static final Logger log = LoggerFactory.getLogger(SmsServiceImpl.class);
 
     @Resource
     private AliyunSMSConfig smsConfig;
@@ -43,12 +48,12 @@ public class SmsServiceImpl implements SmsService {
         try {
             sendSmsResponse = acsClient.getAcsResponse(request);
         } catch (ClientException e) {
-//            log.error("发送短信发生错误。错误代码是 [{}]，错误消息是 [{}]，错误请求ID是 [{}]，错误Msg是 [{}]，错误类型是 [{}]",
-//                    e.getErrCode(),
-//                    e.getMessage(),
-//                    e.getRequestId(),
-//                    e.getErrMsg(),
-//                    e.getErrorType());
+            log.error("发送短信发生错误。错误代码是 [{}]，错误消息是 [{}]，错误请求ID是 [{}]，错误Msg是 [{}]，错误类型是 [{}]",
+                    e.getErrCode(),
+                    e.getMessage(),
+                    e.getRequestId(),
+                    e.getErrMsg(),
+                    e.getErrorType());
             System.out.println("发生错误");
         }
         return sendSmsResponse;
@@ -71,12 +76,12 @@ public class SmsServiceImpl implements SmsService {
         try {
             querySendDetailsResponse = acsClient.getAcsResponse(request);
         } catch (ClientException e) {
-//            log.error("查询发送短信发生错误。错误代码是 [{}]，错误消息是 [{}]，错误请求ID是 [{}]，错误Msg是 [{}]，错误类型是 [{}]",
-//                    e.getErrCode(),
-//                    e.getMessage(),
-//                    e.getRequestId(),
-//                    e.getErrMsg(),
-//                    e.getErrorType());
+            log.error("查询发送短信发生错误。错误代码是 [{}]，错误消息是 [{}]，错误请求ID是 [{}]，错误Msg是 [{}]，错误类型是 [{}]",
+                    e.getErrCode(),
+                    e.getMessage(),
+                    e.getRequestId(),
+                    e.getErrMsg(),
+                    e.getErrorType());
             System.out.println("发生错误");
         }
         return querySendDetailsResponse;
@@ -113,12 +118,12 @@ public class SmsServiceImpl implements SmsService {
                     smsConfig.getProduct(),
                     smsConfig.getDomain());
         } catch (ClientException e) {
-//            log.error("获取短信发送服务机发生错误。错误代码是 [{}]，错误消息是 [{}]，错误请求ID是 [{}]，错误Msg是 [{}]，错误类型是 [{}]",
-//                    e.getErrCode(),
-//                    e.getMessage(),
-//                    e.getRequestId(),
-//                    e.getErrMsg(),
-//                    e.getErrorType());
+            log.error("获取短信发送服务机发生错误。错误代码是 [{}]，错误消息是 [{}]，错误请求ID是 [{}]，错误Msg是 [{}]，错误类型是 [{}]",
+                    e.getErrCode(),
+                    e.getMessage(),
+                    e.getRequestId(),
+                    e.getErrMsg(),
+                    e.getErrorType());
             System.out.println("发生错误");
         }
         return new DefaultAcsClient(profile);
