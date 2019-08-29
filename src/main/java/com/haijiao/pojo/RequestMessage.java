@@ -1,11 +1,15 @@
 package com.haijiao.pojo;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RequestMessage implements Serializable {
     private static final long serialVersionUID = 2707033029334864923L;
 
@@ -15,11 +19,5 @@ public class RequestMessage implements Serializable {
     private String signame;
     private String args;
 
-    public RequestMessage(String id, String url, String method, String signame, String args) {
-        this.id = id;
-        this.url = url;
-        this.method = method;
-        this.signame = signame;
-        this.args = args;
-    }
+
 }
