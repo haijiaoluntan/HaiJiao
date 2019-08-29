@@ -18,6 +18,4 @@ public class RequestMessage implements Serializable {
     private String method;
     private String signame;
     private String args;
-
-
 }
