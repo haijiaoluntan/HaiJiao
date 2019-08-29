@@ -19,7 +19,6 @@ public class PhoneCode {
         String phone = "18229901603";
         getPhonemsg(phone);
     }
-
     /**
      * 生成6位随机数验证码
      *
