@@ -48,6 +48,7 @@ mybatis:
 logging:
   level:
     com.haijiao.mapper: debug
+  file: e:/temp/haijiao.log
 
 jwt:
   secret: haijiaoluntan
