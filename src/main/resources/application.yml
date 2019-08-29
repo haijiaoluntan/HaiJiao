@@ -29,6 +29,18 @@ spring:
             required: true
     host: smtp.qq.com
 
+aliyun:
+  sms:
+    accessKeyId: LTAIsCFOlcDDYz3m
+    accessKeySecret: 5Fd0cGtcUZhMiQ4X1xv4oGk7AXrl3W
+    product: Dysmsapi
+    domain: dysmsapi.aliyuncs.com
+    regionId: cn-hangzhou
+    signName: 海角论坛
+    dateFormat: yyyy-MM-dd
+    endpointName: cn-hangzhou
+    TemplateCode: SMS_173251325
+
 mybatis:
   type-aliases-package: com.haijiao.pojo
   mapper-locations: classpath:/com.haijiao.mapper/*.xml
