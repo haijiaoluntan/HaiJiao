@@ -1,10 +1,9 @@
-/*
+
 package com.haijiao.utils;
 
-*/
 /**
  * 人类验证码生成工具类
- *//*
+ */
 
 public class MyVerifyCode {
     
@@ -46,4 +45,3 @@ public class MyVerifyCode {
     }
     
 }
-*/

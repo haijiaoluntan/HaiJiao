@@ -1,4 +1,4 @@
-/*
+
 package com.haijiao.utils;
 
 
@@ -20,12 +20,11 @@ public class PhoneCode {
         String phone = "18229901603";
         getPhonemsg(phone);
     }
-    */
 /**
      * 生成6位随机数验证码
      *
      * @return
-     *//*
+     */
 
     public static String vcode() {
         String vcode = "";
@@ -34,30 +33,27 @@ public class PhoneCode {
         }
         return vcode;
     }
-    */
 /**
      * 阿里云短信服务配置
      *
      * @param mobile
      * @return
-     *//*
+     */
 
     public static String getPhonemsg(String mobile) {
 
-        */
 /**
          * 进行正则关系校验
-         *//*
+         */
 
         System.out.println(mobile);
         if (mobile == null || mobile == "") {
             System.out.println("手机号为空");
             return "";
         }
-        */
 /**
          * 短信验证---阿里大于工具
-         *//*
+         */
 
 
         // 设置超时时间-可自行调整
@@ -120,4 +116,3 @@ public class PhoneCode {
         return "true";
     }
 }
-*/
