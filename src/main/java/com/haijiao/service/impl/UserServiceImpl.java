@@ -1,3 +1,4 @@
+/*
 package com.haijiao.service.impl;
 
 import com.haijiao.mapper.UserMapper;
@@ -31,13 +32,15 @@ public class UserServiceImpl implements UserService {
         return userMapper.queryByUsername(username);
     }
     
-    /**
+    */
+/**
      * 登录
      *
      * @param email
      * @param password
      * @return
-     */
+     *//*
+
     @Override
     public User queryByEmailPsw(String email, String password) {
         User user = userMapper.queryByEmailPsw(email, password);
@@ -56,12 +59,14 @@ public class UserServiceImpl implements UserService {
         return userMapper.actication(email);
     }
     
-    /**
+    */
+/**
      * 注册
      *
      * @param user
      * @return
-     */
+     *//*
+
     @Override
     public Integer insert(User user) {
         Integer i = userMapper.insert(user);
@@ -74,3 +79,4 @@ public class UserServiceImpl implements UserService {
         }
     }
 }
+*/

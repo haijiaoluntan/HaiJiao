@@ -1,3 +1,4 @@
+/*
 package com.haijiao.controller;
 
 import java.io.OutputStream;
@@ -34,3 +35,4 @@ public class testController {
     }
 
 }
+*/

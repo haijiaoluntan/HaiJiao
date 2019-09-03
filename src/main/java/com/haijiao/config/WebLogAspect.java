@@ -1,3 +1,4 @@
+/*
 package com.haijiao.config;
 
 import java.util.Arrays;
@@ -101,3 +102,4 @@ public class WebLogAspect {
         return obj;
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.haijiao.utils;
 
 import java.util.Date;
@@ -12,11 +13,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClock;
 
+*/
 /**
  * 创建JWT具类
  * 
  *
- */
+ *//*
+
 @Component
 public class JwtTokenUtil {
 
@@ -30,12 +33,14 @@ public class JwtTokenUtil {
 	@Value("${jwt.expiration}")
 	private Long expiration = 1800L;
 
-	/**
+	*/
+/**
 	 * 创建JWT token
 	 * 
 	 * @param uid
 	 * @return
-	 */
+	 *//*
+
 	public String createJwt(String uid) {
 		Date now = clock.now();
 		// 添加JWT的包含部分，有三部分：头部（header）、载荷（payload）、签证（signature）.
@@ -50,24 +55,29 @@ public class JwtTokenUtil {
 
 	}
 
-	/**
+	*/
+/**
 	 * 验证JWT
 	 * 
 	 * @return
-	 */
+	 *//*
+
 	public Claims parseJWT(String token) {
 		//根据密钥解析token,解析成功返回Claims;解析不成功会抛出异常
 		Claims c = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 		return c;
 	}
 
-	/**
+	*/
+/**
 	 * 得到失效时间
 	 * 
 	 * @param createdDate
 	 * @return
-	 */
+	 *//*
+
 	private Date calculateExpirationDate(Date createdDate) {
 		return new Date(createdDate.getTime() + expiration * 1000);
 	}
 }
+*/

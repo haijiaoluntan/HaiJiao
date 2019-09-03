@@ -1,3 +1,4 @@
+/*
 package com.haijiao.service.impl;
 
 import com.aliyuncs.DefaultAcsClient;
@@ -129,3 +130,4 @@ public class SmsServiceImpl implements SmsService {
         return new DefaultAcsClient(profile);
     }
 }
+*/
