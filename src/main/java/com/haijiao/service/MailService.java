@@ -1,4 +1,4 @@
-/*
+
 package com.haijiao.service;
 
 import org.slf4j.Logger;
@@ -55,4 +55,3 @@ public class MailService {
         System.out.println("邮件：邮件发送成功");
     }
 }
-*/

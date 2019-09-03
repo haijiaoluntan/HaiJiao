@@ -1,4 +1,4 @@
-/*
+
 package com.haijiao.service.impl;
 
 import com.haijiao.mapper.PostMapper;
@@ -18,4 +18,3 @@ public class PostServiceImpl implements PostService {
         return postMapper.addPost(post);
     }
 }
-*/
