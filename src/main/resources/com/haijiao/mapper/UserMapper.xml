@@ -1,12 +1,9 @@
-<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-&lt;!&ndash; namespace:命名空间，该值与接口保持一致 &ndash;&gt;
 <mapper namespace="com.haijiao.mapper.UserMapper">
-    &lt;!&ndash; 开启二级缓存，默认情况下没有有开启的 &ndash;&gt;
     <cache/>
 
     <resultMap type="User" id="userMap">
@@ -54,4 +51,4 @@
     </update>
 
 </mapper>
--->
+
