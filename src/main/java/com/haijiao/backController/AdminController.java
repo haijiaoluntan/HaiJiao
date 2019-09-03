@@ -1,5 +1,5 @@
 
-package com.haijiao.controller;
+package com.haijiao.backController;
 
 import com.haijiao.pojo.Admin;
 import com.haijiao.pojo.User;

@@ -1,7 +1,5 @@
 
-package com.haijiao.controller;
-
-import java.io.OutputStream;
+package com.haijiao.backController;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
