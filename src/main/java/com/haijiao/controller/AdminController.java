@@ -4,9 +4,8 @@ package com.haijiao.controller;
 import com.haijiao.pojo.Admin;
 import com.haijiao.pojo.User;
 import com.haijiao.service.AdminService;
-import com.haijiao.utils.JwtTokenUtils;
+import com.haijiao.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,7 @@ public class AdminController {
     private AdminService adminService;
 
     @Autowired
-    private JwtTokenUtils jwtTokenUtil;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Value("${auth.header}") //application.yml 获取auth.header的值
     private String header;

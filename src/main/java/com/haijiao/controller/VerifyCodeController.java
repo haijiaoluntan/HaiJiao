@@ -1,4 +1,4 @@
-/*
+
 package com.haijiao.controller;
 
 import com.haijiao.utils.MyVerifyCode;
@@ -19,4 +19,3 @@ public class VerifyCodeController {
         return new ResponseEntity<>(code, HttpStatus.OK);
     }
 }
-*/

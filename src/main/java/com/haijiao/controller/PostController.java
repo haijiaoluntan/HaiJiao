@@ -1,4 +1,4 @@
-/*
+
 package com.haijiao.controller;
 
 import com.haijiao.pojo.Post;
@@ -53,4 +53,3 @@ public class PostController {
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 }
-*/
