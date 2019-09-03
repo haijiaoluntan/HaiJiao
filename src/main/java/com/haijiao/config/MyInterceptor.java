@@ -5,8 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.haijiao.pojo.ResponseData;
 
 
-
-import com.haijiao.utils.JwtTokenUtils;
+import com.haijiao.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,7 @@ public class MyInterceptor implements HandlerInterceptor {
     private String header;
 
     @Autowired
-    private JwtTokenUtils jwtTokenUtil;
+    private JwtTokenUtil jwtTokenUtil;
 
 
     @Override

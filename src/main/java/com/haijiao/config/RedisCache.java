@@ -1,4 +1,4 @@
-/*
+
 package com.haijiao.config;
 
 import org.apache.ibatis.cache.Cache;
@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-*/
+
 /**
  * 将 Redis 作为 mybatis 的二级缓存
  *
- *//*
+ */
 
 public class RedisCache implements Cache {
   private static final Logger logger = LoggerFactory.getLogger(RedisCache.class);
@@ -39,13 +39,12 @@ public class RedisCache implements Cache {
     return id;
   }
 
-  */
 /**
    * Put query result to redis
    *
    * @param key
    * @param value
-   *//*
+   */
 
   @Override
   public void putObject(Object key, Object value) {
@@ -59,13 +58,12 @@ public class RedisCache implements Cache {
     }
   }
 
-  */
 /**
    * Get cached query result from redis
    *
    * @param key
    * @return
-   *//*
+   */
 
   @Override
   public Object getObject(Object key) {
@@ -80,13 +78,12 @@ public class RedisCache implements Cache {
     }
   }
 
-  */
 /**
    * Remove cached query result from redis
    *
    * @param key
    * @return
-   *//*
+   */
 
   @Override
   @SuppressWarnings("unchecked")
@@ -101,10 +98,9 @@ public class RedisCache implements Cache {
     return null;
   }
 
-  */
 /**
    * Clears this cache instance
-   *//*
+   */
 
   @Override
   public void clear() {
@@ -116,12 +112,11 @@ public class RedisCache implements Cache {
     logger.debug("清除所有redis缓存查询的结果");
   }
 
-  */
 /**
    * This method is not used
    *
    * @return
-   *//*
+   */
 
   @Override
   public int getSize() {
@@ -141,4 +136,3 @@ public class RedisCache implements Cache {
   }
 
 }
-*/
