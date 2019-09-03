@@ -1,3 +1,4 @@
+/*
 package com.haijiao.service;
 
 import com.haijiao.pojo.User;
@@ -18,3 +19,4 @@ public interface UserService {
     
     User queryByUsername(String username);
 }
+*/

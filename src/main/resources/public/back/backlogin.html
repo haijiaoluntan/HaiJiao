@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -112,7 +112,7 @@
                     </div>
                     <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
                     <br>
-                    <input id="pwdButton" type="button" value="登录">
+                    <button id="pwdButton"  >登录</button>
                     <!-- <div id="wb_connect_btn ">weiboLogin</div> --> 
                     <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
                 </form>
@@ -127,63 +127,44 @@
     <script type="text/javascript " src="../js/jwt.js"></script>
 
     <script>
-        $(function() {
-            /* 登录 */
-            var loginButton = $("#loginButton");
-            var loginForm = $("#loginForm");
-            var loginInputEmail = $("#loginInputEmail");
-            var loginInputPassword = $("#loginInputPassword");
 
-            /* 登录处理 */
-            loginButton.on("click", function() {
-                var email = loginInputEmail.val();
-                var password = loginInputPassword.val();
+        $(()=>{
+            $("#pwdButton").click(()=>{
+                var user = logName.val();
+                var pwd = logPassword.val();
+                alert("点我");
+
                 $.ajax({
-                    url: "manifold/user",
-                    type: "get",
+                    url: "/dladmin",
+                    type: "post",
                     data: {
-                        'email': email,
-                        'password': password
+                        user: user,
+                        pwd: pwd
                     },
                     dataType: 'text',
-                    success: function(responseData) {
-                        if (responseData == 0) {
-                            layer.msg('账号被封禁，无法登陆', {
-                                icon: 2
-                            });
-                        } else if (responseData == 1) {
-                            layer.msg('请检查账号或密码', {
-                                icon: 2
-                            });
+                    success: function(data) {
+                        if (data){
+                            console.log(data)
+                            headers:setJwtToken(data);
+                            alert(data);
+                            location.href='backindex.html';
+
                         } else {
-                            layer.msg('登陆成功', {
-                                time: 1000,
-                                icon: 1
-                            }, function() {
-                                setJwtToken(responseData);
-                                setTimeout("toHomePage();", 500);
-                            });
+                            alert("用户名或者密码错误");
                         }
                     },
-                    error: function(responseData) {
-                        if (responseData == 0) {
-                            layer.msg('账号被封禁，无法登陆', {
-                                icon: 2
-                            });
-                        } else if (responseData == 1) {
-                            layer.msg('请检查账号或密码', {
-                                icon: 2
-                            });
-                        }
-                    }
                 });
             });
 
-        });
 
-        function tobackreg() {
+        })
+
+
+
+
+       /* function tobackreg() {
             location.href = 'backregister.html';
-        }
+        }*/
     </script>
 
 </body>

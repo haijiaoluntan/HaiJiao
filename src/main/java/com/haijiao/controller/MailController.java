@@ -1,3 +1,4 @@
+/*
 package com.haijiao.controller;
 
 
@@ -30,3 +31,4 @@ public class MailController {
         return checkCode;
     }
 }
+*/

@@ -14,7 +14,8 @@ public class CorsConfig {
     
     private final String[] origins = {
             "127.0.0.1",
-            "127.0.0.1:8080"
+            "127.0.0.1:8080",
+            "127.0.0.1:8086",
     };
     
     @Bean

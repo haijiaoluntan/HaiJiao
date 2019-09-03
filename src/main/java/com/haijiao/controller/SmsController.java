@@ -1,3 +1,4 @@
+/*
 package com.haijiao.controller;
 
 import com.alibaba.fastjson.JSON;
@@ -21,12 +22,14 @@ public class SmsController {
     @Autowired
     private SmsServiceImpl smsService;
 
-    /**
+    */
+/**
      * @Author: LX 17839193044@162.com
      * @Description: 短信发
      * @Date: 2019/4/18 16:08
      * @Version: V1.0
-     */
+     *//*
+
     @GetMapping("/sms")
     @ResponseBody
     public String sms() {
@@ -38,13 +41,15 @@ public class SmsController {
         return JSON.toJSONString(sendSmsResponse);
     }
 
-    /**
+    */
+/**
      * @Author: LX 17839193044@162.com
      * @Description: 短信查询
      * @Date: 2019/4/18 16:08
      * @Version: V1.0
      *
-     */
+     *//*
+
     @GetMapping("/query")
     @ResponseBody
     public String query() {
@@ -54,3 +59,4 @@ public class SmsController {
     }
 
 }
+*/
