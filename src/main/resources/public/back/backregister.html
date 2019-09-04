@@ -4,7 +4,7 @@
 <head>
     <title>海角论坛</title>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="images/jpeg" href="../images/hai-logo.jpg" />
+    <link rel="shortcut icon" type="images/jpeg" href="../../images/hai-logo.jpg" />
     <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <link rel="stylesheet" href="../css/index.css">
@@ -68,7 +68,7 @@
 <body>
 <body>
 <div class="videocontainer">
-    <video class="fullscreenvideo" poster="__ROOT__/Themes/tdt/Asset/images/loginbg.jpg" id="bgvid" playsinline="" autoplay="true" muted="false" loop="true">
+    <video class="fullscreenvideo" poster="../../images/hai-logo.jpg" id="bgvid" playsinline="" autoplay="true" muted="false" loop="true">
         <source src="../video/haijiao.mp4" type="video/mp4">
     </video>
 </div>
@@ -88,7 +88,7 @@
                         <input type="text" name="phone" id="regphone" placeholder="手机号" autocomplete="new-password">
                         <div>
                             <input type="text" name="yanzm" id="yanzm" placeholder="验证码" autocomplete="new-password">
-                            <button v-on="click:onSubmit" class="get-captcha_button" style="display:inline">获取手机验证码</button>
+                            <button v-on="click:onSubmit" class="get-captcha_button" style="display:inline" id="send">获取验证码</button>
                         </div>
                         <input type="text" name="regName" id="regName" placeholder="账号" autocomplete="new-password">
                         <input type="password" name="password" id="regPassword" placeholder="密码 " autocomplete="new-password">
@@ -180,7 +180,28 @@
             location.href = 'backlogin.html';
         }
     </script>
-
+<!--按钮特效 -->
+<script>
+    var wait=60;
+    function time(){
+        var btn=document.getElementById("send");
+        var str=btn.innerText;
+        if(wait==1){
+            btn.innerText="再次发送";
+            btn.removeAttribute("disabled");
+            wait=60;
+        }else{
+            wait--;
+            btn.innerText=wait+"s后重新发送";
+            btn.setAttribute("disabled",true);
+            setTimeout(function(){
+                time();
+            },1000);
+        }
+    }
+    //点击button触发
+    document.getElementById("send").onclick=time;
+</script>
 </body>
 
 </html>

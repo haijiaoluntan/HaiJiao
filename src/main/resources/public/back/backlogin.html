@@ -68,7 +68,7 @@
 
 <body>
 <div class="videocontainer">
-    <video class="fullscreenvideo" poster="__ROOT__/Themes/tdt/Asset/images/loginbg.jpg" id="bgvid" playsinline="" autoplay="true" muted="false" loop="true">
+    <video class="fullscreenvideo" poster="../images/hai-logo.jpg" id="bgvid" playsinline="" autoplay="true" muted="false" loop="true">
         <source src="../video/haijiao.mp4" type="video/mp4">
     </video>
 </div>
@@ -93,6 +93,7 @@
                     <div class="inputs ">
                         <input type="text " name="phone " id="logPhone" placeholder="手机号" autocomplete="off">
                         <input type="text " name="yanzm " id="yanzm" placeholder="验证码" autocomplete="off">
+                        <button class="btn" id="send">发送验证码</button>
                         <span id="regi-username-error"></span>
                         <span id="regi-email-error"></span>
                     </div>
@@ -155,18 +156,33 @@
                     },
                 });
             });
-
-
         })
-
-
-
-
-       /* function tobackreg() {
+        function tobackreg() {
             location.href = 'backregister.html';
-        }*/
+        }
     </script>
-
+<!--按钮特效 -->
+<script>
+    var wait=60;
+    function time(){
+        var btn=document.getElementById("send");
+        var str=btn.innerText;
+        if(wait==1){
+            btn.innerText="再次发送";
+            btn.removeAttribute("disabled");
+            wait=60;
+        }else{
+            wait--;
+            btn.innerText=wait+"s后重新发送";
+            btn.setAttribute("disabled",true);
+            setTimeout(function(){
+                time();
+            },1000);
+        }
+    }
+    //点击button触发
+    document.getElementById("send").onclick=time;
+</script>
 </body>
 
 </html>
