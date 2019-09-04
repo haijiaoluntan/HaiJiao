@@ -1,4 +1,3 @@
-
 package com.haijiao.service.impl;
 
 import com.haijiao.mapper.UserMapper;
@@ -7,9 +6,8 @@ import com.haijiao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
     
     @Autowired
@@ -31,15 +29,29 @@ public class UserServiceImpl implements UserService {
     public User queryByUsername(String username) {
         return userMapper.queryByUsername(username);
     }
-
-/**
+    
+    @Override
+    public Integer useBalance(Integer uid, Integer balance) {
+        return userMapper.useBalance(uid, balance);
+    }
+    
+    @Override
+    public Integer updLevel(Integer uid) {
+        return userMapper.updLevel(uid);
+    }
+    
+    @Override
+    public Integer updExpByPosts(Integer uid) {
+        return userMapper.updExpByPosts(uid);
+    }
+    
+    /**
      * 登录
      *
      * @param email
      * @param password
      * @return
      */
-
     @Override
     public User queryByEmailPsw(String email, String password) {
         User user = userMapper.queryByEmailPsw(email, password);
@@ -57,14 +69,13 @@ public class UserServiceImpl implements UserService {
     public Integer actication(String email) {
         return userMapper.actication(email);
     }
-
-/**
+    
+    /**
      * 注册
      *
      * @param user
      * @return
      */
-
     @Override
     public Integer insert(User user) {
         Integer i = userMapper.insert(user);

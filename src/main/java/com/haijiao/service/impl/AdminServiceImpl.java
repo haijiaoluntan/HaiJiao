@@ -47,6 +47,37 @@ public class AdminServiceImpl implements AdminService {
         return adminMapper.delete(uid);
     }
 
+    //以下为手机注册登录
+    @Override
+    public int addReady(String phone, Integer yanzm) {
+        return adminMapper.addReady(phone,yanzm);
+    }
+
+    @Override
+    public Integer selReadyY(String phone) {
+        return adminMapper.selReadyY(phone);
+    }
+
+    @Override
+    public Integer phoneReg(Admin admin) {
+        return adminMapper.phoneReg(admin);
+    }
+
+    @Override
+    public Integer updYzm(String phone, Integer phoneyanzm) {
+        return adminMapper.updYzm(phone,phoneyanzm);
+    }
+
+    @Override
+    public Integer selYanzm(String phone) {
+        return adminMapper.selYanzm(phone);
+    }
+
+    @Override
+    public Admin selPhone(String phone) {
+        return adminMapper.selPhone(phone);
+    }
+
 
 }
 

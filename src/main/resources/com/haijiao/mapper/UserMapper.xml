@@ -7,7 +7,8 @@
     <cache/>
 
     <resultMap type="User" id="userMap">
-        <id property="username" column="username"/>
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
         <result property="password" column="password"/>
         <result property="phone" column="phone"/>
         <result property="sex" column="sex"/>
@@ -20,8 +21,8 @@
         <result property="joindate" column="joindate"/>
         <result property="signature" column="signature"/>
         <result property="balance" column="balance"/>
-        <result property="loginDate" column="loginDate"/>
-        <result property="end_date" column="end_date"/>
+        <result property="loginDate" column="logindate"/>
+<!--        <result property="end_date" column="end_date"/>-->
         <result property="email" column="email"/>
         <result property="act" column="act"/>
         <result property="actcode" column="actcode"/>
