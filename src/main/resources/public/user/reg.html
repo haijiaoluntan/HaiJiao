@@ -7,15 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="fly,layui,前端社区">
   <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="../../static/res/layui/css/layui.css">
-  <link rel="stylesheet" href="../../static/res/css/global.css">
+  <link rel="stylesheet" href="../../res/layui/css/layui.css">
+  <link rel="stylesheet" href="../../res/css/global.css">
 </head>
 <body>
 
 <div class="fly-header layui-bg-black">
   <div class="layui-container">
     <a class="fly-logo" href="/">
-      <img src="../../static/res/images/logo.png" alt="layui">
+      <img src="../../res/images/logo.png" alt="layui">
     </a>
     <ul class="layui-nav fly-nav layui-hide-xs">
       <li class="layui-nav-item layui-this">
@@ -64,9 +64,17 @@
               <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">邮箱</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" class="layui-input">
+                  <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" class="layui-input" > 
                 </div>
                 <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
+                <span style="color: #c00;" id="yx"></span>
+              </div>
+              <div class="layui-form-item">
+                <button id="btnfs" type="button" class="layui-btn layui-btn-normal" onclick="fs()">发送验证码</button>
+                <div class="layui-input-inline">
+                  <input type="text" id="L_qemail" name="qemail" required lay-verify="email" autocomplete="off" class="layui-input">
+                </div>
+                <span id="yzm" style="color: red" value=""></span>
               </div>
               <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">昵称</label>
@@ -77,14 +85,16 @@
               <div class="layui-form-item">
                 <label for="L_pass" class="layui-form-label">密码</label>
                 <div class="layui-input-inline">
-                  <input type="password" id="L_pass" name="pass" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="password" id="L_pass" name="pass" required lay-verify="required" autocomplete="off" class="layui-input" onblur="pwd()">
+                  <span id="pp" style="color: red" value=""></span>
                 </div>
                 <div class="layui-form-mid layui-word-aux">6到16个字符</div>
               </div>
               <div class="layui-form-item">
                 <label for="L_repass" class="layui-form-label">确认密码</label>
                 <div class="layui-input-inline">
-                  <input type="password" id="L_repass" name="repass" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="password" id="L_repass" name="repass" required lay-verify="required" autocomplete="off" class="layui-input" onblur="qrpwd()">
+                  <span id="repp" style="color: red" value=""></span>
                 </div>
               </div>
               <div class="layui-form-item">
@@ -97,7 +107,7 @@
                 </div>
               </div>
               <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="*" lay-submit>立即注册</button>
+                <button class="layui-btn" lay-filter="*" lay-submit onclick="login()">立即注册</button>
               </div>
               <div class="layui-form-item fly-form-app">
                 <span>或者直接使用社交账号快捷注册</span>
@@ -122,8 +132,9 @@
   </p>
 </div>
 
-<script src="../../static/res/layui/layui.js"></script>
-<script>
+<script src="../../res/layui/layui.js"></script>
+<script src="../../js/jquery-3.3.1.min.js"></script>
+<script >
 layui.cache.page = 'user';
 layui.cache.user = {
   username: '游客'
@@ -136,8 +147,101 @@ layui.config({
   version: "3.0.0"
   ,base: '../../res/mods/'
 }).extend({
-  fly: 'public.index'
+  fly: 'index'
 }).use('fly');
+
+
+function pwd(){
+  var p = document.getElementById('L_pass').value;
+  var pp = document.getElementById('pp');
+if (p == '' || p.length <= 6 || p.length >= 16) {
+pp.innerHTML = '密码为6-16位长度的字符';
+return false;
+}
+else {
+pp.innerHTML = '';
+return true;
+}
+}
+
+function qrpwd(){
+  var p = document.getElementById('L_pass').value;
+  var qp = document.getElementById('L_repass').value;
+  var repp = document.getElementById('repp');
+  if(p != qp){
+    repp.innerHTML = '与原密码不一致';
+    return false;
+  }else{
+    repp.innerHTML = '';
+    return true;
+  }
+}
+
+$(function () {
+    var btn = $('#btnfs');
+
+    $(function () {
+        btn.click(settime());
+        fs();
+    })
+    var countdown = 5;
+    function settime(){
+        if(countdown==5){
+                btn.attr("disabled", false);
+                btn.html("发送验证码");
+                btn.removeClass("disabled");
+                countdown = 0;
+                return;
+        }else{
+            btn.addClass("disabled");
+            btn.attr("disabled", true);
+            btn.html("重新发送(" + countdown + ")");
+            countdown--;
+        }
+        setTimeout(settime, 1000);
+    }
+
+    function fs(){
+        var qemail = $('#L_qemail').val();
+        $.ajax({
+            method:'post',
+            url:'../../haijiao/getCheckCode',
+            success:function(data){
+                if(qemail!=data){
+                    $('#yzm').innerHTML = '<i class="layui-icon layui-icon-vercode" style="font-size: 30px; color: green;"></i>';
+                }else{
+                    $('#yzm').innerHTML = '<i class="layui-icon layui-icon-vercode" style="font-size: 30px; color: red;"></i>';
+                }
+            },
+            contentType:'application/json;charset=utf-8',
+            dataType:'text'
+        })
+    }
+    function login(){
+
+        var L_email = $('#L_email').val();
+        var L_username = $('#L_username').val();
+        var L_pass = $('#L_pass').val();
+
+        if(!L_email){
+            layer.msg('邮箱不能为空！', {icon:2,time:1000});
+            return;
+        }
+        if(!L_username){
+            layer.msg('昵称不能为空！', {icon:2,time:1000});
+            return;
+        }
+        if(!L_pass){
+            layer.msg('密码不能为空！', {icon:2,time:1000});
+            return;
+        }
+
+        $.ajax({
+            method:'post',
+            url:'../',
+        })
+    }
+})
 </script>
 
 </body>
