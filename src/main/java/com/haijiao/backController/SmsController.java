@@ -4,10 +4,9 @@ package com.haijiao.backController;
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.dysmsapi.model.v20170525.QuerySendDetailsResponse;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.haijiao.service.SmsService;
 import com.haijiao.service.impl.SmsServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,12 +28,21 @@ public class SmsController {
      * @Version: V1.0
      */
 
+    //测试验证码使用
+    @GetMapping("/code")
+    @ResponseBody
+    public Integer getcode(){
+        Integer code=smsService.getcode();
+        return  code;
+    }
+
     @GetMapping("/sms")
     @ResponseBody
-    public String sms() {
-        Map<String, String> map = new HashMap<>();
-        map.put("code", "125645");
-        SendSmsResponse sendSmsResponse = smsService.sendSms("18229901603",
+    public String sms(@Param("phone") String phone) {
+        Integer code=smsService.getcode();
+        Map<String, Integer> map = new HashMap<>();
+        map.put("code", code);
+        SendSmsResponse sendSmsResponse = smsService.sendSms(phone,
                 JSON.toJSONString(map),
                 "SMS_173251325");
         return JSON.toJSONString(sendSmsResponse);

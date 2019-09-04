@@ -31,6 +31,8 @@ public class SmsServiceImpl implements SmsService {
     @Resource
     private AliyunSMSConfig smsConfig;
 
+
+
     @Override
     public SendSmsResponse sendSms(String phoneNumbers, String templateParam, String templateCode) {
         // 封装短信发送对象
@@ -87,6 +89,17 @@ public class SmsServiceImpl implements SmsService {
         }
         return querySendDetailsResponse;
     }
+
+    @Override
+    public Integer getcode() {
+        Integer code=0;
+        for(int j = 0; j< 100; j++){
+            code=(int)((Math.random()*9+1)*100000);
+            System.out.println((int)((Math.random()*9+1)*100000));
+        }
+        return code;
+    }
+
     private QuerySendDetailsRequest getSmsQueryRequest(SmsQuery smsQuery) {
         QuerySendDetailsRequest request = new QuerySendDetailsRequest();
         request.setPhoneNumber(smsQuery.getPhoneNumber());
