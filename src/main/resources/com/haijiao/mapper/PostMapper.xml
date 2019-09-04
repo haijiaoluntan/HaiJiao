@@ -1,51 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.haijiao.mapper.PostMapper">
 
-    <cache/>
-    
-    <resultMap id="showPostMap" type="ShowPost">
-        <id property="pid" column="pid"/>
-        <result property="uid" column="uid"/>
-        <result property="title" column="title"/>
-        <result property="type" column="type"/>
-        <result property="pubDate" column="pubdate"/>
-        <result property="jing" column="jing"/>
-        <result property="top" column="top"/>
-        <result property="jie" column="jie"/>
-        <result property="browse" column="browse"/>
-        <result property="reward" column="reward"/>
-        <result property="rstate" column="rstate"/>
-        <result property="content" column="content"/>
-        <result property="commCount" column="commCount"/>
-        <association property="user" javaType="User">
-            <id property="uid" column="uid"/>
-            <result property="username" column="username"/>
-<!--            <result property="password" column="password"/>-->
-<!--            <result property="phone" column="phone"/>-->
-<!--            <result property="sex" column="sex"/>-->
-<!--            <result property="eid" column="eid"/>-->
-            <result property="picture" column="picture"/>
-            <result property="level" column="level"/>
-<!--            <result property="exp" column="exp"/>-->
-<!--            <result property="province" column="province"/>-->
-<!--            <result property="city" column="city"/>-->
-<!--            <result property="joindate" column="joindate"/>-->
-<!--            <result property="signature" column="signature"/>-->
-<!--            <result property="balance" column="balance"/>-->
-<!--            <result property="loginDate" column="logindate"/>-->
-<!--            <result property="email" column="email"/>-->
-<!--            <result property="act" column="act"/>-->
-<!--            <result property="actcode" column="actcode"/>-->
-        </association>
-    </resultMap>
-
-    <!--  获得展示帖列表  -->
-    <select id="getShowPostList" resultMap="showPostMap">
-        select c.*, d.commCount from (select a.*, b.username, b.picture, b.level from posts a, user b where a.uid = b.uid) c
-        left join (select pid, count(*) commCount from comment group by pid) d
-        on c.pid = d.pid order by c.top desc, c.jing desc, c.jie desc, c.pubdate desc limit #{currentPage}, #{pageSize};
-    </select>
 </mapper>

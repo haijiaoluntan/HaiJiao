@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: Nhtmbyy123
-    url: jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/haijiao?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   data:
     mongodb:
@@ -29,6 +29,18 @@ spring:
             required: true
     host: smtp.qq.com
 
+aliyun:
+  sms:
+    accessKeyId: LTAIsCFOlcDDYz3m
+    accessKeySecret: 5Fd0cGtcUZhMiQ4X1xv4oGk7AXrl3W
+    product: Dysmsapi
+    domain: dysmsapi.aliyuncs.com
+    regionId: cn-hangzhou
+    signName: 海角论坛
+    dateFormat: yyyy-MM-dd
+    endpointName: cn-hangzhou
+    TemplateCode: SMS_173251325
+
 mybatis:
   type-aliases-package: com.haijiao.pojo
   mapper-locations: classpath:/com.haijiao.mapper/*.xml
@@ -36,6 +48,7 @@ mybatis:
 logging:
   level:
     com.haijiao.mapper: debug
+  file: e:/temp/haijiao.log
 
 jwt:
   secret: haijiaoluntan

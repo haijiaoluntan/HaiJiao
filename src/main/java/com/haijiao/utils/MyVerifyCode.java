@@ -1,8 +1,10 @@
+
 package com.haijiao.utils;
 
 /**
  * 人类验证码生成工具类
  */
+
 public class MyVerifyCode {
     
     private static int[] nums1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};

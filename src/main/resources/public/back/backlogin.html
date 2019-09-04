@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/animate.min.css">
+    <link rel="stylesheet" href="../css/video.css">
     <style>
         form {
             position: relative;
@@ -66,7 +67,11 @@
 </head>
 
 <body>
-    <!--<canvas id="c"></canvas>-->
+<div class="videocontainer">
+    <video class="fullscreenvideo" poster="__ROOT__/Themes/tdt/Asset/images/loginbg.jpg" id="bgvid" playsinline="" autoplay="true" muted="false" loop="true">
+        <source src="../video/haijiao.mp4" type="video/mp4">
+    </video>
+</div>
     <div class="moneybox" id="leafContainer"></div>
     <div id="WebGL-output"></div>
     <div id="Stats-output"></div>
@@ -94,7 +99,7 @@
                 </form>
                 <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
                 <br>
-                <button id="registerButton" type="button ">登录</button>
+                <button id="phoneButton" type="button ">登录</button>
                 <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
             </div>
             <div id="login-container">
@@ -107,7 +112,7 @@
                     </div>
                     <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
                     <br>
-                    <input id="loginButton" type="button" value="登录">
+                    <button id="pwdButton"  >登录</button>
                     <!-- <div id="wb_connect_btn ">weiboLogin</div> --> 
                     <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
                 </form>
@@ -120,115 +125,46 @@
     <script type="text/javascript " src="../layer/2.4/layer.js"></script>
     <script type="text/javascript " src="../js/login.js "></script>
     <script type="text/javascript " src="../js/jwt.js"></script>
-    <!--飘钱动态  -->
-    <script>
-        const NUMBER_OF_LEAVES = 15;
-      const width=window.screen.width;
-    function init(){
-        var container = document.getElementById('leafContainer');
-        for (var i = 0; i < NUMBER_OF_LEAVES; i++) 
-        {
-            container.appendChild(createALeaf());
-        }
-
-    }
-    function randomInteger(low, high)
-    {
-        return low + Math.floor(Math.random() * (high - low));
-    }
-    function randomFloat(low, high)
-    {
-        return low + Math.random() * (high - low);
-    }
-    function pixelValue(value)
-    {
-        return value + 'px';
-    }
-
-    function durationValue(value)
-    {
-        return value + 's';
-    }
-    function createALeaf()
-    {
-        var leafDiv = document.createElement('div');
-        var image = document.createElement('img');
-        image.src = '../images/cash' + randomInteger(3, 7) + '.png';
-        leafDiv.style.top = "-100px";
-        leafDiv.style.left = pixelValue(randomInteger(0, width));
-        var spinAnimationName = (Math.random() < 0.5) ? 'clockwiseSpin' : 'counterclockwiseSpinAndFlip';
-        leafDiv.style.webkitAnimationName = 'fade, drop';
-        image.style.webkitAnimationName = spinAnimationName;
-        var fadeAndDropDuration = durationValue(randomFloat(3, 9));
-        var spinDuration = durationValue(randomFloat(3, 7));
-        leafDiv.style.webkitAnimationDuration = fadeAndDropDuration + ', ' + fadeAndDropDuration;
-        var leafDelay = durationValue(randomFloat(0, 0));
-        leafDiv.style.webkitAnimationDelay = leafDelay + ', ' + leafDelay;
-        image.style.webkitAnimationDuration = spinDuration;
-        leafDiv.appendChild(image);
-        return leafDiv;
-    }
-    window.addEventListener('load', init, false);
-    </script>
 
     <script>
-        $(function() {
-            /* 登录 */
-            var loginButton = $("#loginButton");
-            var loginForm = $("#loginForm");
-            var loginInputEmail = $("#loginInputEmail");
-            var loginInputPassword = $("#loginInputPassword");
 
-            /* 登录处理 */
-            loginButton.on("click", function() {
-                var email = loginInputEmail.val();
-                var password = loginInputPassword.val();
+        $(()=>{
+            $("#pwdButton").click(()=>{
+                var user = logName.val();
+                var pwd = logPassword.val();
+                alert("点我");
+
                 $.ajax({
-                    url: "manifold/user",
-                    type: "get",
+                    url: "/dladmin",
+                    type: "post",
                     data: {
-                        'email': email,
-                        'password': password
+                        user: user,
+                        pwd: pwd
                     },
                     dataType: 'text',
-                    success: function(responseData) {
-                        if (responseData == 0) {
-                            layer.msg('账号被封禁，无法登陆', {
-                                icon: 2
-                            });
-                        } else if (responseData == 1) {
-                            layer.msg('请检查账号或密码', {
-                                icon: 2
-                            });
+                    success: function(data) {
+                        if (data){
+                            console.log(data)
+                            headers:setJwtToken(data);
+                            alert(data);
+                            location.href='backindex.html';
+
                         } else {
-                            layer.msg('登陆成功', {
-                                time: 1000,
-                                icon: 1
-                            }, function() {
-                                setJwtToken(responseData);
-                                setTimeout("toHomePage();", 500);
-                            });
+                            alert("用户名或者密码错误");
                         }
                     },
-                    error: function(responseData) {
-                        if (responseData == 0) {
-                            layer.msg('账号被封禁，无法登陆', {
-                                icon: 2
-                            });
-                        } else if (responseData == 1) {
-                            layer.msg('请检查账号或密码', {
-                                icon: 2
-                            });
-                        }
-                    }
                 });
             });
 
-        });
 
-        function tobackreg() {
+        })
+
+
+
+
+       /* function tobackreg() {
             location.href = 'backregister.html';
-        }
+        }*/
     </script>
 
 </body>

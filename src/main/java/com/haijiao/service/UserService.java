@@ -1,3 +1,4 @@
+
 package com.haijiao.service;
 
 import com.haijiao.pojo.User;
@@ -24,3 +25,4 @@ public interface UserService {
     
     Integer updExpByPosts(Integer uid);
 }
+

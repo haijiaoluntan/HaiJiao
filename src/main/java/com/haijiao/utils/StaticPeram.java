@@ -1,9 +1,12 @@
+
 package com.haijiao.utils;
 
 public class StaticPeram {
+
     /**
      * 手机验证部分配置
      */
+
     // 设置超时时间-可自行调整
     final static String defaultConnectTimeout  = "sun.net.client.defaultConnectTimeout";
     final static String defaultReadTimeout = "sun.net.client.defaultReadTimeout";
@@ -15,7 +18,8 @@ public class StaticPeram {
     final static String accessKeyId = "LTAIsCFOlcDDYz3m";// 你的accessKeyId,填你自己的 上文配置所得  自行配置
     final static String accessKeySecret = "5Fd0cGtcUZhMiQ4X1xv4oGk7AXrl3W";// 你的accessKeySecret,填你自己的 上文配置所得 自行配置
     // 必填:短信签名-可在短信控制台中找到
-    final static String SignName = "签名";// 阿里云配置你自己的短信签名填入
+    final static String SignName = "海角论坛";// 阿里云配置你自己的短信签名填入
     // 必填:短信模板-可在短信控制台中找到
-    final static String TemplateCode = "SMS_91945080"; // 阿里云配置你自己的短信模板填入
+    final static String TemplateCode = "SMS_173251325"; // 阿里云配置你自己的短信模板填入
 }
+
