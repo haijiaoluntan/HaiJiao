@@ -1,70 +1,30 @@
 package com.haijiao.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
 
-//后台admin用户类，，，字段会有修改
+//使用了lombak插件
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Admin implements Serializable {
-
+    private static final long serialVersionUID = 4960310662539928636L;
     private int id;
-    private String user;
+    private String Admin;
     private String pwd;
-    private int level ;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss", timezone = "GMT+8")
     private Date login_time;
-
-    public Admin(String user, String pwd, int level, Date login_time) {
-        this.user = user;
-        this.pwd = pwd;
-        this.level = level;
-        this.login_time = login_time;
-    }
-
-    public Admin() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public Date getLogin_time() {
-        return login_time;
-    }
-
-    public void setLogin_time(Date login_time) {
-        this.login_time = login_time;
-    }
-
+    private String phone;
+    private Integer phoneyanzm;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss", timezone = "GMT+8")
+    private Date create_time;
+    private Integer rank;
 }

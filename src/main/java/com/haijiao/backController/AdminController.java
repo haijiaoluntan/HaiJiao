@@ -1,9 +1,12 @@
 
 package com.haijiao.backController;
 
+import com.alibaba.fastjson.JSON;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.haijiao.pojo.Admin;
 import com.haijiao.pojo.User;
 import com.haijiao.service.AdminService;
+import com.haijiao.service.SmsService;
 import com.haijiao.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +16,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
+@RequestMapping("haijiao")
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private SmsService smsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -49,7 +54,6 @@ public class AdminController {
         return adminService.addadmin(user,pwd);
     }
 
-
     @RequestMapping("/check")
     public ResponseEntity<?> check(HttpServletRequest request){
         String token = request.getHeader(header);
@@ -65,12 +69,10 @@ public class AdminController {
         return null;
     }
 
-
     public void updAdmins(Date login_time, String user){
+
         adminService.updAdmins(login_time,user);
     }
-
-
 
     @PostMapping("/seleadmin")
     public Admin seleadmin(@RequestParam("user") String user){
@@ -83,13 +85,79 @@ public class AdminController {
 
         return adminService.findall();
     }
+
     @DeleteMapping("/del/{uid}")
     public int delete(@PathVariable("uid") Integer uid){
         int k=adminService.delete(uid);
-
-
-
         return k;
+    }
+
+    //手机是否注册
+    @GetMapping("/selphone")
+    public ResponseEntity<?> selPhone(String phone){
+        Admin admin=adminService.selPhone(phone);
+            return new ResponseEntity<>(admin,HttpStatus.OK);
+    }
+    //发送验证码创建预设表
+    @PostMapping("/addready")
+    public ResponseEntity<?> addReady(String phone){
+        String msg="发送成功";
+        Integer code=smsService.getcode();
+        Map<String, Integer> map = new HashMap<>();
+        map.put("code", code);
+        SendSmsResponse sendSmsResponse = smsService.sendSms(phone,
+                JSON.toJSONString(map),
+                "SMS_173251325");
+        adminService.addReady(phone,code);
+        return new ResponseEntity<>(msg,HttpStatus.OK);
+    }
+    //注册验证码验证
+    @GetMapping("/selreadyy")
+    public ResponseEntity<?> selReadyY(String phone,Integer yanzm){
+        Integer info=1;
+        Integer yanzm1=adminService.selReadyY(phone);
+        if(yanzm==yanzm1){
+            return new ResponseEntity<>(info,HttpStatus.OK);
+        }else {
+            info=2;
+            return new ResponseEntity<>(info,HttpStatus.OK);
+        }
+    }
+    //手机注册
+    @PostMapping("/phoneReg")
+    public ResponseEntity<?> phoneReg(Admin admin){
+        Integer i=adminService.phoneReg(admin);
+        return new ResponseEntity<>(i,HttpStatus.OK);
+    }
+
+    //手机登录发送验证码
+    @PutMapping("/updyzm")
+    public ResponseEntity<?> updYzm(String phone){
+        String msg="修改成功";
+        Integer yanzm=smsService.getcode();
+        Map<String, Integer> map = new HashMap<>();
+        map.put("code", yanzm);
+        SendSmsResponse sendSmsResponse = smsService.sendSms(phone,
+                JSON.toJSONString(map),
+                "SMS_173251325");
+        adminService.updYzm(phone,yanzm);
+        return new ResponseEntity<>(msg,HttpStatus.OK);
+    }
+
+    //手机登录
+    @PostMapping("/phonedlu")
+    public ResponseEntity<?> phoneDlu(String phone,Integer yanzm){
+        Integer code=adminService.selYanzm(phone);
+        Map<String,String> map=new HashMap<>();
+        if(yanzm==code){
+            map.put("msg","登录成功");
+            map.put("info","1");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }else {
+            map.put("msg","登录失败");
+            map.put("info","2");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }
     }
 
 }
