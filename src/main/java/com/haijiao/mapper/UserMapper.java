@@ -5,9 +5,8 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 
-@Repository("userMapper")
+@Repository
 public interface UserMapper {
     
     User queryByEmailPsw(String email, String password);
@@ -35,4 +34,29 @@ public interface UserMapper {
 
     @Select("select * from user where username = #{username}")
     User queryByUsername(String username);
+    
+    /**
+     * 使用飞吻
+     * @param uid
+     * @param balance
+     * @return
+     */
+    @Update("update user set balance = (balance - #{balance}) where uid = #{uid}")
+    Integer useBalance(Integer uid, Integer balance);
+    
+    /**
+     * 更新等级
+     * @param uid
+     * @return
+     */
+    @Update("update user set level = (level + 1) where uid = #{uid}")
+    Integer updLevel(Integer uid);
+    
+    /**
+     * 发帖获得经验值，+25
+     * @param uid
+     * @return
+     */
+    @Update("update user set exp = (exp + 25) where uid = #{uid}")
+    Integer updExpByPosts(Integer uid);
 }

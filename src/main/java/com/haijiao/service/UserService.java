@@ -18,5 +18,11 @@ public interface UserService {
     Integer updateLoginDate(Integer uid);
     
     User queryByUsername(String username);
+    
+    Integer useBalance(Integer uid, Integer balance);
+    
+    Integer updLevel(Integer uid);
+    
+    Integer updExpByPosts(Integer uid);
 }
 
