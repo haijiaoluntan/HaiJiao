@@ -40,6 +40,27 @@ public class User implements Serializable {
     public User() {
     }
     
+    public User(Integer uid, String username, String password, String phone, String sex, String picture, Integer level, Integer exp, Integer province, Integer city, Date joindate, Date loginDate, Date end_date, String signature, Double balance, String email, Integer act, String actcode) {
+        this.uid = uid;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.sex = sex;
+        this.picture = picture;
+        this.level = level;
+        this.exp = exp;
+        this.province = province;
+        this.city = city;
+        this.joindate = joindate;
+        this.loginDate = loginDate;
+        this.end_date = end_date;
+        this.signature = signature;
+        this.balance = balance;
+        this.email = email;
+        this.act = act;
+        this.actcode = actcode;
+    }
+    
     public Integer getUid() {
         return uid;
     }
@@ -183,47 +204,48 @@ public class User implements Serializable {
     public void setActcode(String actcode) {
         this.actcode = actcode;
     }
-
-    public User(String username, String password, String phone, String sex, String picture, Integer level, Integer exp, Integer province, Integer city, Date joindate, Date loginDate, Date end_date, String signature, Double balance, String email, Integer act, String actcode) {
-        this.username = username;
-        this.password = password;
-        this.phone = phone;
-        this.sex = sex;
-        this.picture = picture;
-        this.level = level;
-        this.exp = exp;
-        this.province = province;
-        this.city = city;
-        this.joindate = joindate;
-        this.loginDate = loginDate;
-        this.end_date = end_date;
-        this.signature = signature;
-        this.balance = balance;
-        this.email = email;
-        this.act = act;
-        this.actcode = actcode;
-    }
-
+    
+    
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", phone='" + phone + '\'' +
-                ", sex='" + sex + '\'' +
-                ", picture='" + picture + '\'' +
-                ", level=" + level +
-                ", exp=" + exp +
-                ", province=" + province +
-                ", city=" + city +
-                ", joindate=" + joindate +
-                ", loginDate=" + loginDate +
-                ", end_date=" + end_date +
-                ", signature='" + signature + '\'' +
-                ", balance=" + balance +
-                ", email='" + email + '\'' +
-                ", act=" + act +
-                ", actcode='" + actcode + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("User").append('[')
+                .append("uid=")
+                .append(uid)
+                .append(", username=")
+                .append(username)
+                .append(", password=")
+                .append(password)
+                .append(", phone=")
+                .append(phone)
+                .append(", sex=")
+                .append(sex)
+                .append(", picture=")
+                .append(picture)
+                .append(", level=")
+                .append(level)
+                .append(", exp=")
+                .append(exp)
+                .append(", province=")
+                .append(province)
+                .append(", city=")
+                .append(city)
+                .append(", joindate=")
+                .append(joindate)
+                .append(", loginDate=")
+                .append(loginDate)
+                .append(", end_date=")
+                .append(end_date)
+                .append(", signature=")
+                .append(signature)
+                .append(", balance=")
+                .append(balance)
+                .append(", email=")
+                .append(email)
+                .append(", act=")
+                .append(act)
+                .append(", actcode=")
+                .append(actcode)
+                .append(']');
+        return sb.toString();
     }
 }

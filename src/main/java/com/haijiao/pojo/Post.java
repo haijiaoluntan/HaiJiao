@@ -1,5 +1,8 @@
 package com.haijiao.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +16,9 @@ public class Post implements Serializable {
     private Integer uid;        //发帖人id
     private String title;       //标题
     private String type;        //类型
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date pubDate;       //发表时间
     private Integer jing;       //是否精品
     private Integer top;        //是否置顶

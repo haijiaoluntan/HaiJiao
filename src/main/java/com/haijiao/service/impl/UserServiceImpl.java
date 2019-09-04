@@ -6,9 +6,8 @@ import com.haijiao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
     
     @Autowired
@@ -29,6 +28,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User queryByUsername(String username) {
         return userMapper.queryByUsername(username);
+    }
+    
+    @Override
+    public Integer useBalance(Integer uid, Integer balance) {
+        return userMapper.useBalance(uid, balance);
+    }
+    
+    @Override
+    public Integer updLevel(Integer uid) {
+        return userMapper.updLevel(uid);
+    }
+    
+    @Override
+    public Integer updExpByPosts(Integer uid) {
+        return userMapper.updExpByPosts(uid);
     }
     
     /**

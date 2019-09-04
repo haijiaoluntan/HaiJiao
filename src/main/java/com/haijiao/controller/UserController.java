@@ -23,10 +23,16 @@ public class UserController {
     
     @Autowired
     private UserService userService;
-
+    
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
     
+    /**
+     * 获得用户信息
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping("/user/getUser")
     public ResponseEntity<?> getUser(HttpServletRequest request) {
         
@@ -36,5 +42,48 @@ public class UserController {
         user.setPassword("******");
         System.out.println(user.getUsername());
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+    
+    /**
+     * 登录
+     *
+     * @param email
+     * @param password
+     * @return
+     */
+    @RequestMapping("/user/login")
+    public ResponseEntity<?> login(String email, String password) {
+        
+        User user = userService.queryByEmailPsw(email, password);
+        
+        if (user != null) {
+            
+            String jwt = jwtTokenUtil.createJwt(user.getUsername());
+            return new ResponseEntity<>(jwt, HttpStatus.OK);
+            
+        } else {
+            
+            return new ResponseEntity<>("fail", HttpStatus.OK);
+        }
+    }
+    
+    /**
+     * 判断余额是否够
+     * @param request
+     * @param reward
+     * @return
+     */
+    @RequestMapping("/user/checkBalance")
+    public ResponseEntity<?> checkBalance(HttpServletRequest request, Integer reward) {
+        
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        if (user.getBalance() < reward) {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
     }
 }

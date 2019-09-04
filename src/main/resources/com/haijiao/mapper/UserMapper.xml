@@ -9,7 +9,8 @@
     <cache/>
 
     <resultMap type="User" id="userMap">
-        <id property="username" column="username"/>
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
         <result property="password" column="password"/>
         <result property="phone" column="phone"/>
         <result property="sex" column="sex"/>
