@@ -22,6 +22,7 @@ public interface AdminService {
     public int addReady(@Param("phone") String phone,@Param("yanzm") Integer yanzm);
     public Integer selReadyY(String phone);
     public Integer phoneReg(Admin admin);
+    public Admin selAdmin(String admin);
     public Integer updYzm(@Param("phone")String phone,@Param("phoneyanzm")Integer phoneyanzm);
     public Integer selYanzm(String phone);
     public Admin selPhone(String phone);

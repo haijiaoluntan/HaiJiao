@@ -9,6 +9,8 @@ import com.haijiao.service.AdminService;
 import com.haijiao.service.SmsService;
 import com.haijiao.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -95,39 +97,100 @@ public class AdminController {
     //手机是否注册
     @GetMapping("/selphone")
     public ResponseEntity<?> selPhone(String phone){
+        System.out.println("进入判断手机是否注册方法");
+        Map<String,String> map=new HashMap<>();
+        System.out.println("获取手机号是"+phone);
         Admin admin=adminService.selPhone(phone);
-            return new ResponseEntity<>(admin,HttpStatus.OK);
+        if(admin==null){
+            map.put("msg","手机号正确");
+            map.put("info","1");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }else{
+            map.put("msg","手机号已被注册");
+            map.put("info","2");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }
     }
     //发送验证码创建预设表
     @PostMapping("/addready")
     public ResponseEntity<?> addReady(String phone){
-        String msg="发送成功";
+        System.out.println("进入发送验证码建预设表方法");
+        System.out.println("获取手机号是"+phone);
         Integer code=smsService.getcode();
         Map<String, Integer> map = new HashMap<>();
         map.put("code", code);
         SendSmsResponse sendSmsResponse = smsService.sendSms(phone,
                 JSON.toJSONString(map),
                 "SMS_173251325");
-        adminService.addReady(phone,code);
-        return new ResponseEntity<>(msg,HttpStatus.OK);
-    }
-    //注册验证码验证
-    @GetMapping("/selreadyy")
-    public ResponseEntity<?> selReadyY(String phone,Integer yanzm){
-        Integer info=1;
-        Integer yanzm1=adminService.selReadyY(phone);
-        if(yanzm==yanzm1){
-            return new ResponseEntity<>(info,HttpStatus.OK);
-        }else {
-            info=2;
-            return new ResponseEntity<>(info,HttpStatus.OK);
+        System.out.println("返回代码是"+JSON.toJSONString(sendSmsResponse));
+        if(sendSmsResponse.getCode().equals("OK")){
+            Map<String, String> map1 = new HashMap<>();
+            map1.put("info","1");
+            map1.put("msg","发送成功");
+            adminService.addReady(phone,code);
+            return new ResponseEntity<>(map1,HttpStatus.OK);
+        }else{
+            Map<String, String> map1 = new HashMap<>();
+            map1.put("info","2");
+            map1.put("msg","发送失败");
+            return new ResponseEntity<>(map1,HttpStatus.OK);
         }
     }
+    //验证注册验证码
+    @PostMapping("/selreadyy")
+    public ResponseEntity<?> selReadyY(@Param("phone") String phone, @Param("yanzm")Integer yanzm){
+        System.out.println("进入验证注册验证码方法");
+        System.out.println("获取手机号是"+phone);
+        System.out.println("获取验证码是"+yanzm);
+        Map<String, String> map = new HashMap<>();
+        Integer yanzm1=adminService.selReadyY(phone);
+        if(yanzm1.equals(yanzm)){
+            map.put("info","1");
+            map.put("msg","验证码正确");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }else {
+            map.put("info","2");
+            map.put("msg","验证码错误");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }
+    }
+
+    //判断用户名是否存在
+    @PostMapping("/seladmin")
+    public ResponseEntity<?> selAdmin(String admin){
+        System.out.println("进入账号重名判断方法");
+        System.out.println("获取的账号"+admin);
+        Map<String,String> map=new HashMap<>();
+        Admin admin1=adminService.selAdmin(admin);
+        if(admin1==null){
+            map.put("msg","账号合法");
+            map.put("info","1");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }else {
+            map.put("msg","账号重复");
+            map.put("info","2");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }
+    }
+
     //手机注册
     @PostMapping("/phoneReg")
     public ResponseEntity<?> phoneReg(Admin admin){
+        System.out.println("进入注册方法");
+        Map<String, String> map = new HashMap<>();
+        System.out.println("获取的注册信息"+admin.toString());
         Integer i=adminService.phoneReg(admin);
-        return new ResponseEntity<>(i,HttpStatus.OK);
+        if(i==1){
+            map.put("info","1");
+            map.put("msg","注册成功");
+            map.put("admin",admin.getAdmin());
+            map.put("pwd",admin.getPwd());
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }else{
+            map.put("info","2");
+            map.put("msg","注册失败");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }
     }
 
     //手机登录发送验证码
@@ -143,7 +206,6 @@ public class AdminController {
         adminService.updYzm(phone,yanzm);
         return new ResponseEntity<>(msg,HttpStatus.OK);
     }
-
     //手机登录
     @PostMapping("/phonedlu")
     public ResponseEntity<?> phoneDlu(String phone,Integer yanzm){

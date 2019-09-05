@@ -59,6 +59,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Admin selAdmin(String admin) {
+        return adminMapper.selAdmin(admin);
+    }
+
+    @Override
     public Integer phoneReg(Admin admin) {
         return adminMapper.phoneReg(admin);
     }
