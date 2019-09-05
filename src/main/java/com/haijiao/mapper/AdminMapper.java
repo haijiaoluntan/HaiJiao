@@ -16,9 +16,9 @@ public interface AdminMapper {
                              @Param("pwd") String pwd);
 
 
-    @Update("update admin set login_time=#{login_time} where user=#{user}")
+    @Update("update admin set login_time=#{login_time} where admin=#{admin}")
     public  int updAdmins(@Param("login_time") Date login_time,
-                          @Param("user") String user);
+                          @Param("admin") String admin);
 
     @Insert("insert into admin(user,pwd,level)values(#{user},#{pwd},1)")
     public  int addadmin(@Param("user") String user,
@@ -52,7 +52,7 @@ public interface AdminMapper {
     @Update("update admin set phoneyanzm=#{phoneyanzm} where phone=#{phone}")
     public Integer updYzm(@Param("phone")String phone,@Param("phoneyanzm")Integer phoneyanzm);
     //手机登录验证码验证(即获取手机验证码)
-    @Select("select yanzm from admin where phone=#{phone}")
+    @Select("select phoneyanzm from admin where phone=#{phone}")
     public Integer selYanzm(String phone);
     //查询手机号是否已经注册(也可做用手机号获取管理员信息)
     @Select("select * from admin where phone=#{phone}")

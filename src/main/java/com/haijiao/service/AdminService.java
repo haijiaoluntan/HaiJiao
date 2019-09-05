@@ -11,7 +11,7 @@ import java.util.List;
 public interface AdminService {
     public String adminlogin(@Param("user") String user, @Param("pwd") String pwd);
     public  int updAdmins(@Param("login_time") Date login_time,
-                          @Param("user") String user);
+                          @Param("admin") String admin);
     public  int addadmin(@Param("user") String user,
                          @Param("pwd") String pwd
     );

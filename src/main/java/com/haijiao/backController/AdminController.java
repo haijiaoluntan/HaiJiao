@@ -60,7 +60,6 @@ public class AdminController {
     public ResponseEntity<?> check(HttpServletRequest request){
         String token = request.getHeader(header);
         if(token!=null){
-
             Claims claims =  jwtTokenUtil.parseJWT(token);
             System.out.println(claims.get("realname")
                     +","+claims.get("sex")+","+claims.get("weight"));
@@ -102,7 +101,7 @@ public class AdminController {
         System.out.println("获取手机号是"+phone);
         Admin admin=adminService.selPhone(phone);
         if(admin==null){
-            map.put("msg","手机号正确");
+            map.put("msg","手机号合法");
             map.put("info","1");
             return new ResponseEntity<>(map,HttpStatus.OK);
         }else{
@@ -196,25 +195,63 @@ public class AdminController {
     //手机登录发送验证码
     @PutMapping("/updyzm")
     public ResponseEntity<?> updYzm(String phone){
-        String msg="修改成功";
+        System.out.println("进入手机登录发送验证码方法");
+        System.out.println("获取手机号是"+phone);
         Integer yanzm=smsService.getcode();
         Map<String, Integer> map = new HashMap<>();
         map.put("code", yanzm);
         SendSmsResponse sendSmsResponse = smsService.sendSms(phone,
                 JSON.toJSONString(map),
                 "SMS_173251325");
-        adminService.updYzm(phone,yanzm);
-        return new ResponseEntity<>(msg,HttpStatus.OK);
+        System.out.println("返回代码是"+JSON.toJSONString(sendSmsResponse));
+        if(sendSmsResponse.getCode().equals("OK")){
+            Map<String, String> map1 = new HashMap<>();
+            map1.put("info","1");
+            map1.put("msg","发送成功");
+            adminService.updYzm(phone,yanzm);
+            return new ResponseEntity<>(map1,HttpStatus.OK);
+        }else{
+            Map<String, String> map1 = new HashMap<>();
+            map1.put("info","2");
+            map1.put("msg","发送失败");
+            return new ResponseEntity<>(map1,HttpStatus.OK);
+        }
     }
-    //手机登录
-    @PostMapping("/phonedlu")
-    public ResponseEntity<?> phoneDlu(String phone,Integer yanzm){
+    //登录验证码验证
+    @PostMapping("/dluyanzm")
+    public ResponseEntity<?> Dluyanzm(String phone,Integer phoneyanzm){
+        System.out.println("进入验证登录验证码方法");
+        System.out.println("获取手机号是"+phone);
+        System.out.println("获取验证码是"+phoneyanzm);
         Integer code=adminService.selYanzm(phone);
         Map<String,String> map=new HashMap<>();
-        if(yanzm==code){
-            map.put("msg","登录成功");
+        if(phoneyanzm.equals(code)){
+            map.put("msg","验证成功");
             map.put("info","1");
             return new ResponseEntity<>(map,HttpStatus.OK);
+        }else {
+            map.put("msg","验证码错误");
+            map.put("info","2");
+            return new ResponseEntity<>(map,HttpStatus.OK);
+        }
+    }
+
+
+    //手机登录
+    @PostMapping("/phonedlu")
+    public ResponseEntity<?> phoneDlu(String phone,Integer phoneyanzm){
+        System.out.println("进入登录功能的方法");
+        System.out.println("获取手机号是"+phone);
+        System.out.println("获取验证码是"+phoneyanzm);
+        Integer code=adminService.selYanzm(phone);
+        Map<String,String> map=new HashMap<>();
+        if(phoneyanzm.equals(code)){
+            Admin admin=adminService.selPhone(phone);
+            String ad=admin.getAdmin();
+            adminService.updAdmins(new Date(),ad);
+            String token = jwtTokenUtil.createJwt(ad);
+            System.out.println("我创建的token是"+token);
+            return new ResponseEntity<>(token,HttpStatus.OK);
         }else {
             map.put("msg","登录失败");
             map.put("info","2");

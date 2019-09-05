@@ -22,8 +22,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int updAdmins(Date login_time, String user) {
-        return adminMapper.updAdmins(login_time,user);
+    public int updAdmins(Date login_time, String admin) {
+        return adminMapper.updAdmins(login_time,admin);
     }
 
 
