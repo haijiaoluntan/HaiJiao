@@ -2,6 +2,7 @@
 package com.haijiao.service;
 
 import com.haijiao.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 
@@ -24,5 +25,9 @@ public interface UserService {
     Integer updLevel(Integer uid);
     
     Integer updExpByPosts(Integer uid);
+
+    public int fsyanzm(@Param("email")String email, @Param("yzm")String yzm);
+
+    public String elemaily(String email);
 }
 
