@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>配置权限</title>
+<style>
+  .layui-table-cell{
+      display:table-cell;
+      vertical-align: middle;
+  }
+</style>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../layui/layui.js"></script>
+<link rel="stylesheet" href="../layui/css/layui.css" /> 
+<script src="../echartsjs/echarts.min.js"></script>
+</head>
+<body>
+<table id="tb" lay-filter="tbf"></table>
+<div id="main" style="width: 1000px;height:400px;"></div>
+<script id="barDemo">
+	<div class="layui-btn-container" > 
+		<button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit" >购物详细</button>
+	</div>
+</script>
+<script type="text/javascript">
+layui.use('table',function(){
+	var  table=layui.table;
+	var laypage = layui.laypage;
+	table.render({
+		elem:"#tb", 
+		url:"../clientshop",  
+		page:{
+			 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+        ,curr: 1 //设定初始在第 5 页
+        ,groups: 3//只显示 1 个连续页码
+        ,first: false //不显示首页
+        ,last:  false
+		},
+		limit:6,
+		limits:[6,7,8,9,10,12],
+		request:{
+			pageName:'page',
+			limitName:'pageSize'
+		},
+		cols:[[
+			{field:'cid',title:"顾客编号", sort: true},
+			{field:'client',title:"顾客名称", sort: true},
+			{field:'orders',title:"下单总量",sort:true,},  
+			{field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+		]] 
+	});
+	table.on('tool(tbf)',function(obj){
+		var data = obj.data; 
+		console.log(obj);
+		if (obj.event === 'edit') {
+			layer.confirm("确认修改吗",{
+				icon:0,
+				title:'小贴士',
+				offset:'150px'
+			},function(index){
+				alert("成功了");
+			})
+			showlayer();
+			loadDatatoForm("formInfo", data);
+		} 
+	});
+})
+</script>
+</body>
+</html>

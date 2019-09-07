@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>所有权限</title>
+<script src="../js/jquery-3.3.1.js"></script>
+<script src="../layui/layui.js"></script>
+<link rel="stylesheet" href="../layui/css/layui.css" />
+</head>
+<body>
+<table id="tb" lay-filter="tbf"></table>
+<script id="barDemo">
+	    <div class="layui-btn-container" >
+		    <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="allot" >分配</button>
+            <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="frozen" >冻结</button>
+            <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="del" >撤职</button>
+        </div>
+</script>
+<script>
+layui.use('table',function(){
+	var  table=layui.table;
+	var laypage = layui.laypage;
+    loadrank();
+	table.on('tool(tbf)',function(obj) {
+        var data = obj.data;
+        console.log(obj);
+        if (obj.event === 'del') {
+            layer.confirm("确定要撤销<p style='color:red'>" + data.fname + "</p>的管理员吗？", {
+                icon: 0,
+                title: '提示',
+                offset: '150px'
+            }, function (index) {
+                $.ajax({
+                    method: "post",
+                    url: "../food",
+                    data: {"type": "del", "fid": data.fid},
+                    success: function () {
+                        if (encode = 1) {
+                            layer.msg('主人，权限冻结成功了', {icon: 6});
+                        }
+                    },
+                    dataType: "json"
+                });
+                //重新渲染
+                loadrank();
+                layer.closeAll("dialog");
+            })
+        } else if (obj.event === 'allot') {
+            layer.open({
+                type: 2,
+                title: "分配权限",
+                area: ['500px', '600px'],
+                offset: '50px',
+                closeBtn: 1,
+                resize: false,
+                content: 'allotrank.html'
+            });
+            $(".layui-laypage-btn").click();
+        } else if (obj.event === 'frozen') {
+            layer.confirm("确定要冻结<p style='color:red'>" + data.fname + "</p>的权限吗？", {
+                icon: 0,
+                title: '提示',
+                offset: '150px'
+            }, function (index) {
+                $.ajax({
+                    method: "post",
+                    url: "../food",
+                    data: {"type": "del", "fid": data.fid},
+                    success: function () {
+                        if (encode = 1) {
+                            layer.msg('主人，权限冻结成功了', {icon: 6});
+                        }
+                    },
+                    dataType: "json"
+                });
+                //重新渲染
+                loadrank();
+                layer.closeAll("dialog");
+            })
+        }
+    });
+})
+
+function loadrank(){
+    table.render({
+        elem:"#tb",
+        url:"../client",
+        height:'313',
+        page:{
+            layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+            ,curr: 1 //设定初始在第 5 页
+            ,groups: 3//只显示 1 个连续页码
+            ,first: false //不显示首页
+            ,last:  false
+        },
+        limit:6,
+        request:{
+            pageName:'page',
+            limitName:'pageSize'
+        },
+        cols:[[
+            {field:'cid',title:"顾客id", sort: true},
+            {field:'client',title:"顾客名称", sort: true},
+            {field:'password',title:"密码",sort:true,},
+            {field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+        ]]
+    });
+};
+</script>
+</body>
+</html>
