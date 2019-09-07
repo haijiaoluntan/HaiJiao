@@ -18,8 +18,35 @@
 </script>
 <script>
 layui.use('table',function(){
-	var  table=layui.table;
-	var laypage = layui.laypage;
+    var  table=layui.table;
+    var laypage = layui.laypage;
+
+    function loadrank(){
+        table.render({
+            elem:"#tb",
+            url:"http://localhost:8080/haijiao/seladmin",
+            height:'313',
+            page:{
+                layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                ,curr: 1 //设定初始在第 5 页
+                ,groups: 3//只显示 1 个连续页码
+                ,first: false //不显示首页
+                ,last:  false
+            },
+            limit:6,
+            request:{
+                pageName:'page',
+                limitName:'pageSize'
+            },
+            cols:[[
+                {field:'id',title:"管理员id", sort: true},
+                {field:'admin',title:"姓名", sort: true},
+                {field:'phone',title:"手机号",sort:true,},
+                {field:'create_time',title:"创建时间",sort:true,},
+                {field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+            ]]
+        });
+    };
     loadrank();
 	table.on('tool(tbf)',function(obj) {
         var data = obj.data;
@@ -30,20 +57,20 @@ layui.use('table',function(){
                 title: '提示',
                 offset: '150px'
             }, function (index) {
-                $.ajax({
-                    method: "post",
-                    url: "../food",
-                    data: {"type": "del", "fid": data.fid},
-                    success: function () {
-                        if (encode = 1) {
-                            layer.msg('主人，权限冻结成功了', {icon: 6});
-                        }
-                    },
-                    dataType: "json"
-                });
-                //重新渲染
-                loadrank();
-                layer.closeAll("dialog");
+                // $.ajax({
+                //     method: "post",
+                //     url: "../food",
+                //     data: {"type": "del", "fid": data.fid},
+                //     success: function () {
+                //         if (encode = 1) {
+                //             layer.msg('主人，权限冻结成功了', {icon: 6});
+                //         }
+                //     },
+                //     dataType: "json"
+                // });
+                // //重新渲染
+                // loadrank();
+                // layer.closeAll("dialog");
             })
         } else if (obj.event === 'allot') {
             layer.open({
@@ -62,50 +89,24 @@ layui.use('table',function(){
                 title: '提示',
                 offset: '150px'
             }, function (index) {
-                $.ajax({
-                    method: "post",
-                    url: "../food",
-                    data: {"type": "del", "fid": data.fid},
-                    success: function () {
-                        if (encode = 1) {
-                            layer.msg('主人，权限冻结成功了', {icon: 6});
-                        }
-                    },
-                    dataType: "json"
-                });
-                //重新渲染
-                loadrank();
-                layer.closeAll("dialog");
+                // $.ajax({
+                //     method: "post",
+                //     url: "../food",
+                //     data: {"type": "del", "fid": data.fid},
+                //     success: function () {
+                //         if (encode = 1) {
+                //             layer.msg('主人，权限冻结成功了', {icon: 6});
+                //         }
+                //     },
+                //     dataType: "json"
+                // });
+                // //重新渲染
+                // loadrank();
+                // layer.closeAll("dialog");
             })
         }
     });
 })
-
-function loadrank(){
-    table.render({
-        elem:"#tb",
-        url:"../client",
-        height:'313',
-        page:{
-            layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-            ,curr: 1 //设定初始在第 5 页
-            ,groups: 3//只显示 1 个连续页码
-            ,first: false //不显示首页
-            ,last:  false
-        },
-        limit:6,
-        request:{
-            pageName:'page',
-            limitName:'pageSize'
-        },
-        cols:[[
-            {field:'cid',title:"顾客id", sort: true},
-            {field:'client',title:"顾客名称", sort: true},
-            {field:'password',title:"密码",sort:true,},
-            {field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
-        ]]
-    });
-};
 </script>
 </body>
 </html>

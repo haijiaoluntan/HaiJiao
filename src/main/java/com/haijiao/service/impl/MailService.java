@@ -1,5 +1,5 @@
 
-package com.haijiao.service;
+package com.haijiao.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +26,7 @@ public class MailService {
 
 
     public void sendSimpleMail(String to,String title,String content){
+        System.out.println("发送人号码"+from);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(from);
         message.setTo(to);

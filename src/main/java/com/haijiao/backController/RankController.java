@@ -23,12 +23,10 @@ public class RankController {
     public ResponseEntity<?> SelAdmin(){
         System.out.println("进入查询所有管理员方法");
         Admin admin=rankService.FindAllAdmin();
-        Map<String,String> map=new HashMap<>();
         if(admin!=null){
-            map.put("msg","查询成功");
-            map.put("info","1");
-            return new ResponseEntity<>(map, HttpStatus.OK);
+            return new ResponseEntity<>(admin, HttpStatus.OK);
         }else{
+            Map<String,String> map=new HashMap<>();
             map.put("msg","查询失败");
             map.put("info","2");
             return new ResponseEntity<>(map, HttpStatus.OK);
