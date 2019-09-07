@@ -65,12 +65,14 @@
                 <label for="L_email" class="layui-form-label">邮箱</label>
                 <div class="layui-input-inline">
                   <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" class="layui-input" > 
+                  <span id="emailts"></span>
                 </div>
                 <div class="layui-form-mid layui-word-aux">将会成为您唯一的登入名</div>
                 <span style="color: #c00;" id="yx"></span>
               </div>
               <div class="layui-form-item">
-                <button id="btnfs" type="button" class="layui-btn layui-btn-normal" onclick="fs()">发送验证码</button>
+                <button id="btnfs" type="button" class="layui-btn layui-btn-normal">发送验证码</button>
+                <span id="fsyzm"></span>
                 <div class="layui-input-inline">
                   <input type="text" id="L_qemail" name="qemail" required lay-verify="email" autocomplete="off" class="layui-input">
                 </div>
@@ -97,15 +99,15 @@
                   <span id="repp" style="color: red" value=""></span>
                 </div>
               </div>
-              <div class="layui-form-item">
-                <label for="L_vercode" class="layui-form-label">人类验证</label>
-                <div class="layui-input-inline">
-                  <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid">
-                  <span style="color: #c00;">{{d.vercode}}</span>
-                </div>
-              </div>
+              <!--<div class="layui-form-item">-->
+                <!--<label for="L_vercode" class="layui-form-label">人类验证</label>-->
+                <!--<div class="layui-input-inline">-->
+                  <!--<input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">-->
+                <!--</div>-->
+                <!--<div class="layui-form-mid">-->
+                  <!--<span style="color: #c00;">{{d.vercode}}</span>-->
+                <!--</div>-->
+              <!--</div>-->
               <div class="layui-form-item">
                 <button class="layui-btn" lay-filter="*" lay-submit onclick="login()">立即注册</button>
               </div>
@@ -177,72 +179,152 @@ function qrpwd(){
   }
 }
 
+// $(function () {
+//     var btn = $('#btnfs');
+//
+//     $(function () {
+//         btn.click(settime());
+//         fs();
+//     })
+//     var countdown = 5;
+//     function settime(){
+//         if(countdown==5){
+//                 btn.attr("disabled", false);
+//                 btn.html("发送验证码");
+//                 btn.removeClass("disabled");
+//                 countdown = 0;
+//                 return;
+//         }else{
+//             btn.addClass("disabled");
+//             btn.attr("disabled", true);
+//             btn.html("重新发送(" + countdown + ")");
+//             countdown--;
+//         }
+//         setTimeout(settime, 1000);
+//     }
+
+
 $(function () {
-    var btn = $('#btnfs');
 
-    $(function () {
-        btn.click(settime());
-        fs();
+    var L_email = $('#L_email').val();
+    var L_qemail = $('#L_qemail').val();
+    //验证邮箱是否被注册
+    $('#L_email').on('blur',function () {
+        $.ajax({
+            method:'get',
+            url:'http://localhost:8080/haijiao/selemail',
+            data:{"email":L_email},
+            dataType:"json",
+            success:function (data) {
+                console.log(data.info+data.msg);
+                if(data.info==1){
+                    $('#emailts').text(data.msg);
+                    $('#emailts').css("color","green");
+                }else if(data.info==2){
+                    $('#emailts').text(data.msg);
+                    $('#emailts').css("color","red");
+                }
+            }
+        })
     })
-    var countdown = 5;
-    function settime(){
-        if(countdown==5){
-                btn.attr("disabled", false);
-                btn.html("发送验证码");
-                btn.removeClass("disabled");
-                countdown = 0;
-                return;
-        }else{
-            btn.addClass("disabled");
-            btn.attr("disabled", true);
-            btn.html("重新发送(" + countdown + ")");
-            countdown--;
-        }
-        setTimeout(settime, 1000);
-    }
 
-    function fs(){
-        var qemail = $('#L_qemail').val();
+    //发送验证码
+    $('#btnfs').on('click',function () {
         $.ajax({
             method:'post',
-            url:'../../haijiao/getCheckCode',
+            url:'http://localhost:8080/haijiao/getCheckCode',
+            data:{"email":L_email},
             success:function(data){
-                if(qemail!=data){
-                    $('#yzm').innerHTML = '<i class="layui-icon layui-icon-vercode" style="font-size: 30px; color: green;"></i>';
-                }else{
-                    $('#yzm').innerHTML = '<i class="layui-icon layui-icon-vercode" style="font-size: 30px; color: red;"></i>';
-                }
+            if(data.info==1){
+                $('#fsyzm').text(data.msg);
+                $('#fsyzm').css("color","green");
+            }else if(data.info==2){
+                $('#fsyzm').text(data.msg);
+                $('#fsyzm').css("color","red");
+            }
             },
-            contentType:'application/json;charset=utf-8',
-            dataType:'text'
+            dataType:"json"
         })
-    }
-    function login(){
+    })
 
+    //验证验证码
+    $('#L_qemail').on('blur',function () {
+
+        $.ajax({
+            method:'post',
+            url:'http://localhost:8080/haijiao/yz',
+            data:{"email":L_email,"yzm":L_qemail},
+            success:function (data) {
+                if(data.info==1){
+                    $('#yzm').text(data.msg);
+                    $('#yzm').css("color","green");
+                }else if(data.info==2){
+                    $('#yzm').text(data.msg);
+                    $('#yzm').css("color","red");
+                }
+            }
+        })
+    })
+})
+
+    //注册
+    function reg() {
         var L_email = $('#L_email').val();
         var L_username = $('#L_username').val();
         var L_pass = $('#L_pass').val();
+        var L_username = $('#L_username').val();
 
-        if(!L_email){
-            layer.msg('邮箱不能为空！', {icon:2,time:1000});
+        if (!L_email) {
+            layer.msg('邮箱不能为空！', {icon: 2, time: 1000});
             return;
         }
-        if(!L_username){
-            layer.msg('昵称不能为空！', {icon:2,time:1000});
+        if (!L_username) {
+            layer.msg('昵称不能为空！', {icon: 2, time: 1000});
             return;
         }
-        if(!L_pass){
-            layer.msg('密码不能为空！', {icon:2,time:1000});
+        if (!L_pass) {
+            layer.msg('密码不能为空！', {icon: 2, time: 1000});
             return;
         }
 
         $.ajax({
-            method:'post',
-            url:'../',
+            method: 'post',
+            url: 'http://localhost:8080/haijiao/reg',
+            data: {"username": L_username, "password": L_pass, "email": L_email},
+            dataType: 'json',
+            success: function (data) {
+                if (data.info == 1) {
+                    layer.msg(data.msg, {time: 1000}, function () {
+                        location.href = 'index.html'
+                    });
+                } else if(data.info==2){
+                    layer.msg(data.msg);
+                }
+            },
+            contentType: 'application/json;charset=utf-8'
         })
     }
-})
 </script>
 
+<script>
+    var wait=60;
+    function time(){
+        var btn=document.getElementById("btnfs");
+        var str=btn.innerText;
+        if(wait==1){
+            btn.innerText="再次发送";
+            btn.removeAttribute("disabled");
+            wait=60;
+        }else{
+            wait--;
+            btn.innerText=wait+"s后重新发送";
+            btn.setAttribute("disabled",true);
+            setTimeout(function(){
+                time();
+            },1000);
+        }
+    }
+    document.getElementById("btnfs").onclick=time;
+</script>
 </body>
 </html>
