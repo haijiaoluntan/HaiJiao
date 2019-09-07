@@ -6,6 +6,8 @@ import com.haijiao.service.RankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RankServiceImpl implements RankService {
 
@@ -13,7 +15,17 @@ public class RankServiceImpl implements RankService {
     RankMapper rankMapper;
 
     @Override
-    public Admin FindAllAdmin() {
+    public List<Admin> currAdmin(Integer page, Integer pageSize) {
+        return rankMapper.currAdmin(page,pageSize);
+    }
+
+    @Override
+    public Integer AdminNum() {
+        return rankMapper.AdminNum();
+    }
+
+    @Override
+    public List<Admin> FindAllAdmin() {
         return rankMapper.FindAllAdmin();
     }
 }

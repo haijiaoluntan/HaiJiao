@@ -39,12 +39,23 @@ layui.use('table',function(){
                 limitName:'pageSize'
             },
             cols:[[
-                {field:'id',title:"管理员id", sort: true},
-                {field:'admin',title:"姓名", sort: true},
-                {field:'phone',title:"手机号",sort:true,},
-                {field:'create_time',title:"创建时间",sort:true,},
+                {field:'id',title:"管理员id", sort: true,templet:function(d){
+                        return d.id;
+                    }},
+                {field:'admin',title:"姓名", sort: true,templet:function(d){
+                        return d.admin;
+                    }},
+                {field:'phone',title:"手机号",sort:true,templet:function(d){
+                        return d.phone;
+                    }},
+                {field:'create_time',title:"创建时间",sort:true,templet:function(d){
+                        return d.create_time;
+                    }},
                 {field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
-            ]]
+            ]],
+            success:function (d) {
+                alert(d.data[0].id.toString());
+            }
         });
     };
     loadrank();
