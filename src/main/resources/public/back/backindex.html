@@ -1,131 +1,126 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>海角论坛</title>
-	<script src="../js/jquery-3.3.1.js"></script>
-	<script src="../layui/layui.js"></script>
-	<script src="../js/jwt-decode.min.js"></script>
-	<script src="../js/jwt.js"></script>
-	<script src="layui/layui.js"></script>
-	<link rel="stylesheet" href="../layui/css/layui.css" />
-	<link rel="shortcut icon" type="images/jpeg" href="../images/hai-logo.jpg" />
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>海角论坛</title>
+		<script src="../js/jquery-3.3.1.js"></script>
+		<script src="../layui/layui.js"></script>
+		<link rel="stylesheet" href="../layui/css/layui.css" />
+		<link rel="shortcut icon" type="images/jpeg" href="../video/hai-logo.jpg" />
+	</head>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo">海角论坛</div>
+				<!-- 头部区域（可配合layui已有的水平导航） -->
 
-</head>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							<img src="../images/1.jpg" class="layui-nav-img"> 管理员
+						</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="">基本资料</a>
+							</dd>
+							<dd>
+								<a href="">安全设置</a>
+							</dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item">
+						<a href="">退出登录</a>
+					</li>
+				</ul>
+			</div>
 
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-	<div class="layui-header">
-		<div class="layui-logo">海角论坛</div>
-		<!-- 头部区域（可配合layui已有的水平导航） -->
-
-		<ul class="layui-nav layui-layout-right">
-			<li class="layui-nav-item">
-				<a href="javascript:;">
-					<span id="aname">kkkkk</span>
-				</a>
-				<dl class="layui-nav-child">
-					<dd>
-						<a href="">基本资料</a>
-					</dd>
-					<dd>
-						<a href="">安全设置</a>
-					</dd>
-				</dl>
-			</li>
-			<li class="layui-nav-item">
-				<a  onclick="out()">退出登录</a>
-			</li>
-		</ul>
-	</div>
-
-	<div class="layui-side layui-bg-black">
-		<div class="layui-side-scroll">
-			<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-			<ul class="layui-nav layui-nav-tree" lay-filter="test">
-				<li class="layui-nav-item layui-nav-itemed">
-					<a class="" href="javascript:;">角色管理</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="clientinfo.html" target="right">用户</a>
-						</dd>
-						<dd>
-							<a href="clientinfo.html" target="right">管理员</a>
-						</dd>
-						<!-- 							<dd>
-                                                            <a href="javascript:void(0)"  onclick="updatePwd('修改密码',1)">修改密码</a>
-                                                        </dd> -->
-					</dl>
-				</li>
-				<li class="layui-nav-item layui-nav-itemed">
-					<a class="" href="javascript:;">话题管理</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="" target="right">话题排行</a>
-						</dd>
-						<dd>
-							<a href="" target="right">话题详情</a>
-						</dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item layui-nav-itemed">
-					<a class="" href="javascript:;">帖子管理</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="orderall.html" target="right">全部帖子</a>
-						</dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item layui-nav-itemed">
-					<a class="" href="javascript:;">权限管理</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="orderall.html" target="right">设置权限</a>
-						</dd>
-						<dd>
-							<a href="orderall.html" target="right">所有权限</a>
-						</dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item layui-nav-itemed">
-					<a class="" href="javascript:;">系统管理</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="orderall.html" target="right">系统设置</a>
-						</dd>
-						<dd>
-							<a href="newsType.html" target="right">栏目管理</a>
-						</dd>
-						<dd>
-							<a href="newsType.html" target="right">数据字典</a>
-						</dd>
-						<dd>
-							<a href="newsType.html" target="right">屏蔽词</a>
-						</dd>
-						<dd>
-							<a href="newsType.html" target="right">系统日志</a>
-						</dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item layui-nav-itemed">
-					<a class="" href="javascript:;">敬请期待</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="orderall.html" target="right">敬请期待</a>
-						</dd>
-						<dd>
-							<a href="newsType.html" target="right">敬请期待</a>
-						</dd>
-						<dd>
-							<a href="newsType.html" target="right">敬请期待</a>
-						</dd>
-					</dl>
-				</li>
-			</ul>
-		</div>
-	</div>
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll">
+					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;">角色管理</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="" target="right">用户</a>
+								</dd>
+								<dd>
+									<a href="" target="right">管理员</a>
+								</dd>
+								<!-- 							<dd>
+                                                                    <a href="javascript:void(0)"  onclick="updatePwd('修改密码',1)">修改密码</a>
+                                                                </dd> -->
+							</dl>
+						</li> 
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;">话题管理</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="" target="right">话题排行</a>
+								</dd>
+								<dd>
+									<a href="" target="right">话题详情</a>
+								</dd> 
+							</dl>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;">帖子管理</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="orderall.html" target="right">全部帖子</a>
+								</dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;">权限管理</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="allrank.html" target="right">所有权限</a>
+								</dd>
+								<dd>
+									<a href="configrank.html" target="right">配置权限</a>
+								</dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;">系统管理</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="orderall.html" target="right">系统设置</a>
+								</dd>
+								<dd>
+									<a href="newsType.html" target="right">栏目管理</a>
+								</dd> 
+								<dd>
+									<a href="newsType.html" target="right">数据字典</a>
+								</dd>
+								<dd>
+									<a href="newsType.html" target="right">屏蔽词</a>
+								</dd>
+								<dd>
+									<a href="newsType.html" target="right">系统日志</a>
+								</dd>
+							</dl>
+						</li>
+						<li class="layui-nav-item layui-nav-itemed">
+							<a class="" href="javascript:;">敬请期待</a>
+							<dl class="layui-nav-child">
+								<dd>
+									<a href="orderall.html" target="right">敬请期待</a>
+								</dd>
+								<dd>
+									<a href="newsType.html" target="right">敬请期待</a>
+								</dd> 
+								<dd>
+									<a href="newsType.html" target="right">敬请期待</a>
+								</dd>
+							</dl>
+						</li>
+					</ul>
+				</div>
+			</div>
 
 	<div class="layui-body" style="z-index: 0;">
 		<!-- 内容主体区域 -->
