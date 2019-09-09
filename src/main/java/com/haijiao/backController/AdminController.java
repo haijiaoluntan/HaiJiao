@@ -4,13 +4,13 @@ package com.haijiao.backController;
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.haijiao.pojo.Admin;
+import com.haijiao.pojo.Post;
 import com.haijiao.pojo.User;
 import com.haijiao.service.AdminService;
 import com.haijiao.service.SmsService;
 import com.haijiao.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -22,6 +22,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("haijiao")
+
 public class AdminController {
     @Autowired
     private AdminService adminService;
@@ -75,9 +76,9 @@ public class AdminController {
     }
 
     @PostMapping("/seleadmin")
-    public Admin seleadmin(@RequestParam("user") String user){
+    public Admin seleadmin(@RequestParam("admin") String admin){
 
-        return adminService.seleadmin(user);
+        return adminService.seleadmin(admin);
     }
 
     @PostMapping("/findall")
