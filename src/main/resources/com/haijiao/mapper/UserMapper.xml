@@ -4,7 +4,8 @@
 
 
 <mapper namespace="com.haijiao.mapper.UserMapper">
-    <cache/>
+
+<!--    <cache/>-->
 
     <resultMap type="User" id="userMap">
         <id property="uid" column="uid"/>

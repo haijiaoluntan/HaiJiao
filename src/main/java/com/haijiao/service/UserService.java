@@ -24,5 +24,11 @@ public interface UserService {
     Integer updLevel(Integer uid);
     
     Integer updExpByPosts(Integer uid);
+    
+    Integer updExpByLike(Integer uid);
+    
+    Integer updExpByComm(Integer uid);
+    
+    Integer earnBalance(Integer uid, Integer balance);
 }
 

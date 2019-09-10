@@ -38,10 +38,13 @@ public class UserController {
     public ResponseEntity<?> getUser(HttpServletRequest request) {
         
         String token = request.getHeader(this.header);
-        Claims claims = jwtTokenUtil.parseJWT(token);
-        User user = userService.queryByUsername(claims.getIssuer());
-        user.setPassword("******");
-        System.out.println(user.getUsername());
+        User user = null;
+        if (token != null && !"".equals(token)) {
+            Claims claims = jwtTokenUtil.parseJWT(token);
+            user = userService.queryByUsername(claims.getIssuer());
+            user.setPassword("******");
+            System.out.println(user.getUsername());
+        }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
     

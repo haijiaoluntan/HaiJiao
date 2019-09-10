@@ -13,19 +13,13 @@
 
 <div class="fly-header layui-bg-black">
     <div class="layui-container">
-        <a class="fly-logo" href="/">
-            <img src="../res/images/logo.png" alt="layui">
+        <a class="fly-logo" href="../index.html">
+            <img src="../images/haijiao.jpeg" style="height: 40px; width: 60px" alt="海角">
         </a>
+
         <ul class="layui-nav fly-nav layui-hide-xs">
             <li class="layui-nav-item layui-this">
-                <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="../case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-            </li>
-            <li class="layui-nav-item">
-                <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-            </li>
+                <a href="../index.html"><i class="iconfont icon-jiaoliu"></i>海 角 论 坛</a>
         </ul>
 
         <ul class="layui-nav fly-nav-user" id="ul_user">
@@ -36,39 +30,11 @@
                 <a class="iconfont icon-touxiang layui-hide-xs" href="../user/login.html"></a>
             </li>
             <li class="layui-nav-item">
-                <a href="user/login.html">登入</a>
+                <a href="../user/login.html">登入</a>
             </li>
             <li class="layui-nav-item">
-                <a href="user/reg.html">注册</a>
+                <a href="../user/reg.html">注册</a>
             </li>
-            <!--
-            <li class="layui-nav-item layui-hide-xs">
-              <a href="/app/qq/" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
-            </li>
-            <li class="layui-nav-item layui-hide-xs">
-              <a href="/app/weibo/" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
-            </li>
-            -->
-
-            <!-- 登入后的状态 -->
-
-            <!--
-            <li class="layui-nav-item">
-              <a class="fly-nav-avatar" href="javascript:;">
-                <cite class="layui-hide-xs">贤心</cite>
-                <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-                <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-              </a>
-              <dl class="layui-nav-child">
-                <dd><a href="../user/set.html"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-                <dd><a href="../user/message.html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-                <dd><a href="../user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-                <hr style="margin: 5px 0;">
-                <dd><a href="" style="text-align: center;">退出</a></dd>
-              </dl>
-            </li>
-            -->
         </ul>
     </div>
 </div>
@@ -79,7 +45,7 @@
         <div class="layui-form layui-form-pane">
             <div class="layui-tab layui-tab-brief" lay-filter="user">
                 <ul class="layui-tab-title">
-                    <li class="layui-this">发表新帖<!-- 编辑帖子 --></li>
+                    <li class="layui-this" id="li_post">发表新帖<!-- 编辑帖子 --></li>
                 </ul>
                 <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
                     <div class="layui-tab-item layui-show">
@@ -112,35 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--
-                            <div class="layui-row layui-col-space15 layui-form-item layui-hide" id="LAY_quiz">
-                              <div class="layui-col-md3">
-                                <label class="layui-form-label">所属产品</label>
-                                <div class="layui-input-block">
-                                  <select name="project">
-                                    <option></option>
-                                    <option value="layui">layui</option>
-                                    <option value="独立版layer">独立版layer</option>
-                                    <option value="独立版layDate">独立版layDate</option>
-                                    <option value="LayIM">LayIM</option>
-                                    <option value="Fly社区模板">Fly社区模板</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="layui-col-md3">
-                                <label class="layui-form-label" for="L_version">版本号</label>
-                                <div class="layui-input-block">
-                                  <input type="text" id="L_version" value="" name="version" autocomplete="off" class="layui-input">
-                                </div>
-                              </div>
-                              <div class="layui-col-md6">
-                                <label class="layui-form-label" for="L_browser">浏览器</label>
-                                <div class="layui-input-block">
-                                  <input type="text" id="L_browser"  value="" name="browser" placeholder="浏览器名称及版本，如：IE 11" autocomplete="off" class="layui-input">
-                                </div>
-                              </div>
-                            </div>
-                            -->
+
                             <div class="layui-form-item layui-form-text">
                                 <div class="layui-input-block">
                                     <textarea id="L_content" name="content"
@@ -181,14 +119,8 @@
 
 <div class="fly-footer">
     <p><a href="#">海角论坛</a> 2019 &copy; <a href="#">葫芦娃出品</a></p>
-    <!--
-    <p>
-      <a href="http://fly.layui.com/jie/3147/" target="_blank">付费计划</a>
-      <a href="http://www.layui.com/template/fly/" target="_blank">获取Fly社区模版</a>
-      <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
-    </p>
-    -->
 </div>
+
 <script src="../json/jquery-3.3.1.min.js"></script>
 <script src="../res/layui/layui.js"></script>
 <script src="../js/jwt.js"></script>
@@ -217,6 +149,151 @@
         getUser();
 
         getVerifyCode();
+
+        var pid = getRequest("pid");
+        console.log(pid);
+
+        if (pid != null) {
+
+            document.title = "编辑帖子";
+            $("#li_post").text("编辑帖子");
+            $("#subbtn").text("立即修改");
+
+            $.ajax({
+                type:"get",
+                url: HOST_URL + "posts/getPost",
+                data: {pid:pid},
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    if (data) {
+                        $("#type").val(data.type);
+                        $("#L_title").val(data.title);
+                        $("#L_content").val(data.content);
+                        $("#reward").val(data.reward);
+                        $("#reward").attr("readonly", "readonly");
+
+                        $("#subbtn").on('click', function (e) {
+
+                            let verifyCode = $("#L_vercode").val();
+                            let type = $("#type").val();
+                            let title = $("#L_title").val();
+                            let content = $("#L_content").val();
+                            let answer = localStorage.getItem("answer");
+
+                            if (type == -1) {
+                                layer.msg("请选择专栏");
+                                e.preventDefault();
+                                return;
+                            }
+
+                            if (!title) {
+                                layer.msg("标题不能为空");
+                                e.preventDefault();
+                                return;
+                            }
+
+                            if (!content) {
+                                layer.msg("内容不能为空");
+                                e.preventDefault();
+                                return;
+                            }
+
+                            if (answer != verifyCode) {
+                                layer.msg("验证码输入错误，请重新输入", {area: '260px', anim: 6});
+                                getVerifyCode();
+                                e.preventDefault();
+                                return;
+                            }
+
+                            $.ajax({
+                                type: "post",
+                                url: HOST_URL + "posts/updPost",
+                                data: {pid: pid, type: type, title: title, content: content},
+                                dataType: "json",
+                                success: function (data) {
+
+                                    console.log(data);
+                                    if (data > 0) {
+                                        layer.msg("修改成功", {icon: 6, time:1000}, function () {
+                                            location.href = "index.html";
+                                        });
+                                    } else {
+                                        layer.msg("修改失败", {icon: 5, time:1000});
+                                    }
+                                },
+                            })
+                        });
+                    }
+                }
+            })
+
+        } else {
+
+            $("#subbtn").on('click', function (e) {
+
+                let verifyCode = $("#L_vercode").val();
+                let type = $("#type").val();
+                let title = $("#L_title").val();
+                let content = $("#L_content").val();
+                let reward = $("#reward").val();
+                let answer = localStorage.getItem("answer");
+
+                if (type == -1) {
+                    layer.msg("请选择专栏");
+                    e.preventDefault();
+                    return;
+                }
+
+                if (!title) {
+                    layer.msg("标题不能为空");
+                    e.preventDefault();
+                    return;
+                }
+
+                if (!content) {
+                    layer.msg("内容不能为空");
+                    e.preventDefault();
+                    return;
+                }
+
+                if (reward) {
+                    if (!checkBalance(reward)) {
+                        layer.msg("飞吻数量不足");
+                        e.preventDefault();
+                        return;
+                    }
+                } else {
+                    reward = 0;
+                }
+
+                if (answer != verifyCode) {
+                    layer.msg("验证码输入错误，请重新输入", {area: '260px', anim: 6});
+                    getVerifyCode();
+                    e.preventDefault();
+                    return;
+                }
+
+                $.ajax({
+                    type: "post",
+                    url: HOST_URL + "posts/addPost",
+                    data: {type: type, title: title, content: content, reward: reward},
+                    dataType: "json",
+                    headers: createAuthorizationTokenHeader(),
+                    success: function (data) {
+
+                        console.log(data);
+                        if (data > 0) {
+                            layer.msg("发表成功，经验值+25", {icon: 6, time:1000}, function () {
+                                location.href = "index.html";
+                            });
+                        } else {
+                            layer.msg("发表失败", {icon: 5, time:1000});
+                        }
+                    },
+                })
+            });
+        }
 
     });
 
@@ -274,84 +351,22 @@
         })
     }
 
-    $("#subbtn").on('click', function (e) {
-
-        let verifyCode = $("#L_vercode").val();
-        let type = $("#type").val();
-        let title = $("#L_title").val();
-        let content = $("#L_content").val();
-        let reward = $("#reward").val();
-        let answer = localStorage.getItem("answer");
-
-        if (type == -1) {
-            layer.msg("请选择专栏");
-            e.preventDefault();
-            return;
-        }
-
-        if (!title) {
-            layer.msg("标题不能为空");
-            e.preventDefault();
-            return;
-        }
-
-        if (!content) {
-            layer.msg("内容不能为空");
-            e.preventDefault();
-            return;
-        }
-
-        if (reward) {
-            if (checkBalance(reward) == "0") {
-                layer.msg("飞吻数量不足");
-                e.preventDefault();
-                return;
-            }
-        } else {
-            reward = 0;
-        }
-
-        if (answer != verifyCode) {
-            layer.msg("验证码输入错误，请重新输入", {area: '260px', anim: 6});
-            getVerifyCode();
-            e.preventDefault();
-            return;
-        }
-
-        $.ajax({
-            type: "post",
-            url: HOST_URL + "posts/addPost",
-            data: {type: type, title: title, content: content, reward: reward},
-            dataType: "json",
-            headers: createAuthorizationTokenHeader(),
-            success: function (data) {
-
-                console.log(data);
-                if (data > 0) {
-                    layer.msg("发表成功", {icon: 6, time:1000}, function () {
-                        location.href = "index.html";
-                    });
-                } else {
-                    layer.msg("发表失败", {icon: 5, time:1000});
-                }
-            },
-        })
-
-
-    });
-
     function checkBalance(reward) {
+
+        var flag = false;
         $.ajax({
             type:"post",
             url: HOST_URL + "user/checkBalance",
             data:{reward:reward},
             dataType:"json",
+            async: false,
             headers:createAuthorizationTokenHeader(),
             success:function (data) {
                 console.log(data);
-                return data ? "1" : "0";
+                flag = data;
             }
-        })
+        });
+        return flag;
     }
 
     /**
@@ -365,6 +380,16 @@
                 location.href = "index.html";
             });
         })
+    }
+
+    //获取URL参数
+    function getRequest(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
     }
 
 </script>
