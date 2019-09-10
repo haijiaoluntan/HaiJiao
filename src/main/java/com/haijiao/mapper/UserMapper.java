@@ -22,7 +22,7 @@ public interface UserMapper {
      * @return
      */
     @Insert("insert into user(username,password,email) values(#{username},#{password},#{email})")
-    Integer insert(User user);
+    Integer addUser(User user);
 
     /**
      * 查询邮箱是否注册

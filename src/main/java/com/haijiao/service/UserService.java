@@ -12,7 +12,7 @@ public interface UserService {
     
     Integer actication(String email);
     
-    Integer insert(User user);
+    Integer addUser(User user);
     
     User queryByEmail(String email);
     
