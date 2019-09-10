@@ -8,9 +8,8 @@
 		<script src="../js/jquery-3.3.1.js"></script>
 		<script src="../layui/layui.js"></script>
 		<link rel="stylesheet" href="../layui/css/layui.css" />
-		<link rel="shortcut icon" type="images/jpeg" href="../images/hai-logo.jpg" />
+		<link rel="shortcut icon" type="images/jpeg" href="../video/hai-logo.jpg" />
 	</head>
-
 	<body class="layui-layout-body">
 		<div class="layui-layout layui-layout-admin">
 			<div class="layui-header">
@@ -20,7 +19,7 @@
 				<ul class="layui-nav layui-layout-right">
 					<li class="layui-nav-item">
 						<a href="javascript:;">
-							<img src="../images/hai-logo.jpg" class="layui-nav-img"> 管理员
+							<img src="../images/1.jpg" class="layui-nav-img"> 管理员
 						</a>
 						<dl class="layui-nav-child">
 							<dd>
@@ -78,10 +77,10 @@
 							<a class="" href="javascript:;">权限管理</a>
 							<dl class="layui-nav-child">
 								<dd>
-									<a href="orderall.html" target="right">设置权限</a>
+									<a href="allrank.html" target="right">所有权限</a>
 								</dd>
 								<dd>
-									<a href="orderall.html" target="right">所有权限</a>
+									<a href="configrank.html" target="right">配置权限</a>
 								</dd>
 							</dl>
 						</li>
@@ -123,41 +122,91 @@
 				</div>
 			</div>
 
-			<div class="layui-body" style="z-index: 0;">
-				<!-- 内容主体区域 -->
-				<div style="padding: 15px;">
-					<iframe src="foodall.html" name="right" frameborder="0" width="100%" height="1200"></iframe>
+	<div class="layui-body" style="z-index: 0;">
+		<!-- 内容主体区域 -->
+		<div style="padding: 15px;">
+			<iframe src="clientinfo.html" name="right" frameborder="0" width="100%" height="1200"></iframe>
 
-				</div>
-			</div>
-
-			<div class="layui-footer">
-				<!-- 底部固定区域 -->
-				底部固定区域
-			</div>
 		</div>
-		
-		<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="../layui/plugs.js">
-		</script>
-		<script type="text/javascript">
-			//添加编辑弹出层
-			function updatePwd(title, id) {
-				$.jq_Panel({
-					title: title,
-					iframeWidth: 500,
-					iframeHeight: 300,
-					url: "updatePwd.html"
-				});
-			}
-		</script>
-		<script src="layui/layui.js"></script>
-		<script>
-			//JavaScript代码区域
-			layui.use('element', function() {
-				var element = layui.element;
-			});
-		</script>
-	</body>
+	</div>
+
+	<div class="layui-footer">
+		<!-- 底部固定区域 -->
+		底部固定区域
+	</div>
+</div>
+
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../layui/plugs.js">
+</script>
+<script type="text/javascript">
+    //添加编辑弹出层
+    /*	function updatePwd(title, id) {
+            $.jq_Panel({
+                title: title,
+                iframeWidth: 500,
+                iframeHeight: 300,
+                url: "updatePwd.html"
+            });
+        }*/
+</script>
+
+
+
+<script>
+
+    //JavaScript代码区域
+    $(()=>{
+        alert("加载函数");
+        loadAdmin();
+
+    })
+	 function  out() {
+         alert("进入了out方法");
+
+         headers:setJwtToken(null);
+
+         location.href='backlogin.html';
+     }
+    function loadAdmin(){
+        alert("进入了loadadmin方法");
+        $.ajax({
+            type:"get",
+            headers:createAuthorizationTokenHeader(),
+            url:"/haijiao/check",
+            dataType:"text",
+            //xhrFields: {withCredentials: true},
+            success:function(data){
+                console.log(data)
+                //$("#loginTime").text(data.login_time);//首页显示上次登录时间
+                $("#aname").text("欢迎您:"+data)//首页显示登陆者名字
+                var usern =data;
+                //alert("第一个ajax");
+                alert(data);
+                // alert("check方法回调函数");
+
+                $.ajax({
+                    type:"post",
+                    headers:createAuthorizationTokenHeader(),
+                    url:"/haijiao/seleadmin",
+                    data:{admin:usern},
+                    dataType:"json",
+                    success:function(data){
+                        console.log(data)
+                        //alert(data);
+                        //$("#loginTime").text(data.login_time);//首页显示上次登录时间
+                        //alert(data.level);
+                    }
+                })
+            }
+        })
+    }
+
+
+    layui.use('element', function() {
+        var element = layui.element;
+    });
+</script>
+</body>
 
 </html>

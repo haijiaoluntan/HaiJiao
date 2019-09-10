@@ -1,0 +1,43 @@
+form {
+    position: relative;
+}
+
+#phonemsg {
+    position: absolute;
+    top: 11px;
+    right: 6px;
+    font-size: 14px;
+    color: #c33;
+}
+
+#yanzmmsg {
+    position: absolute;
+    top: 61px;
+    right: 6px;
+    font-size: 14px;
+    color: #c33;
+}
+
+#regNamemsg {
+    position: absolute;
+    top: 161px;
+    right: 6px;
+    font-size: 14px;
+    color: #c33;
+}
+
+#regPasswordmsg {
+    position: absolute;
+    top: 202px;
+    right: 6px;
+    font-size: 14px;
+    color: #c33;
+}
+
+#regPasswordtomsg {
+    position: absolute;
+    top: 253px;
+    right: 6px;
+    font-size: 14px;
+    color: #c33;
+}

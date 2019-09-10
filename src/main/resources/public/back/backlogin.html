@@ -5,70 +5,19 @@
     <title>海角论坛</title>
     <meta charset="UTF-8">
 
-    <link rel="shortcut icon" type="images/jpeg" href="../images/hai-logo.jpg" />
+    <link rel="shortcut icon" type="images/jpeg" href="../video/hai-logo.jpg" />
     <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/animate.min.css">
     <link rel="stylesheet" href="../css/video.css">
-    <style>
-        form {
-            position: relative;
-        }
-        
-        #regi-username-error {
-            position: absolute;
-            top: 11px;
-            right: 6px;
-            font-size: 14px;
-            color: #c33;
-        }
-        
-        #regi-email-error {
-            position: absolute;
-            top: 61px;
-            right: 6px;
-            font-size: 14px;
-            color: #c33;
-        }
-        
-        #regi-password-error {
-            position: absolute;
-            top: 111px;
-            right: 6px;
-            font-size: 14px;
-            color: #c33;
-        }
-        
-        #regi-password-confirm-error {
-            position: absolute;
-            top: 161px;
-            right: 6px;
-            font-size: 14px;
-            color: #c33;
-        }
-        
-        #login-email-error {
-            position: absolute;
-            top: 13px;
-            right: 6px;
-            font-size: 14px;
-            color: #c33;
-        }
-        
-        #login-password-error {
-            position: absolute;
-            top: 61px;
-            right: 6px;
-            font-size: 14px;
-            color: #c33;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/backlogin.css">
+    <link rel="stylesheet" href="../res/layui/css/layui.css">
 </head>
 
 <body>
 <div class="videocontainer">
-    <video class="fullscreenvideo" poster="__ROOT__/Themes/tdt/Asset/images/loginbg.jpg" id="bgvid" playsinline="" autoplay="true" muted="false" loop="true">
+    <video class="fullscreenvideo" poster="../images/hai-logo.jpg" id="bgvid" playsinline="" autoplay="true" muted="false" loop="true">
         <source src="../video/haijiao.mp4" type="video/mp4">
     </video>
 </div>
@@ -91,15 +40,16 @@
             <div style="display: none; ">
                 <form id="registerForm">
                     <div class="inputs ">
-                        <input type="text " name="phone " id="logPhone" placeholder="手机号" autocomplete="off">
+                        <input type="text " name="phone " id="logphone" placeholder="手机号" autocomplete="off">
                         <input type="text " name="yanzm " id="yanzm" placeholder="验证码" autocomplete="off">
-                        <span id="regi-username-error"></span>
-                        <span id="regi-email-error"></span>
+                        <button class="btn" id="send">发送验证码</button>
+                        <span id="logphonemsg"></span>
+                        <span id="yanzmmsg"></span>
                     </div>
                 </form>
                 <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
                 <br>
-                <button id="phoneButton" type="button ">登录</button>
+                <button id="phoneButton" type="button">登录</button>
                 <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
             </div>
             <div id="login-container">
@@ -122,11 +72,16 @@
 
     <!--基础js-->
     <script type="text/javascript " src="../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript " src="../layer/2.4/layer.js"></script>
+    <script type="text/javascript " src="../res/layui/layui.js"></script>
     <script type="text/javascript " src="../js/login.js "></script>
     <script type="text/javascript " src="../js/jwt.js"></script>
 
     <script>
+
+        var logphone=$("#logphone");
+        var yanzm=$("#yanzm");
+        var send=$("#send");
+        var phoneButton=$("#phoneButton");
 
         $(()=>{
             $("#pwdButton").click(()=>{
@@ -155,18 +110,124 @@
                     },
                 });
             });
-
-
         })
+        layui.use('layer');
+        $(function() {
+            /* 手机是否注册 */
+            logphone.on('blur', function () {
+                var regphoneval=$("#logphone").val();
+                $.ajax({
+                    type:"get",
+                    data:{"phone":regphoneval},
+                    url:"http://localhost:8080/haijiao/selphone",
+                    success:function (data) {
+                        console.log(data.info+data.msg);
+                        if(data.info==2){
+                            $("#logphonemsg").text("输入合法");
+                            $("#logphonemsg").css("color","green");
+                        }else if(data.info==1){
+                            $("#logphonemsg").text("您还没有注册");
+                            $("#logphonemsg").css("color","#c33");
+                        }
+                    },
+                    dataType:"json"
+                })
+            })
+            logphone.on('focus', function () {
+                // regphone.val("");
+                $("#phonemsg").text("");
+            })
+            /* 发送验证码 */
+            send.on('click',function () {
+                var regphoneval=$("#logphone").val();
+                $.ajax({
+                    type:"put",
+                    data:{"phone":regphoneval},
+                    url:"http://localhost:8080/haijiao/updyzm",
+                    success:function (data) {
+                        console.log(data.info+data.msg);
+                        if(data.info==1){
+                            // $("#phonemsg").text(data.msg);
+                            // $("#phonemsg").css("color","green");
+                            layer.msg(data.msg);
+                        }else if(data.info==2){
+                            // $("#phonemsg").text(data.msg);
+                            // $("#phonemsg").css("color","#c33");
+                            layer.msg(data.msg);
+                        }
+                    },
+                    dataType:"json"
+                })
+            })
 
-
-
-
-       /* function tobackreg() {
+            /* 验证登录验证码 */
+            yanzm.on('blur',function () {
+                var regphoneval=$("#logphone").val();
+                var yanzmval=$("#yanzm").val();
+                $.ajax({
+                    type:"post",
+                    data:{"phone":regphoneval,"phoneyanzm":yanzmval},
+                    url:"http://localhost:8080/haijiao/dluyanzm",
+                    success:function (data) {
+                        console.log(data.info+data.msg);
+                        if(data.info==1){
+                            $("#yanzmmsg").text("验证成功");
+                            $("#yanzmmsg").css("color","green");
+                        }else if(data.info==2){
+                            $("#yanzmmsg").text("验证码错误");
+                            $("#yanzmmsg").css("color","#c33");
+                        }
+                    },
+                    dataType:"json"
+                })
+            })
+            /*手机登录处理*/
+            phoneButton.on('click',function () {
+                var regphoneval=$("#logphone").val();
+                var yanzmval=$("#yanzm").val();
+                console.log("登录按钮获取的手机验证码"+regphoneval+yanzmval);
+                $.ajax({
+                    type:"post",
+                    data:{"phone":regphoneval,"phoneyanzm":yanzmval},
+                    url:"http://localhost:8080/haijiao/phonedlu",
+                    success:function (data) {
+                        alert(data);
+                        if(data!==null){
+                            headers:setJwtToken(data);
+                            location.href='backindex.html';
+                        }else{
+                            layer.msg("登录失败");
+                        }
+                    },
+                    dataType:"text"
+                })
+            })
+        });
+        function tobackreg() {
             location.href = 'backregister.html';
-        }*/
+        }
     </script>
-
+<!--按钮特效 -->
+<script>
+    var wait=60;
+    function time(){
+        var btn=document.getElementById("send");
+        var str=btn.innerText;
+        if(wait==1){
+            btn.innerText="再次发送";
+            btn.removeAttribute("disabled");
+            wait=60;
+        }else{
+            wait--;
+            btn.innerText=wait+"s后重新发送";
+            btn.setAttribute("disabled",true);
+            setTimeout(function(){
+                time();
+            },1000);
+        }
+    }
+    //点击button触发
+    document.getElementById("send").onclick=time;
+</script>
 </body>
-
 </html>

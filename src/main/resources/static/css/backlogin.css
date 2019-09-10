@@ -1,0 +1,19 @@
+form {
+    position: relative;
+}
+
+#logphonemsg {
+    position: absolute;
+    top: 11px;
+    right: 6px;
+    font-size: 14px;
+    color: #c33;
+}
+
+#yanzmmsg {
+    position: absolute;
+    top: 61px;
+    right: 6px;
+    font-size: 14px;
+    color: #c33;
+}
