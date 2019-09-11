@@ -27,7 +27,7 @@ layui.use('table',function(){
         table.render({
             elem:"#tb",
             headers:createAuthorizationTokenHeader(),
-            url:"http://localhost:8080/haijiao/seladmin",
+            url:"http://localhost:8080/hai/seladmin",
             height:'313',
             page:{
                 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -63,7 +63,7 @@ layui.use('table',function(){
     };
     loadrank();
 	table.on('tool(tbf)',function(obj) {
-	    var data=obj.data; 
+	    var data=obj.data;
         if (obj.event === 'del') {
             var id=data.id;
             layer.confirm("确定要撤销<p style='color:red'>" + data.admin + "</p>的管理员吗？", {
