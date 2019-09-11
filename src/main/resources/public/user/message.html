@@ -1,145 +1,275 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>我的消息</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="fly,layui,前端社区">
-  <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
-  <link rel="stylesheet" href="../../static/res/layui/css/layui.css">
-  <link rel="stylesheet" href="../../static/res/css/global.css">
+    <meta charset="utf-8">
+    <title>我的消息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="fly,layui,前端社区">
+    <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <link rel="icon" type="image/x-ico" href="images/hai-logo.jpg"/>
+    <link rel="stylesheet" href="../res/layui/css/layui.css">
+    <link rel="stylesheet" href="../res/css/global.css">
 </head>
 <body>
 
 <div class="fly-header layui-bg-black">
-  <div class="layui-container">
-    <a class="fly-logo" href="/">
-      <img src="../../static/res/images/logo.png" alt="layui">
-    </a>
-    <ul class="layui-nav fly-nav layui-hide-xs">
-      <li class="layui-nav-item layui-this">
-        <a href="/"><i class="iconfont icon-jiaoliu"></i>交流</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="../case/case.html"><i class="iconfont icon-iconmingxinganli"></i>案例</a>
-      </li>
-      <li class="layui-nav-item">
-        <a href="http://www.layui.com/" target="_blank"><i class="iconfont icon-ui"></i>框架</a>
-      </li>
-    </ul>
-    
-    <ul class="layui-nav fly-nav-user">
-      <!-- 登入后的状态 -->
-      <li class="layui-nav-item">
-        <a class="fly-nav-avatar" href="javascript:;">
-          <cite class="layui-hide-xs">贤心</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
-          <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+    <div class="layui-container">
+        <a class="fly-logo" href="../index.html">
+            <img src="../images/haijiao.jpeg" style="height: 40px; width: 60px" alt="海角">
         </a>
-        <dl class="layui-nav-child">
-          <dd><a href="l"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href=".html"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="ml"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-          <hr style="margin: 5px 0;">
-          <dd><a href="" style="text-align: center;">退出</a></dd>
-        </dl>
-      </li>
-    </ul>
-  </div>
+
+        <ul class="layui-nav fly-nav layui-hide-xs">
+            <li class="layui-nav-item layui-this">
+                <a href="../index.html"><i class="iconfont icon-jiaoliu"></i>海 角 论 坛</a>
+        </ul>
+
+        <ul class="layui-nav fly-nav-user" id="ul_user">
+
+            <!-- 未登入的状态 -->
+            <li class="layui-nav-item">
+                <a class="iconfont icon-touxiang layui-hide-xs" href="login.html"></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="login.html">登入</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="reg.html">注册</a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="layui-container fly-marginTop fly-user-main">
-  <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
-    <li class="layui-nav-item">
-      <a href="home.html">
-        <i class="layui-icon">&#xe609;</i>
-        我的主页
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="index.html">
-        <i class="layui-icon">&#xe612;</i>
-        用户中心
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="set.html">
-        <i class="layui-icon">&#xe620;</i>
-        基本设置
-      </a>
-    </li>
-    <li class="layui-nav-item layui-this">
-      <a href="message.html">
-        <i class="layui-icon">&#xe611;</i>
-        我的消息
-      </a>
-    </li>
-  </ul>
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
+        <li class="layui-nav-item">
+            <a id="myhome" href="home.html">
+                <i class="layui-icon">&#xe609;</i>
+                我的主页
+            </a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="index.html">
+                <i class="layui-icon">&#xe612;</i>
+                用户中心
+            </a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="set.html">
+                <i class="layui-icon">&#xe620;</i>
+                基本设置
+            </a>
+        </li>
+        <li class="layui-nav-item layui-this">
+            <a href="message.html">
+                <i class="layui-icon">&#xe611;</i>
+                我的消息
+            </a>
+        </li>
+    </ul>
 
-  <div class="site-tree-mobile layui-hide">
-    <i class="layui-icon">&#xe602;</i>
-  </div>
-  <div class="site-mobile-shade"></div>
-  
-  <div class="site-tree-mobile layui-hide">
-    <i class="layui-icon">&#xe602;</i>
-  </div>
-  <div class="site-mobile-shade"></div>
-  
-  
-  <div class="fly-panel fly-panel-user" pad20>
-	  <div class="layui-tab layui-tab-brief" lay-filter="user" id="LAY_msg" style="margin-top: 15px;">
-	    <button class="layui-btn layui-btn-danger" id="LAY_delallmsg">清空全部消息</button>
-	    <div  id="LAY_minemsg" style="margin-top: 10px;">
-        <!--<div class="fly-none">您暂时没有最新消息</div>-->
-        <ul class="mine-msg">
-          <li data-id="123">
-            <blockquote class="layui-elem-quote">
-              <a href="/jump?username=Absolutely" target="_blank"><cite>Absolutely</cite></a>回答了您的求解<a target="_blank" href="/jie/8153.html/page/0/#item-1489505778669"><cite>layui后台框架</cite></a>
-            </blockquote>
-            <p><span>1小时前</span><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
-          </li>
-          <li data-id="123">
-            <blockquote class="layui-elem-quote">
-              系统消息：欢迎使用 layui
-            </blockquote>
-            <p><span>1小时前</span><a href="javascript:;" class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
-          </li>
-        </ul>
-      </div>
-	  </div>
-	</div>
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
 
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
+
+
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user" id="LAY_msg" style="margin-top: 15px;">
+            <button class="layui-btn layui-btn-danger" id="delAllMsg">清空全部消息</button>
+            <div id="LAY_minemsg" style="margin-top: 10px;">
+                <!--<div class="fly-none">您暂时没有最新消息</div>-->
+                <ul class="mine-msg" id="myMsg">
+                    <li data-id="123">
+                        <blockquote class="layui-elem-quote">
+                            <a href="/jump?username=Absolutely" target="_blank"><cite>Absolutely</cite></a>回答了您的求解<a
+                                target="_blank" href="/jie/8153.html/page/0/#item-1489505778669"><cite>layui后台框架</cite></a>
+                        </blockquote>
+                        <p><span>1小时前</span><a href="javascript:;"
+                                               class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
+                    </li>
+                    <li data-id="123">
+                        <blockquote class="layui-elem-quote">
+                            系统消息：欢迎使用 layui
+                        </blockquote>
+                        <p><span>1小时前</span><a href="javascript:;"
+                                               class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="fly-footer">
-  <p><a href="http://fly.layui.com/" target="_blank">Fly社区</a> 2017 &copy; <a href="http://www.layui.com/" target="_blank">layui.com 出品</a></p>
-  <p>
-    <a href="http://fly.layui.com/jie/3147/" target="_blank">付费计划</a>
-    <a href="http://www.layui.com/template/fly/" target="_blank">获取Fly社区模版</a>
-    <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
-  </p>
+    <p><a href="#">海角论坛</a> 2019 &copy; <a href="#">葫芦娃出品</a></p>
 </div>
 
-<script src="../../static/res/layui/layui.js"></script>
+<script src="../json/jquery-3.3.1.min.js"></script>
+<script src="../res/layui/layui.js"></script>
+<script src="../js/jwt.js"></script>
+
 <script>
-layui.cache.page = 'user';
-layui.cache.user = {
-  username: '游客'
-  ,uid: -1
-  ,avatar: '../../res/images/avatar/00.jpg'
-  ,experience: 83
-  ,sex: '男'
-};
-layui.config({
-  version: "3.0.0"
-  ,base: '../../res/mods/'
-}).extend({
-  fly: 'public.index'
-}).use('fly');
+    layui.cache.page = 'user';
+    layui.cache.user = {
+        username: '游客'
+        , uid: -1
+        , avatar: '../res/images/avatar/00.jpg'
+        , experience: 83
+        , sex: '男'
+    };
+    layui.config({
+        version: "3.0.0"
+        , base: '../res/mods/'
+    }).extend({
+        fly: 'index'
+    }).use('fly');
+
+    $(function () {
+
+        getUser();
+
+        getMyMessage();
+    });
+
+    $("#delAllMsg").on('click', function () {
+
+        layer.alert("确认要清空吗", function () {
+
+            $.ajax({
+                type:"get",
+                url: HOST_URL + "user/delAllMsg",
+                async: false,
+                dataType: "json",
+                headers:createAuthorizationTokenHeader(),
+                success: function (data) {
+                    if (data > 0) {
+                        layer.msg('已清空', {time:1000}, function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.msg('操作失败', {time:1000});
+                    }
+                }
+            })
+        });
+
+    });
+
+    //消息列表
+    function getMyMessage() {
+
+        $.ajax({
+            type:"get",
+            url: HOST_URL + "user/getMessageByUid",
+            async: false,
+            dataType: "json",
+            headers:createAuthorizationTokenHeader(),
+            success: function (data) {
+                console.log(data);
+                let appendVal = ``;
+                if (data.length != 0) {
+                    $.each(data, function (i, msg) {
+                        appendVal += `
+                            <li data-id="${msg.mid}">
+                                <blockquote class="layui-elem-quote">
+                                    <a href="home.html?uid=${msg.suid}" target="_blank"><cite>${msg.ausername}</cite></a>${msg.content}<a
+                                        target="_blank" href="../jie/detail.html?pid=${msg.pid}"><cite>${msg.title}</cite></a>
+                                </blockquote>
+                                <p><span>${msg.mdate}</span><a href="javascript:delMsg(${msg.mid});"
+                                                       class="layui-btn layui-btn-small layui-btn-danger fly-delete">删除</a></p>
+                            </li>
+                        `;
+                    })
+
+                } else {
+                    appendVal += `<div class="fly-none">您暂时没有最新消息</div>`;
+                }
+                $("#myMsg").html(appendVal);
+            }
+        })
+    }
+
+    //删除消息
+    function delMsg(mid) {
+
+        $.ajax({
+            type:"post",
+            url: HOST_URL + "user/delMsg",
+            async: false,
+            data: {mid:mid},
+            dataType: "json",
+            success: function (data) {
+                if (data > 0) {
+                    layer.msg('已删除', {time:1000}, function () {
+                        location.reload();
+                    });
+                } else {
+                    layer.msg('操作失败', {time:1000});
+                }
+            }
+        })
+    }
+
+    function getUser() {
+        $.ajax({
+            type: "get",
+            url: HOST_URL + "user/getUser",
+            dataType: "json",
+            async: false,
+            headers: createAuthorizationTokenHeader(),
+            success: function (data) {
+                console.log(data);
+                if (data) {
+                    let appendVal = `
+                        <li class="layui-nav-item">
+                          <a class="fly-nav-avatar" href="javascript:;">
+                            <cite class="layui-hide-xs">${data.username}</cite>
+<!--                            <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>-->
+                            <i class="layui-badge fly-badge-vip layui-hide-xs">VIP${data.level}</i>
+                            <img src="../${data.picture}">
+                          </a>
+                          <dl class="layui-nav-child">
+                            <dd><a href="set.html?uid=${data.uid}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+                            <dd><a href="message.html?uid=${data.uid}"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+                            <dd><a href="home.html?uid=${data.uid}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+                            <hr style="margin: 5px 0;">
+                            <dd><a href="javascript:logout();" style="text-align: center;">退出</a></dd>
+                          </dl>
+                        </li>
+                    `;
+
+                    $("#myhome").attr("href", "home.html?uid=" + data.uid);
+                    $("#ul_user").html(appendVal);
+                }
+            },
+            error: function (data) {
+                console.log(data);
+                layer.alert("请先登录", function () {
+                    location.href = "login.html";
+                })
+            }
+        })
+    }
+
+    /**
+     * 注销
+     */
+    function logout() {
+        layer.confirm("真的要注销吗?", () => {
+
+            removeJwtToken();
+            layer.msg("注销成功", {time: 1000}, function () {
+                location.href = '../index.html';
+            });
+        })
+    }
+
 </script>
 
 </body>

@@ -104,7 +104,7 @@ public interface PostMapper {
      * @param pid
      * @return
      */
-    @Select("select pid, title, type, reward, content from posts where pid = #{pid}")
+    @Select("select pid, uid, title, type, reward, content from posts where pid = #{pid}")
     Post getPostByPid(Integer pid);
     
     /**

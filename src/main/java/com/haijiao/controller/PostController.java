@@ -1,9 +1,11 @@
 
 package com.haijiao.controller;
 
+import com.haijiao.pojo.Favorite;
 import com.haijiao.pojo.Post;
 import com.haijiao.pojo.ShowPost;
 import com.haijiao.pojo.User;
+import com.haijiao.service.FavoriteService;
 import com.haijiao.service.PostService;
 import com.haijiao.service.UserService;
 import com.haijiao.utils.JudgeLevelUtil;
@@ -36,6 +38,9 @@ public class PostController {
     
     @Autowired
     private PostService postService;
+    
+    @Autowired
+    private FavoriteService favoriteService;
     
     @Autowired
     private JudgeLevelUtil judgeLevelUtil;
@@ -254,18 +259,74 @@ public class PostController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
-//    @RequestMapping("/posts/isFavorite")
-//    public ResponseEntity<?> isFavorite(Integer uid, Integer pid) {
-//
-//    }
-//
-//    @RequestMapping("/posts/addFavorite")
-//    public ResponseEntity<?> addFavorite(HttpServletRequest request, Integer pid) {
-//
-//    }
-//
-//    @RequestMapping("/posts/cancelFavorite")
-//    public ResponseEntity<?> cancelFavorite(HttpServletRequest request, Integer pid) {
-//
-//    }
+    /**
+     * 我收藏的帖
+     * @param request
+     * @return
+     */
+    @RequestMapping("/posts/getMyFavorites")
+    public ResponseEntity<?> getMyFavorites(HttpServletRequest request) {
+        
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        List<Favorite> myFavorites = favoriteService.getMyFavorites(user.getUid());
+        
+        return new ResponseEntity<>(myFavorites, HttpStatus.OK);
+    }
+    
+    /**
+     * 判断是否已收藏
+     * @param uid
+     * @param pid
+     * @return
+     */
+    @RequestMapping("/posts/isFavorite")
+    public ResponseEntity<?> isFavorite(Integer uid, Integer pid) {
+    
+        Favorite favorite = favoriteService.isFavorite(uid, pid);
+    
+        if (favorite != null) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+    }
+    
+    /**
+     * 添加收藏
+     * @param request
+     * @param pid
+     * @return
+     */
+    @RequestMapping("/posts/addFavorite")
+    public ResponseEntity<?> addFavorite(HttpServletRequest request, Integer pid) {
+    
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        Integer count = favoriteService.addFavorite(user.getUid(), pid);
+        
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    
+    /**
+     * 取消收藏
+     * @param request
+     * @param pid
+     * @return
+     */
+    @RequestMapping("/posts/cancelFavorite")
+    public ResponseEntity<?> cancelFavorite(HttpServletRequest request, Integer pid) {
+    
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        Integer count = favoriteService.cancelFavorite(user.getUid(), pid);
+    
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
 }

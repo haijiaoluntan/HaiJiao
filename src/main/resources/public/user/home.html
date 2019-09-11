@@ -271,7 +271,15 @@
                         <p class="fly-home-info">
                             <i class="iconfont icon-kiss" title="飞吻"></i><span style="color: #FF7200;">${data.balance} 飞吻</span>
                             <i class="iconfont icon-shijian"></i><span>${data.joindate} 加入</span>
-                            <i class="iconfont icon-chengshi"></i><span>来自${data.province}${data.city}</span>
+                    `;
+
+                    if (data.sprovince != null && data.scity != null) {
+                        appendVal += `<i class="iconfont icon-chengshi"></i><span>来自${data.sprovince}${data.scity}</span>`;
+                    } else {
+                        appendVal += `<i class="iconfont icon-chengshi"></i><span>来自神秘之域</span>`;
+                    }
+
+                    appendVal += `
                         </p>
                     `;
 
@@ -341,7 +349,7 @@
 
             removeJwtToken();
             layer.msg("注销成功", {time: 1000}, function () {
-                location.reload();
+                location.href = '../index.html';
             });
         })
     }
