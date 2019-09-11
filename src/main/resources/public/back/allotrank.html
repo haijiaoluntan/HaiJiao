@@ -6,6 +6,8 @@
     <title>权限分配页面</title>
     <script src="../js/jquery-3.3.1.js"></script>
     <script src="../layui/layui.js"></script>
+    <script src="../js/jwt-decode.min.js"></script>
+    <script src="../js/jwt.js"></script>
     <link rel="stylesheet" href="../layui/css/layui.css" />
 </head>
 <!--$.each(data, function (i, item) {-->
@@ -56,7 +58,7 @@
         }
         function loadData() {
             $.ajax({
-                url: 'http://localhost:8080/haijiao/seldata',
+                url: 'http://localhost:8080/hai/seldata',
                 dataType: 'json',
                 type: 'post',
                 data:{"aid":aid},
@@ -81,7 +83,7 @@
         }
         function loadOPer() {
             $.ajax({
-                url: 'http://localhost:8080/haijiao/seloper',
+                url: 'http://localhost:8080/hai/seloper',
                 dataType: 'json',
                 type: 'post',
                 data:{"aid":aid},
@@ -112,7 +114,7 @@
                 var did=data.elem.getAttribute("did");
                 var state=data.elem.getAttribute("state");
                 $.ajax({
-                    url: 'http://localhost:8080/haijiao/dataupd',
+                    url: 'http://localhost:8080/hai/dataupd',
                     dataType: 'json',
                     type: 'post',
                     data:{"aid":aid,"did":did,"state":state},
@@ -130,7 +132,7 @@
                 var did=data.elem.getAttribute("did");
                 var state=data.elem.getAttribute("state");
                 $.ajax({
-                    url: 'http://localhost:8080/haijiao/dataupd',
+                    url: 'http://localhost:8080/hai/dataupd',
                     dataType: 'json',
                     type: 'post',
                     data:{"aid":aid,"did":did,"state":state},
@@ -156,7 +158,7 @@
                 var oid=data.elem.getAttribute("oid");
                 var state=data.elem.getAttribute("state");
                 $.ajax({
-                    url: 'http://localhost:8080/haijiao/operupd',
+                    url: 'http://localhost:8080/hai/operupd',
                     dataType: 'json',
                     type: 'post',
                     data:{"aid":aid,"oid":oid,"state":state},
@@ -174,7 +176,7 @@
                 var oid=data.elem.getAttribute("oid");
                 var state=data.elem.getAttribute("state");
                 $.ajax({
-                    url: 'http://localhost:8080/haijiao/operupd',
+                    url: 'http://localhost:8080/hai/operupd',
                     dataType: 'json',
                     type: 'post',
                     data:{"aid":aid,"oid":oid,"state":state},

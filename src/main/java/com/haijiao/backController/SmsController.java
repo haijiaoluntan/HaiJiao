@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/haijiao")
+@RequestMapping("/hai")
 public class SmsController {
     @Autowired
     private SmsServiceImpl smsService;

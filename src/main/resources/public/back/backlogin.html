@@ -192,12 +192,11 @@
                     data:{"phone":regphoneval,"phoneyanzm":yanzmval},
                     url:"http://localhost:8080/haijiao/phonedlu",
                     success:function (data) {
-                        alert(data);
-                        if(data!==null){
+                        if(data==2){
+                            layer.msg("登录失败");
+                        }else{
                             headers:setJwtToken(data);
                             location.href='backindex.html';
-                        }else{
-                            layer.msg("登录失败");
                         }
                     },
                     dataType:"text"

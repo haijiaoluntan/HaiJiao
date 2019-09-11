@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @RestController
-@RequestMapping("haijiao")
+@RequestMapping("hai")
 
 public class AdminController {
     @Autowired
@@ -253,9 +253,8 @@ public class AdminController {
             System.out.println("我创建的token是"+token);
             return new ResponseEntity<>(token,HttpStatus.OK);
         }else {
-            map.put("msg","登录失败");
-            map.put("info","2");
-            return new ResponseEntity<>(map,HttpStatus.OK);
+            String info="2";
+            return new ResponseEntity<>(info,HttpStatus.OK);
         }
     }
 

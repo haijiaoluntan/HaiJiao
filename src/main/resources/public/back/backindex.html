@@ -58,17 +58,6 @@
                                                                     <a href="javascript:void(0)"  onclick="updatePwd('修改密码',1)">修改密码</a>
                                                                 </dd> -->
 							</dl>
-						</li> 
-						<li class="layui-nav-item layui-nav-itemed">
-							<a class="" href="javascript:;">话题管理</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="" target="right"><img src="../img/explorer_60px.png" class="layui-nav-img">话题排行</a>
-								</dd>
-								<dd>
-									<a href="" target="right"><img src="../img/pinterest_60px.png" class="layui-nav-img">话题详情</a>
-								</dd> 
-							</dl>
 						</li>
 						<li class="layui-nav-item layui-nav-itemed">
 							<a class="" href="javascript:;">帖子管理</a>
@@ -144,20 +133,6 @@
 <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../layui/plugs.js">
 </script>
-<script type="text/javascript">
-    //添加编辑弹出层
-    /*	function updatePwd(title, id) {
-            $.jq_Panel({
-                title: title,
-                iframeWidth: 500,
-                iframeHeight: 300,
-                url: "updatePwd.html"
-            });
-        }*/
-</script>
-
-
-
 <script>
 
     //JavaScript代码区域
@@ -188,7 +163,7 @@
         $.ajax({
             type:"get",
             headers:createAuthorizationTokenHeader(),
-            url:"/haijiao/check",
+            url:"/hai/check",
             dataType:"text",
             //xhrFields: {withCredentials: true},
             success:function(data){
@@ -204,7 +179,7 @@
                 $.ajax({
                     type:"post",
                     headers:createAuthorizationTokenHeader(),
-                    url:"/haijiao/seleadmin",
+                    url:"/hai/seleadmin",
                     data:{admin:usern},
                     dataType:"json",
                     success:function(data){

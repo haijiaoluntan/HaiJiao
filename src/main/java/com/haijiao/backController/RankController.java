@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("haijiao")
+@RequestMapping("hai")
 public class RankController {
     @Autowired
     RankServiceImpl rankService;
