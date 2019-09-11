@@ -87,4 +87,34 @@ public class RankController {
             return new ResponseEntity<>(jsonx,HttpStatus.OK);
         }
     }
+
+    @RequestMapping("dataupd")
+    public ResponseEntity<?> DataUpdate(Integer state, Integer aid, Integer did){
+        System.out.println("进入分配数据权限的方法");
+        System.out.println("获取的管理员state:"+state+"aid是"+aid+"did是"+did);
+        Integer i=rankService.DataUpdate(state,aid,did);
+        LayuiJSON jsonx=new LayuiJSON();
+        if(i!=null){
+            jsonx.setCode(1);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }else{
+            jsonx.setCode(2);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping("operupd")
+    public ResponseEntity<?> OperUpdate(Integer state, Integer aid, Integer oid){
+        System.out.println("进入分配数据权限的方法");
+        System.out.println("获取的管理员state:"+state+"aid是"+aid+"did是"+oid);
+        Integer i=rankService.OperUpdate(state,aid,oid);
+        LayuiJSON jsonx=new LayuiJSON();
+        if(i!=null){
+            jsonx.setCode(1);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }else{
+            jsonx.setCode(2);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }
+    }
 }
