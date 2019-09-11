@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DataAuth {
+    private Integer aid;
     private Integer did;
     private String dpath;
-    private String descibe;
+    private String describe;
+    private Integer state;
 }

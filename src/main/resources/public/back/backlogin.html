@@ -62,7 +62,7 @@
                     </div>
                     <h6>没有账号,快来<span style="color: blue" onclick="tobackreg()">注册</span></h6>
                     <br>
-                    <button id="pwdButton"  >登录</button>
+                    <button id="pwdButton" type="button"  onclick="sou()">登录</button>
                     <!-- <div id="wb_connect_btn ">weiboLogin</div> --> 
                     <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
                 </form>
@@ -84,33 +84,34 @@
         var phoneButton=$("#phoneButton");
 
         $(()=>{
-            $("#pwdButton").click(()=>{
-                var user = logName.val();
-                var pwd = logPassword.val();
-                alert("点我");
 
-                $.ajax({
-                    url: "/dladmin",
-                    type: "post",
-                    data: {
-                        user: user,
-                        pwd: pwd
-                    },
-                    dataType: 'text',
-                    success: function(data) {
-                        if (data){
-                            console.log(data)
-                            headers:setJwtToken(data);
-                            alert(data);
-                            location.href='backindex.html';
-
-                        } else {
-                            alert("用户名或者密码错误");
-                        }
-                    },
-                });
-            });
         })
+
+
+        function sou() {
+            var user = $("#logName").val();
+            var pwd = $("#logPassword").val();
+
+            $.ajax({
+                url: "/haijiao/dladmin",
+                type: "post",
+                data: {
+                    user: user,
+                    pwd: pwd
+                },
+                dataType: 'text',
+                success: function(data) {
+                    if (data){
+                        console.log(data)
+                        setJwtToken(data);
+                        location.href='backindex.html';
+                    } else {
+                        alert("用户名或者密码错误");
+                    }
+                },
+            });
+        }
+
         layui.use('layer');
         $(function() {
             /* 手机是否注册 */

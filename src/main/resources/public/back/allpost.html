@@ -43,10 +43,16 @@ layui.use('table',function(){
 			limitName:'pageSize'
 		},
 		cols:[[
-			{field:'cid',title:"顾客编号", sort: true},
-			{field:'client',title:"顾客名称", sort: true},
-			{field:'orders',title:"下单总量",sort:true,},  
-			{field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+			{field:'pid',title:"帖子id", sort: true},
+			{field:'uid',title:"uid  ", sort: true},
+            {field:'title',title:"title", sort: true},
+            {field:'type',title:"type", sort: true},
+            {field:'pubdate',title:"pubdate", sort: true},
+			{field:'jing',title:"jing",sort:true},
+            {field:'top',title:"top",sort:true},
+            {field:'jie',title:"jie",sort:true},
+            {field:'browse',title:"browse",sort:true},
+
 		]] 
 	});
 	table.on('tool(tbf)',function(obj){

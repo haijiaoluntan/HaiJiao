@@ -1,10 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <title>权限分配页面</title>
+    <script src="../js/jquery-3.3.1.js"></script>
+    <script src="../layui/layui.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css" />
 </head>
+<!--$.each(data, function (i, item) {-->
+<!--$("#CityObjectcb").append(-->
+<!--"<label>"-->
+    <!--+"<input name='items' type='checkbox' value="+"item.cityName" +">"+-->
+    <!--"item.cityName"+-->
+    <!--"</label>");-->
+<!--});-->
 <body>
-没错，我就是权限分配页面
+<form class="layui-form" action="">
+    <div class="layui-form-item" style="margin-right: 35px;margin-top:15px">
+        <label class="layui-form-label">老板尊名</label>
+        <div class="layui-input-block">
+            <input type="text"  id="admin" name="title" required  lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据权限</label>
+        <div class="layui-input-block" id="dataAuth" >
+            <!--<input type="checkbox" name="like[write]" title="写作">
+            <input type="checkbox" name="like[read]" title="阅读" checked>
+            <input type="checkbox" name="like[dai]" title="发呆"> -->
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">操作权限</label>
+        <div class="layui-input-block" id="operAuth" lay-verify="operAuth">
+
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">保存设置</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    layui.use('form', function(){
+        var aid=parent.PartitionId;
+        var admin=parent.PartitionAdmin;
+        console.log("从父亲获取的id和姓名:"+aid+admin);
+        var form = layui.form;
+        function loadAdmin(){
+            $("#admin").val(admin);
+        }
+        function loadData() {
+            $.ajax({
+                url: 'http://localhost:8080/haijiao/seldata',
+                dataType: 'json',
+                type: 'post',
+                data:{"aid":aid},
+                success: function (data1) {
+                    var data=data1.data;
+                    $.each(data, function (i, v) {
+                        // $('#typetwo').append(new Option(v.ttname, v.ttid));
+                        <!--<input type="checkbox" name="like[write]" title="写作">-->
+                        <!--<input type="checkbox" name="like[read]" title="阅读" checked>-->
+                        <!--<input type="checkbox" name="like[dai]" title="发呆">-->
+                        console.log(v.did+v.describe);
+                        if(v.state==1){
+                            $('#dataAuth').append('<input type="checkbox" lay-filter="dataAuth"  did='+v.did+' title='+v.describe+'  value='+v.did+'  state='+v.state+' checked>');
+                        }else {
+                            $('#dataAuth').append('<input type="checkbox" lay-filter="dataAuth" did='+v.did+' title='+v.describe+'   value='+v.did+'  state='+v.state+'>');
+                        }
+                    });
+                    layui.form.render("checkbox");
+                    //重新渲染 固定写法
+                }
+            })
+        }
+        function loadOPer() {
+            $.ajax({
+                url: 'http://localhost:8080/haijiao/seloper',
+                dataType: 'json',
+                type: 'post',
+                data:{"aid":aid},
+                success: function (data1) {
+                    var data=data1.data;
+                    $.each(data, function (i, v) {
+                        console.log(v.oid+v.describe);
+                        if(v.state==1){
+                            $('#operAuth').append('<input type="checkbox" lay-filter="operAuth"  oid='+v.oid+' title='+v.describe+' value='+v.oid+' state='+v.state+' checked>');
+                        }else {
+                            $('#operAuth').append('<input type="checkbox" lay-filter="operAuth" oid='+v.oid+' title='+v.describe+' value='+v.oid+' state='+v.state+'>');
+                        }
+                    });
+                    layui.form.render("checkbox");
+                    //重新渲染 固定写法
+                }
+            })
+        }
+        loadAdmin();
+        loadData();
+        loadOPer();
+
+        form.on('checkbox(dataAuth)',function (data) {
+
+            var  check=data.elem.checked;
+            if(check){
+                data.elem.setAttribute('state',1);
+                var did=data.elem.getAttribute("did");
+                var state=data.elem.getAttribute("state");
+                $.ajax({
+                    url: 'http://localhost:8080/haijiao/dataupd',
+                    dataType: 'json',
+                    type: 'post',
+                    data:{"aid":aid,"did":did,"state":state},
+                    success: function (data1) {
+                        console.log(data1.code);
+                        if(data1.code){
+                            console.log("修改成功");
+                        }else{
+                            console.log("修改失败");
+                        }
+                    }
+                })
+            }else{
+                data.elem.setAttribute('state',0);
+                var did=data.elem.getAttribute("did");
+                var state=data.elem.getAttribute("state");
+                $.ajax({
+                    url: 'http://localhost:8080/haijiao/dataupd',
+                    dataType: 'json',
+                    type: 'post',
+                    data:{"aid":aid,"did":did,"state":state},
+                    success: function (data1) {
+                        console.log(data1.code);
+                        if(data1.code){
+                            console.log("修改成功");
+                        }else{
+                            console.log("修改失败");
+                        }
+                    }
+                })
+            }
+            // console.log(data.elem); //得到checkbox原始DOM对象
+            // console.log(data.elem.checked); //是否被选中，true或者false
+            // console.log(data.value); //复选框value值，也可以通过data.elem.value得到
+        })
+
+        form.on('checkbox(operAuth)',function (data) {
+            var  check=data.elem.checked;
+            if(check){
+                data.elem.setAttribute('state',1);
+                var oid=data.elem.getAttribute("oid");
+                var state=data.elem.getAttribute("state");
+                $.ajax({
+                    url: 'http://localhost:8080/haijiao/operupd',
+                    dataType: 'json',
+                    type: 'post',
+                    data:{"aid":aid,"oid":oid,"state":state},
+                    success: function (data1) {
+                        console.log(data1.code);
+                        if(data1.code){
+                            console.log("修改成功");
+                        }else{
+                            console.log("修改失败");
+                        }
+                    }
+                })
+            }else{
+                data.elem.setAttribute('state',0);
+                var oid=data.elem.getAttribute("oid");
+                var state=data.elem.getAttribute("state");
+                $.ajax({
+                    url: 'http://localhost:8080/haijiao/operupd',
+                    dataType: 'json',
+                    type: 'post',
+                    data:{"aid":aid,"oid":oid,"state":state},
+                    success: function (data1) {
+                        console.log(data1.code);
+                        if(data1.code){
+                            console.log("修改成功");
+                        }else{
+                            console.log("修改失败");
+                        }
+                    }
+                })
+            }
+            // console.log(data.elem); //得到checkbox原始DOM对象
+            // console.log(data.elem.checked); //是否被选中，true或者false
+            // console.log(data.value); //复选框value值，也可以通过data.elem.value得到
+        })
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
+<script>
+</script>
 </body>
+
 </html>
