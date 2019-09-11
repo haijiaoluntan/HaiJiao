@@ -22,6 +22,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("hai")
+
 public class AdminController {
     @Autowired
     private AdminService adminService;
@@ -60,7 +61,6 @@ public class AdminController {
         String token = request.getHeader(header);
         if(token!=null){
             Claims claims =  jwtTokenUtil.parseJWT(token);
-            System.out.println("token得到的用户信息"+claims.getIssuer());
             System.out.println(claims.get("realname")
                     +","+claims.get("sex")+","+claims.get("weight"));
             System.out.println("claims.getIssuer()="+claims.getIssuer());

@@ -93,7 +93,7 @@
             var pwd = $("#logPassword").val();
 
             $.ajax({
-                url: "/hai/dladmin",
+                url: "/haijiao/dladmin",
                 type: "post",
                 data: {
                     user: user,
@@ -120,7 +120,7 @@
                 $.ajax({
                     type:"get",
                     data:{"phone":regphoneval},
-                    url:"http://localhost:8080/hai/selphone",
+                    url:"http://localhost:8080/haijiao/selphone",
                     success:function (data) {
                         console.log(data.info+data.msg);
                         if(data.info==2){
@@ -144,7 +144,7 @@
                 $.ajax({
                     type:"put",
                     data:{"phone":regphoneval},
-                    url:"http://localhost:8080/hai/updyzm",
+                    url:"http://localhost:8080/haijiao/updyzm",
                     success:function (data) {
                         console.log(data.info+data.msg);
                         if(data.info==1){
@@ -168,7 +168,7 @@
                 $.ajax({
                     type:"post",
                     data:{"phone":regphoneval,"phoneyanzm":yanzmval},
-                    url:"http://localhost:8080/hai/dluyanzm",
+                    url:"http://localhost:8080/haijiao/dluyanzm",
                     success:function (data) {
                         console.log(data.info+data.msg);
                         if(data.info==1){
@@ -190,7 +190,7 @@
                 $.ajax({
                     type:"post",
                     data:{"phone":regphoneval,"phoneyanzm":yanzmval},
-                    url:"http://localhost:8080/hai/phonedlu",
+                    url:"http://localhost:8080/haijiao/phonedlu",
                     success:function (data) {
                         if(data==2){
                             layer.msg("登录失败");

@@ -22,8 +22,4 @@ public interface RankService {
     public Integer DataUpdate(@Param("state") Integer state,@Param("aid") Integer aid,@Param("did") Integer did);
     public Integer OperUpdate(@Param("state") Integer state,@Param("aid") Integer aid,@Param("oid") Integer oid);
 
-
-    public Integer selDS(@Param("aid") Integer aid,@Param("did") Integer did);
-    public Integer selOS(@Param("aid") Integer aid,@Param("oid") Integer oid);
-    public Integer aidByAdmin(String admin);
 }

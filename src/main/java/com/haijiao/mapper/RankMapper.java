@@ -38,12 +38,4 @@ public interface RankMapper {
     @Update("update rale_oper set state=#{state} where aid=#{aid} and oid=#{oid}")
     public Integer OperUpdate(@Param("state") Integer state,@Param("aid") Integer aid,@Param("oid") Integer oid);
 
-    @Select("select state from rale_data where aid=#{aid} and did=#{did}")
-    public Integer selDS(@Param("aid") Integer aid,@Param("did") Integer did);
-
-    @Select("select state from rale_oper where aid=#{aid} and oid=#{oid}")
-    public Integer selOS(@Param("aid") Integer aid,@Param("oid") Integer oid);
-
-    @Select("select aid from admin where admin=#{admin}")
-    public Integer aidByAdmin(String admin);
 }

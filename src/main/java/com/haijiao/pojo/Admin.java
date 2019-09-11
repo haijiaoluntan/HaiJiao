@@ -26,7 +26,7 @@ public class Admin implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd  HH:mm:ss", timezone = "GMT+8")
     private Date create_time;
-    private String rank;
+    private Integer rank;
     private DataAuth dataAuth;
     private OperAuth operAuth;
 }

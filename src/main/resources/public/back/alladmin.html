@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>全部管理员</title>
+<title>顾客信息</title>
     <link rel="stylesheet" href="../layui/css/layui.css" />
     <script src="../js/jquery-3.3.1.js"></script>
 <script src="../layui/layui.js"></script>
@@ -10,97 +10,95 @@
     <script src="../js/jwt-decode.min.js"></script>
     <script src="../js/jwt.js"></script>
 </head>
-<body>
+<body> 
 <table id="tb" lay-filter="tbf"></table>
 <script id="barDemo">
-    <div class="layui-btn-container" >
-        <button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="add" >添加新管理员</button>
-        </div>
+	<div class="layui-btn-container" > 
+		<button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="reset" >重置密码</button>
+	</div>
 </script>
 <script>
-    var admins=parent.PartitionAdmin;
-    layui.use('table',function(){
-        var  table=layui.table;
-        var laypage = layui.laypage;
-
-        function loadrank(){
-            table.render({
-                elem:"#tb",
-                headers:createAuthorizationTokenHeader(),
-                url:"http://localhost:8080/hai/seladmin",
-                height:'313',
-                page:{
-                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
-                    ,curr: 1 //设定初始在第 5 页
-                    ,groups: 3//只显示 1 个连续页码
-                    ,first: false //不显示首页
-                    ,last:  false
-                },
-                limit:6,
-                request:{
-                    pageName:'page',
-                    limitName:'pageSize'
-                },
-                cols:[[
-                    {field:'aid',title:"管理员id", sort: true,templet:function(d){
-                            return d.aid;
-                        }},
-                    {field:'admin',title:"账号", sort: true,templet:function(d){
-                            return d.admin;
-                        }},
-                    {field:'pwd',title:"密码",sort:true,templet:function(d){
-                            return d.pwd;
-                        }},
-                    {field:'login_time',title:"本次登录时间",sort:true,templet:function(d){
-                            return d.login_time;
-                        }},
-                    {field:'rank',title:"账号状态",sort:true,templet:function(d){
-                            return d.rank;
-                        }},
-                    {field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
-                ]],
-                success:function (d) {
-                    alert(d.data[0].id.toString());
-                }
-            });
-        };
-        loadrank();
-        table.on('tool(tbf)',function(obj) {
-            var data=obj.data;
-            if (obj.event === 'add') {
-                var aid=data.aid;
-                var admin=data.admin
-                window.PartitionId=aid;
-                window.PartitionAdmin=admin;
-                $.ajax({
-                    method: "post",
-                    url: "http://localhost:8080/hai/yanoper",
-                    data: {"oid": 2,"admin":admins},
-                    success: function (data) {
-                        if (data == 1) {
-                            // layer.open({
-                            //     type: 2,
-                            //     title: "分配权限",
-                            //     area: ['500px', '600px'],
-                            //     offset: '50px',
-                            //     closeBtn: 1,
-                            //     resize: false,
-                            //     content: 'allotrank.html'
-                            // });
-                            // $(".layui-laypage-btn").click();
-                            layer.msg("恭喜进入添加管理员的方法");
-                        }else{
-                            layer.msg("对不起，您没有操作权限");
-                        }
-                    },
-                    dataType: "json"
-                });
-                //重新渲染
-                loadrank();
-                layer.closeAll("dialog");
-            }
-        });
-    })
+layui.use('table',function(){
+	var  table=layui.table;
+	var laypage = layui.laypage;
+	table.render({
+		elem:"#tb", 
+		url:"../client", 
+		height:'313',
+		page:{
+			 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+        ,curr: 1 //设定初始在第 5 页
+        ,groups: 3//只显示 1 个连续页码
+        ,first: false //不显示首页
+        ,last:  false
+		},
+		limit:5,
+		limits:[5,6,7,8,9,10],
+		request:{
+			pageName:'page',
+			limitName:'pageSize'
+		},
+		cols:[[
+			{field:'id',title:"管理员id", sort: true},
+			{field:'admin',title:"管理员姓名", sort: true},
+			{field:'pwd',title:"管理员密码",sort:true,},
+			{field:'login_time',title:"登录时间",sort:true},
+            {field:'phone',title:"电话",sort:true},
+            {field:'phoneyanzm',title:"phoneyanzm",sort:true},
+            {field:'create_time',title:"create_time",sort:true},
+            {field:'rank',title:"rank",sort:true},
+		]] 
+	});
+	table.on('tool(tbf)',function(obj){
+		var data = obj.data; 
+		console.log(obj);
+		if (obj.event === 'reset') {
+			layer.confirm("确认将顾客密码重置为123456嘛",{
+				icon:0,
+				title:'小贴士',
+				offset:'150px'
+			},function(index){
+				$.ajax({
+					url:"../client",
+					method:"get", 
+					data:{"type":"reset","cid":data.cid},
+					success:function(data){   
+						if(encode==1){
+							alert("重置成功");
+						}
+					},
+					dataType:'json'
+				});
+				alert("重置成功");
+				//重新渲染
+				table.render({
+					elem:"#tb", 
+					url:"../client", 
+					height:'313',
+					page:{
+						 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+			        ,curr: 1 //设定初始在第 5 页
+			        ,groups: 3//只显示 1 个连续页码
+			        ,first: false //不显示首页
+			        ,last:  false
+					},
+					limit:6,
+					request:{
+						pageName:'page',
+						limitName:'pageSize'
+					},
+					cols:[[
+						{field:'cid',title:"顾客id", sort: true},
+						{field:'client',title:"顾客名称", sort: true},
+						{field:'password',title:"密码",sort:true,}, 
+						{field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+					]] 
+				});
+				layer.closeAll('dialog'); 
+			}) 
+		} 
+	});
+})
 </script>
 </body>
 </html>

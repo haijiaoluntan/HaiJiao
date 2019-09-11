@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>所有用户</title>
+<title>所有帖子</title>
 <script src="../js/jquery-3.3.1.js"></script>
 <script src="../layui/layui.js"></script>
 <script src="../js/jwt-decode.min.js"></script>
@@ -10,23 +10,133 @@
 <link rel="stylesheet" href="../layui/css/layui.css" />
 </head>
 <body>
-<table id="tb" lay-filter="tbf"></table>
+	<table id="tb" lay-filter="tbf"></table>
 <script id="barDemo">
 	<div class="layui-btn-container" > 
-		<button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="feng" >封号</button>
+		<button class="layui-btn layui-btn-sm layui-btn-normal" lay-event="edit" >订单详细</button>
 	</div>
 </script>
 <script>
-    var admins=parent.PartitionAdmin;
+
+    /*$(()=>{
+        //alert("加载函数");
+       // sss();
+   		 alert("加载函数");
+
+    })*/
+	//function sss(){
+
+        /*$.ajax({
+            type:"get",
+            //data:{"phone":regphoneval},
+            headers:createAuthorizationTokenHeader(),
+            url:"http://localhost:8080/haijiao/selauser",
+            success:function (data) {
+                alert("进入了加载函数");*/
+
+	/*layui.use('table',function(){
+		var  table=layui.table;
+		var	  laypage = layui.laypage;
+
+        function all(){
+		table.render({
+			elem:"#tb",
+           	//type:"get",
+			url:"http://localhost:8080/haijiao/selauser",
+            //headers:createAuthorizationTokenHeader(),
+			height:'465',
+			page:{
+				 layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+            ,curr: 1 //设定初始在第 5 页
+            ,groups: 3//只显示 1 个连续页码
+            ,first: false //不显示首页
+            ,last:  false
+			},
+			limit:6,
+			//limits:[6,8,10,12,15],
+			request:{
+				pageName:'page',
+				limitName:'pageSize'
+			},
+			cols:[[
+
+				{field:'uid',title:"用户id", sort: true,templet:function(d){
+                        return d.uid;
+                    }},
+				{field:'username',title:"用户名",sort:true,templet:function(d){
+					return d.username;
+				}},
+				{field:'pwd',title:"密码", sort: true,templet:function(d){
+                        return d.pwd;
+                    }},
+				{field:'sex',title:"性别",sort:true,templet:function(d){
+                        return d.sex;
+                    }},
+                {field:'eid',title:"eid", sort: true,templet:function(d){
+                        return d.eid;
+                    }},
+                {field:'picture',title:"picture", sort: true,templet:function(d){
+                        return d.picture;
+                    }},
+                {field:'levels',title:"等级", sort: true,templet:function(d){
+                        return d.levels;
+                    }},
+                {field:'exps',title:"经验", sort: true,templet:function(d){
+                        return d.exps;
+                    }},
+                {field:'province',title:"province", sort: true,templet:function(d){
+                        return d.province;
+                    }},
+                {field:'city',title:"city", sort: true,templet:function(d){
+                        return d.city;
+                    }},
+                {field:'joindate',title:"joindate", sort: true,templet:function(d){
+                        return d.joindate;
+                    }},
+                {field:'signature',title:"signature", sort: true,templet:function(d){
+                        return d.signature;
+                    }},
+                {field:'balance',title:"balance", sort: true,templet:function(d){
+                        return d.balance;
+                    }},
+			]] ,
+            success:function (d) {
+                alert(d.data[0].id.toString());
+            }
+		});
+        };
+		all();
+
+		table.on('tool(tbf)',function(obj){
+			var data = obj.data; 
+			console.log(obj);
+			if (obj.event === 'edit') {
+				layer.confirm("确认修改吗",{
+					icon:0,
+					title:'小贴士',
+					offset:'150px'
+				},function(index){
+					alert(data.oid+data.orddate);
+				})
+				showlayer();
+				loadDatatoForm("formInfo", data);
+			} 
+		});
+	})*/
+      /*      },
+            dataType:"json"
+        })
+    }*/
+
     layui.use('table',function(){
         var  table=layui.table;
         var laypage = layui.laypage;
 
-        function loadUser(){
+        function loaduser(){
             table.render({
                 elem:"#tb",
                 headers:createAuthorizationTokenHeader(),
-                url:"http://localhost:8080/hai/seluser",
+                url:"http://localhost:8080/haijiao/selauser",
                 height:'313',
                 page:{
                     layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
@@ -44,26 +154,41 @@
                     {field:'uid',title:"用户id", sort: true,templet:function(d){
                             return d.uid;
                         }},
-                    {field:'username',title:"用户名", sort: true,templet:function(d){
+                    {field:'username',title:"用户名",sort:true,templet:function(d){
                             return d.username;
                         }},
-                    {field:'email',title:"邮箱",sort:true,templet:function(d){
-                            return d.email;
-                        }},
-                    {field:'level',title:"等级",sort:true,templet:function(d){
-                            return d.level;
-                        }},
-                    {field:'commCount',title:"总评论数",sort:true,templet:function(d){
-                            return d.commCount;
-                        }},
-                    {field:'city',title:"城市",sort:true,templet:function(d){
-                            return d.city;
+                    {field:'pwd',title:"密码", sort: true,templet:function(d){
+                            return d.pwd;
                         }},
                     {field:'sex',title:"性别",sort:true,templet:function(d){
                             return d.sex;
                         }},
-                    {field:'joindate',title:"建号时间",sort:true,templet:function(d){
+                    {field:'eid',title:"eid", sort: true,templet:function(d){
+                            return d.eid;
+                        }},
+                    {field:'picture',title:"picture", sort: true,templet:function(d){
+                            return d.picture;
+                        }},
+                    {field:'levels',title:"等级", sort: true,templet:function(d){
+                            return d.levels;
+                        }},
+                    {field:'exps',title:"经验", sort: true,templet:function(d){
+                            return d.exps;
+                        }},
+                    {field:'province',title:"province", sort: true,templet:function(d){
+                            return d.province;
+                        }},
+                    {field:'city',title:"city", sort: true,templet:function(d){
+                            return d.city;
+                        }},
+                    {field:'joindate',title:"joindate", sort: true,templet:function(d){
                             return d.joindate;
+                        }},
+                    {field:'signature',title:"signature", sort: true,templet:function(d){
+                            return d.signature;
+                        }},
+                    {field:'balance',title:"balance", sort: true,templet:function(d){
+                            return d.balance;
                         }},
                     {field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
                 ]],
@@ -72,41 +197,69 @@
                 }
             });
         };
-        loadUser();
+        loaduser();
         table.on('tool(tbf)',function(obj) {
-            $.ajax({
-                method: "post",
-                url: "http://localhost:8080/hai/yanoper",
-                data: {"oid": 7,"admin":admins},
-                success: function (data) {
-                    if (data == 1) {
-                        layer.msg("恭喜进入封号方法");
-                        // $.ajax({
-                        //     method: "post",
-                        //     url: "../food",
-                        //     data: {"type": "del", "fid": data.fid},
-                        //     success: function () {
-                        //         if (encode = 1) {
-                        //             layer.msg('主人，权限冻结成功了', {icon: 6});
-                        //         }
-                        //     },
-                        //     dataType: "json"
-                        // });
-                        // //重新渲染
-                        // loadrank();
-                        // layer.closeAll("dialog");
-
-                    }else{
-                        layer.msg("对不起，您没有封号的权限");
-                    }
-                },
-                dataType: "json"
-            });
-            //重新渲染
-            loadrank();
-            layer.closeAll("dialog");
+            var data = obj.data;
+            console.log(obj);
+            if (obj.event === 'del') {
+                layer.confirm("确定要撤销<p style='color:red'>" + data.fname + "</p>的管理员吗？", {
+                    icon: 0,
+                    title: '提示',
+                    offset: '150px'
+                }, function (index) {
+                    // $.ajax({
+                    //     method: "post",
+                    //     url: "../food",
+                    //     data: {"type": "del", "fid": data.fid},
+                    //     success: function () {
+                    //         if (encode = 1) {
+                    //             layer.msg('主人，权限冻结成功了', {icon: 6});
+                    //         }
+                    //     },
+                    //     dataType: "json"
+                    // });
+                    // //重新渲染
+                    // loadrank();
+                    // layer.closeAll("dialog");
+                })
+            } else if (obj.event === 'allot') {
+                layer.open({
+                    type: 2,
+                    title: "分配权限",
+                    area: ['500px', '600px'],
+                    offset: '50px',
+                    closeBtn: 1,
+                    resize: false,
+                    content: 'allotrank.html'
+                });
+                $(".layui-laypage-btn").click();
+            } else if (obj.event === 'frozen') {
+                layer.confirm("确定要冻结<p style='color:red'>" + data.fname + "</p>的权限吗？", {
+                    icon: 0,
+                    title: '提示',
+                    offset: '150px'
+                }, function (index) {
+                    // $.ajax({
+                    //     method: "post",
+                    //     url: "../food",
+                    //     data: {"type": "del", "fid": data.fid},
+                    //     success: function () {
+                    //         if (encode = 1) {
+                    //             layer.msg('主人，权限冻结成功了', {icon: 6});
+                    //         }
+                    //     },
+                    //     dataType: "json"
+                    // });
+                    // //重新渲染
+                    // loadrank();
+                    // layer.closeAll("dialog");
+                })
+            }
         });
     })
+
+
+
 </script>
 </body>
 </html>

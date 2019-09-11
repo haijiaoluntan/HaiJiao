@@ -73,6 +73,9 @@
 								<dd>
 									<a href="allrank.html" target="right"><img src="../img/d_60px.png" class="layui-nav-img">所有权限</a>
 								</dd>
+								<dd>
+									<a href="" target="right"><img src="../img/b%20social%20media_60px.png" class="layui-nav-img">配置权限</a>
+								</dd>
 							</dl>
 						</li>
 						<li class="layui-nav-item layui-nav-itemed">
@@ -131,6 +134,7 @@
 <script type="text/javascript" src="../layui/plugs.js">
 </script>
 <script>
+
     //JavaScript代码区域
     $(()=>{
         //alert("加载函数");
@@ -164,15 +168,13 @@
             //xhrFields: {withCredentials: true},
             success:function(data){
                 //alert("进入了check方法");
-                console.log("返回的token用户信息"+data)
+                console.log(data)
                 //$("#loginTime").text(data.login_time);//首页显示上次登录时间
-                $("#aname").text(data)//首页显示登陆者名字
+                $("#aname").text("欢迎您:"+data)//首页显示登陆者名字
                 var usern =data;
                 //alert("第一个ajax");
                 //alert(data);
                 // alert("check方法回调函数");
-                window.PartitionAdmin=data;
-                console.log(data);
 
                 $.ajax({
                     type:"post",
@@ -190,6 +192,8 @@
             }
         })
     }
+
+
     layui.use('element', function() {
         var element = layui.element;
     });
