@@ -37,7 +37,7 @@ public interface PostMapper {
      * @param post
      * @return
      */
-    @Insert("insert into posts values(null, #{uid}, #{title}, #{type}, #{pubDate}, #{jing}, #{top}, #{jie}, #{browse}, #{reward}, #{rstate}, #{content}, 0)")
+    @Insert("insert into posts values(null, #{uid}, #{title}, #{type}, #{pubDate}, #{jing}, #{top}, #{jie}, #{browse}, #{reward}, #{rstate}, #{content}, 1)")
     Integer addPost(Post post);
     
     /**
