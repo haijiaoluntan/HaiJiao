@@ -5,6 +5,8 @@
 <title>所有权限</title>
 <script src="../js/jquery-3.3.1.js"></script>
 <script src="../layui/layui.js"></script>
+    <script src="../js/jwt-decode.min.js"></script>
+    <script src="../js/jwt.js"></script>
 <link rel="stylesheet" href="../layui/css/layui.css" />
 </head>
 <body>
@@ -24,6 +26,7 @@ layui.use('table',function(){
     function loadrank(){
         table.render({
             elem:"#tb",
+            headers:createAuthorizationTokenHeader(),
             url:"http://localhost:8080/haijiao/seladmin",
             height:'313',
             page:{

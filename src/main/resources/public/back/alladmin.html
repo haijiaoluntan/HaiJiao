@@ -37,10 +37,14 @@ layui.use('table',function(){
 			limitName:'pageSize'
 		},
 		cols:[[
-			{field:'cid',title:"顾客id", sort: true},
-			{field:'client',title:"顾客名称", sort: true},
-			{field:'password',title:"密码",sort:true,}, 
-			{field:'tool',title:"操作",align:"center",toolbar:"#barDemo"}
+			{field:'id',title:"管理员id", sort: true},
+			{field:'admin',title:"管理员姓名", sort: true},
+			{field:'pwd',title:"管理员密码",sort:true,},
+			{field:'login_time',title:"登录时间",sort:true},
+            {field:'phone',title:"电话",sort:true},
+            {field:'phoneyanzm',title:"phoneyanzm",sort:true},
+            {field:'create_time',title:"create_time",sort:true},
+            {field:'rank',title:"rank",sort:true},
 		]] 
 	});
 	table.on('tool(tbf)',function(obj){
