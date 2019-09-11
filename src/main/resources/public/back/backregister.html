@@ -19,227 +19,227 @@
         <source src="../video/haijiao.mp4" type="video/mp4">
     </video>
 </div>
-    <div class="moneybox" id="leafContainer"></div>
-    <div id="WebGL-output"></div>
-    <div id="Stats-output"></div>
-    <div class="wrap ">
-        <header>
-            <h1>海角论坛</h1>
-            <h5>自由,开放的社交论坛</h5>
-            <p>在海角认识世界</p>
-        </header>
-        <section>
-            <div id="login-container">
-                <form id="loginForm">
-                    <div class="inputs ">
-                        <input type="text" name="phone" id="regphone" placeholder="手机号" autocomplete="new-password">
+<div class="moneybox" id="leafContainer"></div>
+<div id="WebGL-output"></div>
+<div id="Stats-output"></div>
+<div class="wrap ">
+    <header>
+        <h1>海角论坛</h1>
+        <h5>自由,开放的社交论坛</h5>
+        <p>在海角认识世界</p>
+    </header>
+    <section>
+        <div id="login-container">
+            <form id="loginForm">
+                <div class="inputs ">
+                    <input type="text" name="phone" id="regphone" placeholder="手机号" autocomplete="new-password">
 
-                        <div>
-                            <input type="text" name="yanzm" id="yanzm" placeholder="验证码" autocomplete="new-password">
-                            <button v-on="click:onSubmit" class="get-captcha_button" style="display:inline" id="send">获取验证码</button>
-                        </div>
-                        <input type="text" name="regName" id="regName" placeholder="账号" autocomplete="new-password">
-                        <input type="password" name="password" id="regPassword" placeholder="密码 " autocomplete="new-password">
-                        <input type="password" name="passwordto" id="regPasswordto" placeholder="确认密码 " autocomplete="new-password">
-                        <span id="phonemsg"></span>
-                        <span id="yanzmmsg"></span>
-                        <span id="regNamemsg"></span>
-                        <span id="regPasswordmsg"></span>
-                        <span id="regPasswordtomsg"></span>
+                    <div>
+                        <input type="text" name="yanzm" id="yanzm" placeholder="验证码" autocomplete="new-password">
+                        <button v-on="click:onSubmit" class="get-captcha_button" style="display:inline" id="send">获取验证码</button>
                     </div>
-                    <h6>账号有了,犹豫什么去<span style="color: blue" onclick="tobacklog()">登录</span>啊！</h6>
-                    <br>
-                    <input id="registerButton" type="button" value="注册">
-                    <!--<a href="https://api.weibo.com/oauth2/authorize?client_id=968565512&response_type=code&redirect_uri=http://naivee.me/weiboLogin ">微博登录</a>-->
-                    <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
-                </form>
-            </div> 
-        </section>
-    </div> 
-    <script type="text/javascript " src="../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript " src="../res/layui/layui.js"></script>
-    <script type="text/javascript " src="../js/login.js "></script>
-    <script type="text/javascript " src="../js/jwt.js"></script>
-    <script>
+                    <input type="text" name="regName" id="regName" placeholder="账号" autocomplete="new-password">
+                    <input type="password" name="password" id="regPassword" placeholder="密码 " autocomplete="new-password">
+                    <input type="password" name="passwordto" id="regPasswordto" placeholder="确认密码 " autocomplete="new-password">
+                    <span id="phonemsg"></span>
+                    <span id="yanzmmsg"></span>
+                    <span id="regNamemsg"></span>
+                    <span id="regPasswordmsg"></span>
+                    <span id="regPasswordtomsg"></span>
+                </div>
+                <h6>账号有了,犹豫什么去<span style="color: blue" onclick="tobacklog()">登录</span>啊！</h6>
+                <br>
+                <input id="registerButton" type="button" value="注册">
+                <!--<a href="https://api.weibo.com/oauth2/authorize?client_id=968565512&response_type=code&redirect_uri=http://naivee.me/weiboLogin ">微博登录</a>-->
+                <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-----copyright@2019海角-----</h5>
+            </form>
+        </div>
+    </section>
+</div>
+<script type="text/javascript " src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript " src="../res/layui/layui.js"></script>
+<script type="text/javascript " src="../js/login.js "></script>
+<script type="text/javascript " src="../js/jwt.js"></script>
+<script>
 
-        layui.use('layer');
-        $(function() {
-            // var regphoneval=$("#regphone").val();
-            // var yanzmval=$("#yanzm").val();
-            // var regNameval=$("#regName").val();
-            // var regPasswordval=$("#regPassword").val();
-            // var regPasswordtoval=$("#regPasswordto").val();
+    layui.use('layer');
+    $(function() {
+        // var regphoneval=$("#regphone").val();
+        // var yanzmval=$("#yanzm").val();
+        // var regNameval=$("#regName").val();
+        // var regPasswordval=$("#regPassword").val();
+        // var regPasswordtoval=$("#regPasswordto").val();
 
-            var regphone=$("#regphone");
-            var yanzm=$("#yanzm");
-            var send=$("#send");
-            var regName=$("#regName");
-            var regPassword=$("#regPassword");
-            var regPasswordto=$("#regPasswordto");
-            var registerButton=$("#registerButton");
-            /* 手机是否注册 */
-            regphone.on('blur', function () {
-                var regphoneval=$("#regphone").val();
-                $.ajax({
-                    type:"get",
-                    data:{"phone":regphoneval},
-                    url:"http://localhost:8080/haijiao/selphone",
-                    success:function (data) {
-                        console.log(data.info+data.msg);
-                        if(data.info==1){
-                            $("#phonemsg").text(data.msg);
-                            $("#phonemsg").css("color","green");
-                        }else if(data.info==2){
-                            $("#phonemsg").text(data.msg);
-                            $("#phonemsg").css("color","#c33");
-                        }
-                    },
-                    dataType:"json"
-                })
-            })
-            regphone.on('focus', function () {
-                // regphone.val("");
-                $("#phonemsg").text("");
-            })
-            /* 发送验证码 */
-            send.on('click',function () {
-                var regphoneval=$("#regphone").val();
-                $.ajax({
-                    type:"post",
-                    data:{"phone":regphoneval},
-                    url:"http://localhost:8080/haijiao/addready",
-                    success:function (data) {
-                        console.log(data.info+data.msg);
-                        if(data.info==1){
-                            // $("#phonemsg").text(data.msg);
-                            // $("#phonemsg").css("color","green");
-                            layer.msg(data.msg);
-                        }else if(data.info==2){
-                            // $("#phonemsg").text(data.msg);
-                            // $("#phonemsg").css("color","#c33");
-                            layer.msg(data.msg);
-                        }
-                    },
-                    dataType:"json"
-                })
-            })
-
-            /* 验证注册验证码 */
-            yanzm.on('blur',function () {
-                var regphoneval=$("#regphone").val();
-                var yanzmval=$("#yanzm").val();
-                $.ajax({
-                    type:"post",
-                    data:{"phone":regphoneval,"yanzm":yanzmval},
-                    url:"http://localhost:8080/haijiao/selreadyy",
-                    success:function (data) {
-                        console.log(data.info+data.msg);
-                        if(data.info==1){
-                            $("#yanzmmsg").text(data.msg);
-                            $("#yanzmmsg").css("color","green");
-                        }else if(data.info==2){
-                            $("#yanzmmsg").text(data.msg);
-                            $("#yanzmmsg").css("color","#c33");
-                        }
-                    },
-                    dataType:"json"
-                })
-            })
-
-            /* 验证账号重复 */
-            yanzm.on('blur',function () {
-                var regNameval=$("#regName").val();
-                $.ajax({
-                    type:"post",
-                    data:{"admin":regNameval},
-                    url:"http://localhost:8080/haijiao/seladmin",
-                    success:function (data) {
-                        console.log(data.info+data.msg);
-                        if(data.info==1){
-                            $("#yanzmmsg").text(data.msg);
-                            $("#yanzmmsg").css("color","green");
-                        }else if(data.info==2){
-                            $("#yanzmmsg").text(data.msg);
-                            $("#yanzmmsg").css("color","#c33");
-                        }
-                    },
-                    dataType:"json"
-                })
-            })
-
-            /* 注册处理 */
-            registerButton.on("click", function() {
-                var regphoneval=$("#regphone").val();
-                var yanzmval=$("#yanzm").val();
-                var regNameval=$("#regName").val();
-                var regPasswordval=$("#regPassword").val();
-                var regPasswordtoval=$("#regPasswordto").val();
-                $.ajax({
-                    url: "http://localhost:8080/haijiao/phoneReg",
-                    type: "post",
-                    data: {"phone":regphoneval,"phoneyanzm":yanzmval,"admin":regNameval,"pwd":regPasswordval,"rank":1},
-                    dataType: 'json',
-                    success: function(data) {
-                        if(data.info==1){
-                            layer.msg(data.msg, {time: 1000}, function () {
-                                location.href='backlogin.html?admin='+data.admin+'&pwd='+data.pwd;
-                            });
-                        }else{
-                            layer.msg(data.msg);
-                        }
+        var regphone=$("#regphone");
+        var yanzm=$("#yanzm");
+        var send=$("#send");
+        var regName=$("#regName");
+        var regPassword=$("#regPassword");
+        var regPasswordto=$("#regPasswordto");
+        var registerButton=$("#registerButton");
+        /* 手机是否注册 */
+        regphone.on('blur', function () {
+            var regphoneval=$("#regphone").val();
+            $.ajax({
+                type:"get",
+                data:{"phone":regphoneval},
+                url:"http://localhost:8080/hai/selphone",
+                success:function (data) {
+                    console.log(data.info+data.msg);
+                    if(data.info==1){
+                        $("#phonemsg").text(data.msg);
+                        $("#phonemsg").css("color","green");
+                    }else if(data.info==2){
+                        $("#phonemsg").text(data.msg);
+                        $("#phonemsg").css("color","#c33");
                     }
-                });
-            });
-
-            /*	注册输入字段校验*/
-            regName.blur(function() {
-                var value = $(this).val();
-                if (value.length < 1 || value.length > 15) {
-                    $("#regNamemsg").text("账号长度须在1-15个字符以内 ");
-                    $("#regPasswordtomsg").css("color","#c33");
-                } else {
-                    $("#regNamemsg").text("账号合法");
-                    $("#regNamemsg").css("color","green");
-                }
-            });
-            // registerInputEmail.blur(function() {
-            //     var value = $(this).val();
-            //     var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            //     if (!reg.test(value)) {
-            //         $("#regi-email-error ").text("请输入正确的邮箱 ");
-            //     } else {
-            //         $("#regi-email-error ").text(" ");
-            //     }
-            // });
-            regPassword.blur(function() {
-                var value = $(regPassword).val();
-                var reg = /[a-zA-Z0-9]{6,10}/;
-                if (!reg.test(value)) {
-                    $("#regPassword").text("密码长度须在6-20个字符 ");
-                    $("#regPasswordtomsg").css("color","#c33");
-                } else {
-                    $("#regPassword").text("密码合法");
-                    $("#regPassword").css("color","green");
-                }
-            });
-            regPasswordto.blur(function() {
-                var value = $(regPasswordto).val();
-                var psw = regPassword.val();
-                if (value != psw) {
-                    $("#regPasswordtomsg").text("两次密码不一致");
-                    $("#regPasswordtomsg").css("color","#c33");
-                } else {
-                    $("#regPasswordtomsg").text("确认成功");
-                    $("#regPasswordtomsg").css("color","green");
-                }
+                },
+                dataType:"json"
             })
+        })
+        regphone.on('focus', function () {
+            // regphone.val("");
+            $("#phonemsg").text("");
+        })
+        /* 发送验证码 */
+        send.on('click',function () {
+            var regphoneval=$("#regphone").val();
+            $.ajax({
+                type:"post",
+                data:{"phone":regphoneval},
+                url:"http://localhost:8080/hai/addready",
+                success:function (data) {
+                    console.log(data.info+data.msg);
+                    if(data.info==1){
+                        // $("#phonemsg").text(data.msg);
+                        // $("#phonemsg").css("color","green");
+                        layer.msg(data.msg);
+                    }else if(data.info==2){
+                        // $("#phonemsg").text(data.msg);
+                        // $("#phonemsg").css("color","#c33");
+                        layer.msg(data.msg);
+                    }
+                },
+                dataType:"json"
+            })
+        })
 
+        /* 验证注册验证码 */
+        yanzm.on('blur',function () {
+            var regphoneval=$("#regphone").val();
+            var yanzmval=$("#yanzm").val();
+            $.ajax({
+                type:"post",
+                data:{"phone":regphoneval,"yanzm":yanzmval},
+                url:"http://localhost:8080/hai/selreadyy",
+                success:function (data) {
+                    console.log(data.info+data.msg);
+                    if(data.info==1){
+                        $("#yanzmmsg").text(data.msg);
+                        $("#yanzmmsg").css("color","green");
+                    }else if(data.info==2){
+                        $("#yanzmmsg").text(data.msg);
+                        $("#yanzmmsg").css("color","#c33");
+                    }
+                },
+                dataType:"json"
+            })
+        })
+
+        /* 验证账号重复 */
+        yanzm.on('blur',function () {
+            var regNameval=$("#regName").val();
+            $.ajax({
+                type:"post",
+                data:{"admin":regNameval},
+                url:"http://localhost:8080/hai/seladmin",
+                success:function (data) {
+                    console.log(data.info+data.msg);
+                    if(data.info==1){
+                        $("#yanzmmsg").text(data.msg);
+                        $("#yanzmmsg").css("color","green");
+                    }else if(data.info==2){
+                        $("#yanzmmsg").text(data.msg);
+                        $("#yanzmmsg").css("color","#c33");
+                    }
+                },
+                dataType:"json"
+            })
+        })
+
+        /* 注册处理 */
+        registerButton.on("click", function() {
+            var regphoneval=$("#regphone").val();
+            var yanzmval=$("#yanzm").val();
+            var regNameval=$("#regName").val();
+            var regPasswordval=$("#regPassword").val();
+            var regPasswordtoval=$("#regPasswordto").val();
+            $.ajax({
+                url: "http://localhost:8080/hai/phoneReg",
+                type: "post",
+                data: {"phone":regphoneval,"phoneyanzm":yanzmval,"admin":regNameval,"pwd":regPasswordval,"rank":1},
+                dataType: 'json',
+                success: function(data) {
+                    if(data.info==1){
+                        layer.msg(data.msg, {time: 1000}, function () {
+                            location.href='backlogin.html?admin='+data.admin+'&pwd='+data.pwd;
+                        });
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            });
         });
-        function tobacklog() {
-            var data="zhouzekun"
-            location.href='backlogin.html';
-        }
-    </script>
+
+        /*	注册输入字段校验*/
+        regName.blur(function() {
+            var value = $(this).val();
+            if (value.length < 1 || value.length > 15) {
+                $("#regNamemsg").text("账号长度须在1-15个字符以内 ");
+                $("#regPasswordtomsg").css("color","#c33");
+            } else {
+                $("#regNamemsg").text("账号合法");
+                $("#regNamemsg").css("color","green");
+            }
+        });
+        // registerInputEmail.blur(function() {
+        //     var value = $(this).val();
+        //     var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        //     if (!reg.test(value)) {
+        //         $("#regi-email-error ").text("请输入正确的邮箱 ");
+        //     } else {
+        //         $("#regi-email-error ").text(" ");
+        //     }
+        // });
+        regPassword.blur(function() {
+            var value = $(regPassword).val();
+            var reg = /[a-zA-Z0-9]{6,10}/;
+            if (!reg.test(value)) {
+                $("#regPassword").text("密码长度须在6-20个字符 ");
+                $("#regPasswordtomsg").css("color","#c33");
+            } else {
+                $("#regPassword").text("密码合法");
+                $("#regPassword").css("color","green");
+            }
+        });
+        regPasswordto.blur(function() {
+            var value = $(regPasswordto).val();
+            var psw = regPassword.val();
+            if (value != psw) {
+                $("#regPasswordtomsg").text("两次密码不一致");
+                $("#regPasswordtomsg").css("color","#c33");
+            } else {
+                $("#regPasswordtomsg").text("确认成功");
+                $("#regPasswordtomsg").css("color","green");
+            }
+        })
+
+    });
+    function tobacklog() {
+        var data="zhouzekun"
+        location.href='backlogin.html';
+    }
+</script>
 <!--按钮特效 -->
 <script>
     var wait=60;

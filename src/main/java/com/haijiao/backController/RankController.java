@@ -6,6 +6,7 @@ import com.haijiao.pojo.DataAuth;
 import com.haijiao.pojo.LayuiJSON;
 import com.haijiao.pojo.OperAuth;
 import com.haijiao.service.impl.RankServiceImpl;
+import io.jsonwebtoken.Claims;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +62,7 @@ public class RankController {
     public ResponseEntity<?> FindData(Integer aid){
         System.out.println("进入查询数据权限的方法");
         System.out.println("获取的管理员id:"+aid);
-       List<DataAuth> dataAuthList=rankService.FindData(aid);
+        List<DataAuth> dataAuthList=rankService.FindData(aid);
         LayuiJSON jsonx=new LayuiJSON();
         if(dataAuthList!=null){
             jsonx.setData(dataAuthList);
@@ -116,5 +118,23 @@ public class RankController {
             jsonx.setCode(2);
             return new ResponseEntity<>(jsonx,HttpStatus.OK);
         }
+    }
+
+    @RequestMapping("yanoper")
+    public ResponseEntity<?> YanOper(String admin, Integer oid){
+        System.out.println("进入操作权限验证的方法");
+        System.out.println("获取的管理员admin是"+admin+"did是"+oid);
+        Integer aid=rankService.aidByAdmin(admin);
+        Integer state=rankService.selOS(aid,oid);
+        return new ResponseEntity<>(state,HttpStatus.OK);
+    }
+
+    @RequestMapping("yandata")
+    public ResponseEntity<?> YanDate(String admin, Integer did){
+        System.out.println("进入数据权限验证的方法");
+        System.out.println("获取的管理员admin是"+admin+"did是"+did);
+        Integer aid=rankService.aidByAdmin(admin);
+        Integer state=rankService.selOS(aid,did);
+        return new ResponseEntity<>(state,HttpStatus.OK);
     }
 }
