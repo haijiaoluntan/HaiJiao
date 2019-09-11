@@ -83,7 +83,7 @@
                 $.ajax({
                     type:"get",
                     data:{"phone":regphoneval},
-                    url:"http://localhost:8080/haijiao/selphone",
+                    url:"http://localhost:8080/hai/selphone",
                     success:function (data) {
                         console.log(data.info+data.msg);
                         if(data.info==1){
@@ -107,7 +107,7 @@
                 $.ajax({
                     type:"post",
                     data:{"phone":regphoneval},
-                    url:"http://localhost:8080/haijiao/addready",
+                    url:"http://localhost:8080/hai/addready",
                     success:function (data) {
                         console.log(data.info+data.msg);
                         if(data.info==1){
@@ -131,7 +131,7 @@
                 $.ajax({
                     type:"post",
                     data:{"phone":regphoneval,"yanzm":yanzmval},
-                    url:"http://localhost:8080/haijiao/selreadyy",
+                    url:"http://localhost:8080/hai/selreadyy",
                     success:function (data) {
                         console.log(data.info+data.msg);
                         if(data.info==1){
@@ -152,7 +152,7 @@
                 $.ajax({
                     type:"post",
                     data:{"admin":regNameval},
-                    url:"http://localhost:8080/haijiao/seladmin",
+                    url:"http://localhost:8080/hai/seladmin",
                     success:function (data) {
                         console.log(data.info+data.msg);
                         if(data.info==1){
@@ -175,7 +175,7 @@
                 var regPasswordval=$("#regPassword").val();
                 var regPasswordtoval=$("#regPasswordto").val();
                 $.ajax({
-                    url: "http://localhost:8080/haijiao/phoneReg",
+                    url: "http://localhost:8080/hai/phoneReg",
                     type: "post",
                     data: {"phone":regphoneval,"phoneyanzm":yanzmval,"admin":regNameval,"pwd":regPasswordval,"rank":1},
                     dataType: 'json',

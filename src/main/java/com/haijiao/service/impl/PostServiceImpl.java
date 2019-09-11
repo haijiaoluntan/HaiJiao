@@ -15,7 +15,22 @@ public class PostServiceImpl implements PostService {
     
     @Autowired
     private PostMapper postMapper;
-    
+
+    @Override
+    public List<Post> AllPost() {
+        return postMapper.AllPost();
+    }
+
+    @Override
+    public List<Post> CurrPost(Integer page, Integer pageSize) {
+        return postMapper.CurrPost(page,pageSize);
+    }
+
+    @Override
+    public Integer NumPost() {
+        return postMapper.NumPost();
+    }
+
     @Override
     public Integer addPost(Post post) {
         return postMapper.addPost(post);

@@ -16,6 +16,21 @@ public class RankServiceImpl implements RankService {
     RankMapper rankMapper;
 
     @Override
+    public Integer selDS(Integer aid, Integer did) {
+        return rankMapper.selDS(aid,did);
+    }
+
+    @Override
+    public Integer selOS(Integer aid, Integer oid) {
+        return rankMapper.selOS(aid,oid);
+    }
+
+    @Override
+    public Integer aidByAdmin(String admin) {
+        return rankMapper.aidByAdmin(admin);
+    }
+
+    @Override
     public Integer DataUpdate(Integer state, Integer aid, Integer did) {
         return rankMapper.DataUpdate(state,aid,did);
     }

@@ -16,8 +16,22 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserMapper userMapper;
-    
-    
+
+    @Override
+    public Integer NumUser() {
+        return userMapper.NumUser();
+    }
+
+    @Override
+    public List<User> CurrUser(Integer page, Integer pageSize) {
+        return userMapper.CurrUser(page,pageSize);
+    }
+
+    @Override
+    public List<User> AllUser() {
+        return userMapper.AllUser();
+    }
+
     @Override
     public User queryByEmail(String email) {
         

@@ -50,5 +50,11 @@ public interface UserService {
     List<City> queryCitysByPid(Integer pid);
     
     Integer updInfo(User user);
+
+    Integer NumUser();
+
+    List<User> CurrUser(@Param("page") Integer page,@Param("pageSize") Integer pageSize);
+
+    List<User> AllUser();
 }
 

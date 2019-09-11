@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="wrap">
+        <input type="tel" class="shuru" id="phone"/>
+        <button class="btn" id="send">发送验证码</button>
+    </div>
+<img src="images/1.jpg">
+
+</body>
+<script>
+     var wait=60;
+     function time(){
+             var btn=document.getElementById("send");
+             var str=btn.innerText;
+             if(wait==1){
+                     btn.innerText="再次发送";
+                     btn.removeAttribute("disabled");
+                     wait=60;
+                 }else{
+                     wait--;
+                     btn.innerText=wait+"s后重新发送";
+                     btn.setAttribute("disabled",true);
+                    setTimeout(function(){
+                            time();
+                        },1000);
+                 }
+         }
+     //点击button触发
+     document.getElementById("send").onclick=time;
+</script>
+</html>

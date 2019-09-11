@@ -2,6 +2,7 @@ package com.haijiao.mapper;
 
 import com.haijiao.pojo.Post;
 import com.haijiao.pojo.ShowPost;
+import com.haijiao.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -12,7 +13,26 @@ import java.util.List;
 
 @Repository
 public interface PostMapper {
-    
+
+    /**
+     * 查询全部用户
+     */
+    @Select("select * from posts")
+    List<Post> AllPost();
+
+    /**
+     * 查询当前页面用户
+     */
+    @Select("select * from posts limit #{page},#{pageSize}")
+    List<Post> CurrPost(@Param("page") Integer page,@Param("pageSize") Integer pageSize);
+
+    /**
+     * 查询用户总数
+     */
+    @Select("select count(*) from posts")
+    Integer NumPost();
+
+
     /**
      * 首页展示列表
      * @return

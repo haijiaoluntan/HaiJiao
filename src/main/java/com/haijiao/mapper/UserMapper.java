@@ -25,9 +25,27 @@ public interface UserMapper {
      * @param uid
      * @return
      */
-    @Select("select uid, username, sex, email, picture, level, province, city, joindate, signature, balance from user where uid = #{uid}")
+    @Select("select * from user where uid = #{uid}")
     User getUserByUid(Integer uid);
-    
+
+    /**
+     * 查询全部用户
+     */
+    @Select("select * from user")
+    List<User> AllUser();
+
+    /**
+     * 查询当前页面用户
+     */
+    @Select("select * from user limit #{page},#{pageSize}")
+    List<User> CurrUser(@Param("page") Integer page,@Param("pageSize") Integer pageSize);
+
+    /**
+     * 查询用户总数
+     */
+    @Select("select count(*) from user")
+    Integer NumUser();
+
     /**
      * 注册
      * @param user
