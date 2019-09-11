@@ -45,6 +45,31 @@ public class UserServiceImpl implements UserService {
         return userMapper.updExpByPosts(uid);
     }
     
+    @Override
+    public int fsyanzm(String email, String yzm) {
+        return userMapper.fsyanzm(email, yzm);
+    }
+    
+    @Override
+    public String elemaily(String email) {
+        return userMapper.selemaily(email);
+    }
+    
+    @Override
+    public Integer updExpByLike(Integer uid) {
+        return userMapper.updExpByLike(uid);
+    }
+    
+    @Override
+    public Integer updExpByComm(Integer uid) {
+        return userMapper.updExpByComm(uid);
+    }
+    
+    @Override
+    public Integer earnBalance(Integer uid, Integer balance) {
+        return userMapper.earnBalance(uid, balance);
+    }
+    
     /**
      * 登录
      *
@@ -77,8 +102,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public Integer insert(User user) {
-        Integer i = userMapper.insert(user);
+    public Integer addUser(User user) {
+        Integer i = userMapper.addUser(user);
         if (i > 0) {
             System.out.println("注册:注册成功");
             return i;

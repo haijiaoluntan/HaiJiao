@@ -4,7 +4,7 @@
 
 <mapper namespace="com.haijiao.mapper.PostMapper">
 
-    <cache/>
+<!--    <cache/>-->
 
     <resultMap id="showPostMap" type="ShowPost">
         <id property="pid" column="pid"/>
@@ -19,6 +19,7 @@
         <result property="reward" column="reward"/>
         <result property="rstate" column="rstate"/>
         <result property="content" column="content"/>
+        <result property="state" column="state"/>
         <result property="commCount" column="commCount"/>
         <association property="user" javaType="User">
             <id property="uid" column="uid"/>
@@ -30,22 +31,130 @@
             <result property="picture" column="picture"/>
             <result property="level" column="level"/>
             <!--            <result property="exp" column="exp"/>-->
-            <!--            <result property="province" column="province"/>-->
-            <!--            <result property="city" column="city"/>-->
             <!--            <result property="joindate" column="joindate"/>-->
             <!--            <result property="signature" column="signature"/>-->
             <!--            <result property="balance" column="balance"/>-->
             <!--            <result property="loginDate" column="logindate"/>-->
             <!--            <result property="email" column="email"/>-->
-            <!--            <result property="act" column="act"/>-->
-            <!--            <result property="actcode" column="actcode"/>-->
         </association>
     </resultMap>
 
-    <!--  获得展示帖列表  -->
-    <select id="getShowPostList" resultMap="showPostMap">
+    <sql id="showPost">
         select c.*, d.commCount from (select a.*, b.username, b.picture, b.level from posts a, user b where a.uid = b.uid) c
         left join (select pid, count(*) commCount from comment group by pid) d
-        on c.pid = d.pid order by c.top desc, c.jing desc, c.jie desc, c.pubdate desc limit #{currentPage}, #{pageSize};
+        on c.pid = d.pid
+    </sql>
+
+    <!--  根据分类获得展示帖列表  -->
+    <select id="getShowPostList" resultMap="showPostMap">
+
+        <include refid="showPost"/>
+
+        <where>
+
+            c.state = 1 and
+
+            <choose>
+                <when test="type == 0">
+                    1 = 1
+                </when>
+                <when test="type == 1">
+                    c.type = '提问'
+                </when>
+                <when test="type == 2">
+                    c.type = '分享'
+                </when>
+                <when test="type == 3">
+                    c.type = '公告'
+                </when>
+            </choose>
+            <choose>
+                <when test="state == 0">
+                    and 1 = 1
+                </when>
+                <when test="state == 1">
+                    and c.jie = 0
+                </when>
+                <when test="state == 2">
+                    and c.jie = 1
+                </when>
+                <when test="state == 3">
+                    and c.jing = 1
+                </when>
+            </choose>
+        </where>
+        <choose>
+            <when test="dateOrComm == 0">
+                order by c.top desc, c.jing desc, c.jie desc, c.pubdate desc
+            </when>
+            <when test="dateOrComm == 1">
+                order by c.top desc, c.jing desc, c.jie desc, d.commCount desc
+            </when>
+        </choose>
+
+        limit #{currentPage}, #{pageSize};
+    </select>
+
+    <!--  相应分类总记录数  -->
+    <select id="getShowPostListTotal" resultType="Integer">
+
+        select count(*) from (
+        <include refid="showPost"/>
+
+        <where>
+
+            c.state = 1 and
+
+            <choose>
+                <when test="type == 0">
+                    1 = 1
+                </when>
+                <when test="type == 1">
+                    c.type = '提问'
+                </when>
+                <when test="type == 2">
+                    c.type = '分享'
+                </when>
+                <when test="type == 3">
+                    c.type = '公告'
+                </when>
+            </choose>
+            <choose>
+                <when test="state == 0">
+                    and 1 = 1
+                </when>
+                <when test="state == 1">
+                    and c.jie = 0
+                </when>
+                <when test="state == 2">
+                    and c.jie = 1
+                </when>
+                <when test="state == 3">
+                    and c.jing = 1
+                </when>
+            </choose>
+        </where>
+
+        ) e;
+    </select>
+
+    <!--  本周热议  -->
+    <select id="getWeekList" resultMap="showPostMap">
+
+        <include refid="showPost"/>
+
+        where c.state = 1 and YEARWEEK(date_format(c.pubdate,'%Y-%m-%d'),1) = YEARWEEK(now(),1)
+
+        order by d.commCount desc
+
+        limit 0, 12;
+    </select>
+
+    <!--  根据id获得showPost  -->
+    <select id="getShowPostByPid" resultMap="showPostMap">
+
+        <include refid="showPost"/>
+
+        where c.state = 1 and c.pid = #{pid};
     </select>
 </mapper>

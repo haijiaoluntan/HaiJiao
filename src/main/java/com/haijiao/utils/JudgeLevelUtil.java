@@ -26,9 +26,9 @@ public class JudgeLevelUtil {
     
         if ((level == 1 && exp >= 50) ||
                 (level == 2 && exp >= 200) ||
-                (level == 3 && exp >= 1000) ||
-                (level == 4 && exp >= 5000) ||
-                (level == 5 && exp >= 10000)) {
+                (level == 3 && exp >= 3000) ||
+                (level == 4 && exp >= 10000) ||
+                (level == 5 && exp >= 20000)) {
             userService.updLevel(uid);
         }
     }
