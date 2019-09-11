@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<div class="fly-home fly-panel" id="user-info" style="background-image: url(../images/微信图片_20190613101506.jpg);">
+<div class="fly-home fly-panel" id="user-info" style="background-image: url('../images/beijing.jpeg');">
 
 </div>
 
@@ -314,12 +314,12 @@
                                 <cite class="layui-hide-xs">${data.username}</cite>
 <!--                                <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>-->
                                 <i class="layui-badge fly-badge-vip layui-hide-xs">VIP${data.level}</i>
-                                <img src="${data.picture}">
+                                <img src="../${data.picture}">
                               </a>
                               <dl class="layui-nav-child">
-                                <dd><a href="../user/set.html?uid=${data.uid}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-                                <dd><a href="../user/message.html?uid=${data.uid}"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-                                <dd><a href="../user/home.html?uid=${data.uid}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+                                <dd><a href="set.html?uid=${data.uid}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+                                <dd><a href="message.html?uid=${data.uid}"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+                                <dd><a href="home.html?uid=${data.uid}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
                                 <hr style="margin: 5px 0;">
                                 <dd><a href="javascript:logout();" style="text-align: center;">退出</a></dd>
                               </dl>

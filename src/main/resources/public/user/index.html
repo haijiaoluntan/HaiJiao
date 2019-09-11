@@ -148,6 +148,7 @@
         getMyfavoritePostList();
     });
 
+    //我收藏的帖
     function getMyfavoritePostList() {
 
         $.ajax({
@@ -210,7 +211,7 @@
                             <cite class="layui-hide-xs">${data.username}</cite>
 <!--                            <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>-->
                             <i class="layui-badge fly-badge-vip layui-hide-xs">VIP${data.level}</i>
-                            <img src="${data.picture}">
+                            <img src="../${data.picture}">
                           </a>
                           <dl class="layui-nav-child">
                             <dd><a href="set.html?uid=${data.uid}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>

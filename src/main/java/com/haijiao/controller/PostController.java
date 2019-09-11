@@ -253,4 +253,19 @@ public class PostController {
         
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+    
+//    @RequestMapping("/posts/isFavorite")
+//    public ResponseEntity<?> isFavorite(Integer uid, Integer pid) {
+//
+//    }
+//
+//    @RequestMapping("/posts/addFavorite")
+//    public ResponseEntity<?> addFavorite(HttpServletRequest request, Integer pid) {
+//
+//    }
+//
+//    @RequestMapping("/posts/cancelFavorite")
+//    public ResponseEntity<?> cancelFavorite(HttpServletRequest request, Integer pid) {
+//
+//    }
 }

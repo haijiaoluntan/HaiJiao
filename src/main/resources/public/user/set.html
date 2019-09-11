@@ -42,7 +42,7 @@
 <div class="layui-container fly-marginTop fly-user-main">
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
         <li class="layui-nav-item">
-            <a href="home.html">
+            <a id="myhome" href="home.html">
                 <i class="layui-icon">&#xe609;</i>
                 我的主页
             </a>
@@ -306,6 +306,7 @@
             type: "post",
             url: HOST_URL + "user/checkEmail",
             data: {email:email},
+            headers: createAuthorizationTokenHeader(),
             async: false,
             dataType: "json",
             success: function (data) {
@@ -323,6 +324,7 @@
             type: "post",
             url: HOST_URL + "user/checkUsername",
             data: {username:username},
+            headers: createAuthorizationTokenHeader(),
             async: false,
             dataType: "json",
             success: function (data) {
@@ -420,7 +422,7 @@
             return;
         }
 
-        if (nowpass != repass) {
+        if (newpass != repass) {
             layer.msg('两次密码不相等！', {time: 1000});
             return;
         }
@@ -493,7 +495,7 @@
                             <cite class="layui-hide-xs">${data.username}</cite>
 <!--                            <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>-->
                             <i class="layui-badge fly-badge-vip layui-hide-xs">VIP${data.level}</i>
-                            <img src="${data.picture}">
+                            <img src="../${data.picture}">
                           </a>
                           <dl class="layui-nav-child">
                             <dd><a href="set.html?uid=${data.uid}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
@@ -505,6 +507,7 @@
                         </li>
                     `;
 
+                    $("#myhome").attr("href", "home.html?uid=" + data.uid);
                     $("#ul_user").html(appendVal);
                 }
             },

@@ -249,14 +249,20 @@ public class UserController {
      * @return
      */
     @RequestMapping("/user/checkEmail")
-    public ResponseEntity<?> checkEmail(String email) {
+    public ResponseEntity<?> checkEmail(HttpServletRequest request, String email) {
     
-        User user = userService.queryByEmail(email);
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
     
-        if (user != null) {
-            return new ResponseEntity<>(false, HttpStatus.OK);
-        } else {
+        User user1 = userService.queryByEmail(email);
+    
+        if (user1 == null) {
             return new ResponseEntity<>(true, HttpStatus.OK);
+        } else if (email.equals(user.getEmail())) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.OK);
         }
     }
     
@@ -266,14 +272,20 @@ public class UserController {
      * @return
      */
     @RequestMapping("/user/checkUsername")
-    public ResponseEntity<?> checkUsername(String username) {
+    public ResponseEntity<?> checkUsername(HttpServletRequest request, String username) {
     
-        User user = userService.queryByUsername(username);
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+        
+        User user1 = userService.queryByUsername(username);
     
-        if (user != null) {
-            return new ResponseEntity<>(false, HttpStatus.OK);
-        } else {
+        if (user1 == null) {
             return new ResponseEntity<>(true, HttpStatus.OK);
+        } else if (username.equals(user.getUsername())) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.OK);
         }
     }
     
