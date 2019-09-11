@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haijiao.mapper.CommentMapper">
+
+    <resultMap id="commMap" type="Comment">
+        <id property="cid" column="cid"/>
+        <result property="pid" column="pid"/>
+        <result property="cdate" column="cdate"/>
+        <result property="likes" column="likes"/>
+        <result property="accept" column="accept"/>
+        <result property="content" column="content"/>
+        <association property="user" javaType="User">
+            <id property="uid" column="uid"/>
+            <result property="username" column="username"/>
+            <result property="picture" column="picture"/>
+            <result property="level" column="level"/>
+        </association>
+    </resultMap>
+
+    <!--  获得评论列表  -->
+    <select id="getCommentList" resultMap="commMap">
+        select c.*, d.username, d.picture, d.level from (select a.*, b.likes from comment a left join (select cid, sum(state) likes from likes group by cid) b on a.cid = b.cid) c
+        left join user d on c.uid = d.uid where pid = #{pid};
+    </select>
+
+</mapper>

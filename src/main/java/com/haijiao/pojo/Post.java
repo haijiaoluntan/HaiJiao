@@ -27,6 +27,7 @@ public class Post implements Serializable {
     private Integer reward;     //悬赏飞吻数
     private Integer rstate;     //是否已悬赏
     private String content;     //帖子内容
+    private Integer state;      //审核状态
     
     public Post() {
     }
@@ -44,6 +45,22 @@ public class Post implements Serializable {
         this.reward = reward;
         this.rstate = rstate;
         this.content = content;
+    }
+    
+    public Post(Integer pid, Integer uid, String title, String type, Date pubDate, Integer jing, Integer top, Integer jie, Integer browse, Integer reward, Integer rstate, String content, Integer state) {
+        this.pid = pid;
+        this.uid = uid;
+        this.title = title;
+        this.type = type;
+        this.pubDate = pubDate;
+        this.jing = jing;
+        this.top = top;
+        this.jie = jie;
+        this.browse = browse;
+        this.reward = reward;
+        this.rstate = rstate;
+        this.content = content;
+        this.state = state;
     }
     
     public Integer getPid() {
@@ -142,6 +159,14 @@ public class Post implements Serializable {
         this.content = content;
     }
     
+    public Integer getState() {
+        return state;
+    }
+    
+    public void setState(Integer state) {
+        this.state = state;
+    }
+    
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Post").append('[')
@@ -169,6 +194,8 @@ public class Post implements Serializable {
                 .append(rstate)
                 .append(", content=")
                 .append(content)
+                .append(", state=")
+                .append(state)
                 .append(']');
         return sb.toString();
     }

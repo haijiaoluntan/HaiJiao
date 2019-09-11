@@ -2,7 +2,9 @@ package com.haijiao.backController;
 
 
 import com.haijiao.pojo.Admin;
+import com.haijiao.pojo.DataAuth;
 import com.haijiao.pojo.LayuiJSON;
+import com.haijiao.pojo.OperAuth;
 import com.haijiao.service.impl.RankServiceImpl;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,38 @@ public class RankController {
             jsonx.setCount(num);
             jsonx.setData(adminCurr);
             jsonx.setTotal(admin);
+            jsonx.setCode(2);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping("seldata")
+    public ResponseEntity<?> FindData(Integer aid){
+        System.out.println("进入查询数据权限的方法");
+        System.out.println("获取的管理员id:"+aid);
+       List<DataAuth> dataAuthList=rankService.FindData(aid);
+        LayuiJSON jsonx=new LayuiJSON();
+        if(dataAuthList!=null){
+            jsonx.setData(dataAuthList);
+            jsonx.setCode(1);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }else{
+            jsonx.setCode(2);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping("seloper")
+    public ResponseEntity<?> FindOper(Integer aid){
+        System.out.println("进入查询操作权限的方法");
+        System.out.println("获取的管理员id:"+aid);
+        List<OperAuth> operAuthList=rankService.FindOper(aid);
+        LayuiJSON jsonx=new LayuiJSON();
+        if(operAuthList!=null){
+            jsonx.setData(operAuthList);
+            jsonx.setCode(1);
+            return new ResponseEntity<>(jsonx,HttpStatus.OK);
+        }else{
             jsonx.setCode(2);
             return new ResponseEntity<>(jsonx,HttpStatus.OK);
         }

@@ -4,7 +4,8 @@
 
 
 <mapper namespace="com.haijiao.mapper.UserMapper">
-    <cache/>
+
+<!--    <cache/>-->
 
     <resultMap type="User" id="userMap">
         <id property="uid" column="uid"/>
@@ -33,17 +34,9 @@
         select * from user where email=#{email} and password=#{password};
     </select>
 
-    <insert id="insert" parameterType="User">
-        insert into user(eid,password,username,joindate) values(#{eid},#{password},#{username},#{joinTime});
-    </insert>
-
     <update id="activation" parameterType="java.lang.String">
         update user set act=1 where email=#{email};
     </update>
-
-    <select id="queryByEmail" resultMap="userMap">
-        select * from user where email=#{email}
-    </select>
 
     <update id="update" parameterType="User">
         update user

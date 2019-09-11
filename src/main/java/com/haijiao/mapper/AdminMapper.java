@@ -25,7 +25,7 @@ public interface AdminMapper {
                          @Param("pwd") String pwd
     );
 
-    @Select("select id,USER,LEVEL,login_time from admin where user=#{user} ")
+    @Select("select aid,USER,LEVEL,login_time from admin where user=#{user} ")
     public Admin seleadmin(@Param("user") String user);
 
     @Select("SELECT uid,username,pwd FROM users  ")

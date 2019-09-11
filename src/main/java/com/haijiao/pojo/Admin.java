@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Admin implements Serializable {
     private static final long serialVersionUID = 4960310662539928636L;
-    private int id;
+    private int aid;
     private String admin;
     private String pwd;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

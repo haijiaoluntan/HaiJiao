@@ -12,7 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class RequestMessage implements Serializable {
     private static final long serialVersionUID = 2707033029334864923L;
-
     private String id;
     private String url;
     private String method;

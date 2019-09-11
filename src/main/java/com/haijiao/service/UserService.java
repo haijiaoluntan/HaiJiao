@@ -12,7 +12,7 @@ public interface UserService {
     
     Integer actication(String email);
     
-    Integer insert(User user);
+    Integer addUser(User user);
     
     User queryByEmail(String email);
     
@@ -29,5 +29,11 @@ public interface UserService {
     public int fsyanzm(@Param("email")String email, @Param("yzm")String yzm);
 
     public String elemaily(String email);
+    
+    Integer updExpByLike(Integer uid);
+    
+    Integer updExpByComm(Integer uid);
+    
+    Integer earnBalance(Integer uid, Integer balance);
 }
 

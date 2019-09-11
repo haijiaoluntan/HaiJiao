@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OperAuth {
+    private Integer aid;
     private Integer oid;
     private String describe;
     private  String authname;
+    private Integer state;
 }
