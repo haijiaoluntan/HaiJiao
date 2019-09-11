@@ -49,5 +49,12 @@
         left join (select uid, count(*) commCount from comment group by uid) b
         on a.uid = b.uid order by b.commCount desc limit 0, 12;
     </select>
+
+    <select id="getUserByUid" resultType="User">
+        select c.uid, c.username, c.sex, c.picture, c.level, c.exp, c.joindate, c.balance, c.sprovince, d.name scity from
+        (select a.uid, a.username, a.sex, a.picture, a.level, a.exp, a.joindate, a.balance, a.city, b.name sprovince
+        from user a left join province b on a.province = b.id) c left join city d on c.city = d.id
+        where c.uid = #{uid};
+    </select>
 </mapper>
 

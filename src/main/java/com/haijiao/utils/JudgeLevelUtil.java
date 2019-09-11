@@ -23,7 +23,9 @@ public class JudgeLevelUtil {
         Integer uid = user.getUid();
         Integer level = user.getLevel();
         Integer exp = user.getExp();
-    
+        System.out.println("level = " + level);
+        System.out.println("exp = " + exp);
+        
         if ((level == 1 && exp >= 50) ||
                 (level == 2 && exp >= 200) ||
                 (level == 3 && exp >= 3000) ||

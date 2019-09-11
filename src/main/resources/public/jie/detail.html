@@ -652,6 +652,9 @@
                 } else {
                     layer.msg("操作失败", {time: 1000});
                 }
+            },
+            error: function (data) {
+                layer.msg("请登录", {time: 1000});
             }
         })
     }

@@ -25,7 +25,6 @@ public interface UserMapper {
      * @param uid
      * @return
      */
-    @Select("select uid, username, sex, email, picture, level, province, city, joindate, signature, balance from user where uid = #{uid}")
     User getUserByUid(Integer uid);
     
     /**
@@ -74,7 +73,7 @@ public interface UserMapper {
      * @param username
      * @return
      */
-    @Select("select uid, username, sex, email, picture, level, province, city, joindate, signature, balance from user where username = #{username}")
+    @Select("select uid, username, sex, email, picture, level, exp, province, city, joindate, signature, balance from user where username = #{username}")
     User queryByUsername(String username);
     
     /**

@@ -4,10 +4,7 @@ import com.haijiao.pojo.Comment;
 import com.haijiao.pojo.Like;
 import com.haijiao.pojo.Post;
 import com.haijiao.pojo.User;
-import com.haijiao.service.CommentService;
-import com.haijiao.service.LikeService;
-import com.haijiao.service.PostService;
-import com.haijiao.service.UserService;
+import com.haijiao.service.*;
 import com.haijiao.utils.JudgeLevelUtil;
 import com.haijiao.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
@@ -46,6 +43,9 @@ public class CommentController {
     @Autowired
     private PostService postService;
     
+    @Autowired
+    private MessageService messageService;
+    
     /**
      * 新增评论
      * @param request
@@ -60,15 +60,20 @@ public class CommentController {
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user = userService.queryByUsername(claims.getIssuer());
     
+        Post post = postService.getPostByPid(pid);
+        
         Integer count = commentService.addComment(user.getUid(), pid, content);
     
         //获得经验并判断是否升级
         if (count > 0) {
     
             userService.updExpByComm(user.getUid());
-            judgeLevelUtil.judgeLevel(user);
+            User user1 = userService.getUserByUid(user.getUid());
+            judgeLevelUtil.judgeLevel(user1);
         }
-        
+    
+        //发送消息
+        messageService.addMessage(post.getUid(), user.getUid(), "评论了你的帖子", pid);
         
         return new ResponseEntity<>(count, HttpStatus.OK);
     }

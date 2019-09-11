@@ -37,6 +37,8 @@ public class User implements Serializable {
     private Integer act;        //邮箱是否激活
     private String actcode;     //邮箱激活码
     private Integer commCount;  //评论总数
+    private String sprovince;   //省份string
+    private String scity;       //城市string
     
     public Integer getUid() {
         return uid;
@@ -190,6 +192,22 @@ public class User implements Serializable {
         this.commCount = commCount;
     }
     
+    public String getSprovince() {
+        return sprovince;
+    }
+    
+    public void setSprovince(String sprovince) {
+        this.sprovince = sprovince;
+    }
+    
+    public String getScity() {
+        return scity;
+    }
+    
+    public void setScity(String scity) {
+        this.scity = scity;
+    }
+    
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("User").append('[')
@@ -231,6 +249,10 @@ public class User implements Serializable {
                 .append(actcode)
                 .append(", commCount=")
                 .append(commCount)
+                .append(", sprovince=")
+                .append(sprovince)
+                .append(", scity=")
+                .append(scity)
                 .append(']');
         return sb.toString();
     }

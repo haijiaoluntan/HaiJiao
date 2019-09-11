@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haijiao.mapper.FavoriteMapper">
+
+    <resultMap id="favoMap" type="Favorite">
+        <id property="fid" column="fid"/>
+        <result property="uid" column="uid"/>
+        <result property="fdate" column="fdate"/>
+        <association property="post" javaType="Post">
+            <id property="pid" column="pid"/>
+            <result property="title" column="title"/>
+        </association>
+    </resultMap>
+
+    <!--  判断是否已收藏  -->
+    <select id="isFavorite" resultMap="favoMap">
+        select a.fid, a.uid, a.pid, a.fdate, b.title from favorites a
+        left join posts b on a.pid = b.pid
+        where a.uid = #{uid} and a.pid = #{pid};
+    </select>
+
+    <!--  我收藏的帖  -->
+    <select id="getMyFavorites" resultMap="favoMap">
+        select a.fid, a.uid, a.pid, a.fdate, b.title from favorites a
+        left join posts b on a.pid = b.pid
+        where a.uid = #{uid};
+    </select>
+</mapper>

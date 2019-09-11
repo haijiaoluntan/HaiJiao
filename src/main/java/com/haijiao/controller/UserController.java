@@ -3,8 +3,10 @@ package com.haijiao.controller;
 
 
 import com.haijiao.pojo.City;
+import com.haijiao.pojo.Message;
 import com.haijiao.pojo.Province;
 import com.haijiao.pojo.User;
+import com.haijiao.service.MessageService;
 import com.haijiao.service.UserService;
 import com.haijiao.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
@@ -31,6 +33,9 @@ public class UserController {
     
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private MessageService messageService;
     
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -306,6 +311,46 @@ public class UserController {
         
         Integer count = userService.updInfo(user);
         
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    
+    /**
+     * 我的消息
+     * @param request
+     * @return
+     */
+    @RequestMapping("/user/getMessageByUid")
+    public ResponseEntity<?> getMessageByUid(HttpServletRequest request) {
+    
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        List<Message> list = messageService.getMessageByUid(user.getUid());
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    
+    /**
+     * 删除消息
+     * @param mid
+     * @return
+     */
+    @RequestMapping("/user/delMsg")
+    public ResponseEntity<?> delMsg(Integer mid) {
+    
+        Integer count = messageService.delMsg(mid);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    
+    /**
+     * 清空个人消息
+     * @param uid
+     * @return
+     */
+    @RequestMapping("/user/delAllMsg")
+    public ResponseEntity<?> delAllMsg(Integer uid) {
+        
+        Integer count = messageService.delAllMsg(uid);
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 }
