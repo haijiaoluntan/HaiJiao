@@ -1,120 +1,117 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>海角论坛</title>
-		<script src="../js/jquery-3.3.1.js"></script>
-		<script src="../layui/layui.js"></script>
-		<script src="../js/jwt-decode.min.js"></script>
-		<script src="../js/jwt.js"></script>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>海角论坛</title>
+	<script src="../js/jquery-3.3.1.js"></script>
+	<script src="../layui/layui.js"></script>
+	<script src="../js/jwt-decode.min.js"></script>
+	<script src="../js/jwt.js"></script>
 
-		<link rel="stylesheet" href="../layui/css/layui.css" />
-		<link rel="shortcut icon" type="images/jpeg" href="../video/hai-logo.jpg" />
-	</head>
-	<body class="layui-layout-body">
-		<div class="layui-layout layui-layout-admin">
-			<div class="layui-header">
-				<div class="layui-logo">海角论坛</div>
-				<!-- 头部区域（可配合layui已有的水平导航） -->
+	<link rel="stylesheet" href="../layui/css/layui.css" />
+	<link rel="shortcut icon" type="images/jpeg" href="../video/hai-logo.jpg" />
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+	<div class="layui-header">
+		<div class="layui-logo">海角论坛</div>
+		<!-- 头部区域（可配合layui已有的水平导航） -->
 
-				<ul class="layui-nav layui-layout-right">
-					<li class="layui-nav-item">
-						<a href="javascript:;">
-							<img src="../img/evernote_60px.png" class="layui-nav-img"> <span id="aname">kkkkk</span>
-						</a>
-						<dl class="layui-nav-child">
-							<dd>
-								<a href="">基本资料</a>
-							</dd>
-							<dd>
-								<a href="">安全设置</a>
-							</dd>
-						</dl>
-					</li>
-					<li class="layui-nav-item">
-						<a  onclick="out()">退出登录 </a>
-					</li>
-				</ul>
-			</div>
+		<ul class="layui-nav layui-layout-right">
+			<li class="layui-nav-item">
+				<a href="javascript:;">
+					<img src="../img/evernote_60px.png" class="layui-nav-img"> <span id="aname">kkkkk</span>
+				</a>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="">基本资料</a>
+					</dd>
+					<dd>
+						<a href="">安全设置</a>
+					</dd>
+				</dl>
+			</li>
+			<li class="layui-nav-item">
+				<a  onclick="out()">退出登录 </a>
+			</li>
+		</ul>
+	</div>
 
-			<div class="layui-side layui-bg-black">
-				<div class="layui-side-scroll">
-					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-					<ul class="layui-nav layui-nav-tree" lay-filter="test">
-						<li class="layui-nav-item layui-nav-itemed">
-							<a class="" href="javascript:;">角色管理</a>
-							<dl class="layui-nav-child">
-								<dd>
+	<div class="layui-side layui-bg-black">
+		<div class="layui-side-scroll">
+			<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+			<ul class="layui-nav layui-nav-tree" lay-filter="test">
+				<li class="layui-nav-item layui-nav-itemed">
+					<a class="" href="javascript:;">角色管理</a>
+					<dl class="layui-nav-child">
+						<dd>
 
-									<a href="alluser.html" target="right"><img src="../img/android_60px.png" class="layui-nav-img">  用户</a>
+							<a href="alluser.html" target="right"><img src="../img/android_60px.png" class="layui-nav-img">  用户</a>
 
-								</dd>
-								<dd>
-									<a href="alladmin.html" target="right"> <img src="../img/logo%20two_60px.png" class="layui-nav-img">管理员</a>
-								</dd>
-								<!-- 							<dd>
-                                                                    <a href="javascript:void(0)"  onclick="updatePwd('修改密码',1)">修改密码</a>
-                                                                </dd> -->
-							</dl>
-						</li>
-						<li class="layui-nav-item layui-nav-itemed">
-							<a class="" href="javascript:;">帖子管理</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="allpost.html" target="right"><img src="../img/logo%20five_60px.png" class="layui-nav-img"> 全部帖子</a>
-								</dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item layui-nav-itemed">
-							<a class="" href="javascript:;">权限管理</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="allrank.html" target="right"><img src="../img/d_60px.png" class="layui-nav-img">所有权限</a>
-								</dd>
-								<dd>
-									<a href="" target="right"><img src="../img/b%20social%20media_60px.png" class="layui-nav-img">配置权限</a>
-								</dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item layui-nav-itemed">
-							<a class="" href="javascript:;">系统管理</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="newsType.html" target="right"><img src="../img/pocket_60px.png" class="layui-nav-img">系统设置</a>
-								</dd>
-								<dd>
-									<a href="newsType.html" target="right"><img src="../img/safari_60px.png" class="layui-nav-img">栏目管理</a>
-								</dd> 
-								<dd>
-									<a href="newsType.html" target="right"><img src="../img/social%20network%20one_60px.png" class="layui-nav-img">数据字典</a>
-								</dd>
-								<dd>
-									<a href="newsType.html" target="right"><img src="../img/vine%20one_60px.png" class="layui-nav-img">屏蔽词</a>
-								</dd>
-								<dd>
-									<a href="newsType.html" target="right"><img src="../img/tinger_60px.png" class="layui-nav-img">系统日志</a>
-								</dd>
-							</dl>
-						</li>
-						<li class="layui-nav-item layui-nav-itemed">
-							<a class="" href="javascript:;">敬请期待</a>
-							<dl class="layui-nav-child">
-								<dd>
-									<a href="newsType.html" target="right">敬请期待</a>
-								</dd>
-								<dd>
-									<a href="newsType.html" target="right">敬请期待</a>
-								</dd> 
-								<dd>
-									<a href="newsType.html" target="right">敬请期待</a>
-								</dd>
-							</dl>
-						</li>
-					</ul>
-				</div>
-			</div>
+						</dd>
+						<dd>
+							<a href="alladmin.html" target="right"> <img src="../img/logo%20two_60px.png" class="layui-nav-img">管理员</a>
+						</dd>
+						<!-- 							<dd>
+                                                            <a href="javascript:void(0)"  onclick="updatePwd('修改密码',1)">修改密码</a>
+                                                        </dd> -->
+					</dl>
+				</li>
+				<li class="layui-nav-item layui-nav-itemed">
+					<a class="" href="javascript:;">帖子管理</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="allpost.html" target="right"><img src="../img/logo%20five_60px.png" class="layui-nav-img"> 全部帖子</a>
+						</dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item layui-nav-itemed">
+					<a class="" href="javascript:;">权限管理</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="allrank.html" target="right"><img src="../img/d_60px.png" class="layui-nav-img">所有权限</a>
+						</dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item layui-nav-itemed">
+					<a class="" href="javascript:;">系统管理</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="newsType.html" target="right"><img src="../img/pocket_60px.png" class="layui-nav-img">系统设置</a>
+						</dd>
+						<dd>
+							<a href="newsType.html" target="right"><img src="../img/safari_60px.png" class="layui-nav-img">栏目管理</a>
+						</dd>
+						<dd>
+							<a href="newsType.html" target="right"><img src="../img/social%20network%20one_60px.png" class="layui-nav-img">数据字典</a>
+						</dd>
+						<dd>
+							<a href="newsType.html" target="right"><img src="../img/vine%20one_60px.png" class="layui-nav-img">屏蔽词</a>
+						</dd>
+						<dd>
+							<a href="newsType.html" target="right"><img src="../img/tinger_60px.png" class="layui-nav-img">系统日志</a>
+						</dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item layui-nav-itemed">
+					<a class="" href="javascript:;">敬请期待</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="newsType.html" target="right">敬请期待</a>
+						</dd>
+						<dd>
+							<a href="newsType.html" target="right">敬请期待</a>
+						</dd>
+						<dd>
+							<a href="newsType.html" target="right">敬请期待</a>
+						</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
 
 	<div class="layui-body" style="z-index: 0;">
 		<!-- 内容主体区域 -->
@@ -134,30 +131,29 @@
 <script type="text/javascript" src="../layui/plugs.js">
 </script>
 <script>
-
     //JavaScript代码区域
     $(()=>{
         //alert("加载函数");
-   			 loadAdmin();
-    			//ext();
+        loadAdmin();
+        //ext();
 
     })
-	function ext() {
+    function ext() {
         alert("ext");
-		//<span id="aname">kkkkk</span>
-		var ss=$("#aname").hide();
+        //<span id="aname">kkkkk</span>
+        var ss=$("#aname").hide();
         //alert(ss);
         if(ss=="欢迎您:{'code':'403','msg':'fobidden'}"){
             alert("进入了ext");
             location.href='backlogin.html';
 
-		}
+        }
     }
-	 function  out() {
-         //alert("进入了out方法");
-         location.href='backlogin.html';
-         headers:setJwtToken(null);
-     }
+    function  out() {
+        //alert("进入了out方法");
+        location.href='backlogin.html';
+        headers:setJwtToken(null);
+    }
     function loadAdmin(){
         //alert("进入了loadadmin方法");
         $.ajax({
@@ -168,13 +164,15 @@
             //xhrFields: {withCredentials: true},
             success:function(data){
                 //alert("进入了check方法");
-                console.log(data)
+                console.log("返回的token用户信息"+data)
                 //$("#loginTime").text(data.login_time);//首页显示上次登录时间
-                $("#aname").text("欢迎您:"+data)//首页显示登陆者名字
+                $("#aname").text(data)//首页显示登陆者名字
                 var usern =data;
                 //alert("第一个ajax");
                 //alert(data);
                 // alert("check方法回调函数");
+                window.PartitionAdmin=data;
+                console.log(data);
 
                 $.ajax({
                     type:"post",
@@ -192,8 +190,6 @@
             }
         })
     }
-
-
     layui.use('element', function() {
         var element = layui.element;
     });
