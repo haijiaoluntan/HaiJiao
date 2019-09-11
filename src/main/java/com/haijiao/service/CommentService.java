@@ -13,4 +13,6 @@ public interface CommentService {
     Integer delComm(Integer cid);
     
     Integer acceptComm(Integer cid);
+    
+    List<Comment> getCommListByUid(Integer uid);
 }

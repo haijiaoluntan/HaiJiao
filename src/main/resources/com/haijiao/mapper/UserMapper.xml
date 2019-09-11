@@ -44,5 +44,10 @@
         where email=#{email};
     </update>
 
+    <select id="getCommRank" resultType="User">
+        select a.uid, a.username, a.picture, b.commCount from user a
+        left join (select uid, count(*) commCount from comment group by uid) b
+        on a.uid = b.uid order by b.commCount desc limit 0, 12;
+    </select>
 </mapper>
 

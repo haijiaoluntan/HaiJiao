@@ -81,5 +81,25 @@ public class PostServiceImpl implements PostService {
         return postMapper.doJie(pid);
     }
     
+    @Override
+    public List<ShowPost> getTopList() {
+        return postMapper.getTopList();
+    }
+    
+    @Override
+    public List<ShowPost> getIndexPostList(Integer state) {
+        return postMapper.getIndexPostList(state);
+    }
+    
+    @Override
+    public List<ShowPost> getPostsListByUid(Integer uid) {
+        return postMapper.getPostsListByUid(uid);
+    }
+    
+    @Override
+    public List<ShowPost> getPostsList(Integer uid) {
+        return postMapper.getPostsList(uid);
+    }
+    
     
 }

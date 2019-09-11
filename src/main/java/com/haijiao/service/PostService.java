@@ -35,5 +35,13 @@ public interface PostService {
     Integer cancelTop(Integer pid);
     
     Integer doJie(Integer pid);
+    
+    List<ShowPost> getTopList();
+    
+    List<ShowPost> getIndexPostList(Integer state);
+    
+    List<ShowPost> getPostsListByUid(Integer uid);
+    
+    List<ShowPost> getPostsList(Integer uid);
 }
 

@@ -22,7 +22,7 @@ public class JwtTokenUtil {
 
 	// jwt失效时间(单位为秒)
 	@Value("${jwt.expiration}")
-	private Long expiration = 1800L;
+	private Long expiration = 6400L;
 
 	/**
 	 * 创建JWT token

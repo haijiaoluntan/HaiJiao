@@ -22,6 +22,7 @@ public class Comment implements Serializable {
     private Integer likes;      //点赞数
     private Integer accept;     //是否采纳
     private String content;     //评论内容
+    private String title;       //所属帖子标题
     
     public Integer getCid() {
         return cid;
@@ -79,6 +80,14 @@ public class Comment implements Serializable {
         this.content = content;
     }
     
+    public String getTitle() {
+        return title;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Comment").append('[')
@@ -96,6 +105,8 @@ public class Comment implements Serializable {
                 .append(accept)
                 .append(", content=")
                 .append(content)
+                .append(", title=")
+                .append(title)
                 .append(']');
         return sb.toString();
     }

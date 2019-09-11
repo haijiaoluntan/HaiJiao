@@ -14,6 +14,25 @@ import java.util.List;
 public interface PostMapper {
     
     /**
+     * 首页展示列表
+     * @return
+     */
+    List<ShowPost> getIndexPostList(Integer state);
+    
+    /**
+     * 查询用户发表的所有帖子
+     * @param uid
+     * @return
+     */
+    List<ShowPost> getPostsListByUid(Integer uid);
+    
+    /**
+     * 置顶帖子列表
+     * @return
+     */
+    List<ShowPost> getTopList();
+    
+    /**
      * 发表新帖
      * @param post
      * @return
@@ -115,4 +134,11 @@ public interface PostMapper {
      */
     @Update("update posts set jie = 1, rstate = 1 where pid = #{pid}")
     Integer doJie(Integer pid);
+    
+    /**
+     * 我发的帖
+     * @param uid
+     * @return
+     */
+    List<ShowPost> getPostsList(Integer uid);
 }

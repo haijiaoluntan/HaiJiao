@@ -25,4 +25,9 @@
         left join user d on c.uid = d.uid where pid = #{pid};
     </select>
 
+    <!--  用户最近的评论  -->
+    <select id="getCommListByUid" resultType="Comment">
+        select a.*, b.title from comment a left join posts b on a.pid = b. pid
+        where a.uid = #{uid} order by a.cdate desc limit 0, 3;
+    </select>
 </mapper>

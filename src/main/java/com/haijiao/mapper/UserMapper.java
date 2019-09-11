@@ -1,12 +1,16 @@
 
 package com.haijiao.mapper;
+import com.haijiao.pojo.City;
 import com.haijiao.pojo.Eready;
+import com.haijiao.pojo.Province;
 import com.haijiao.pojo.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @Repository
@@ -15,7 +19,15 @@ public interface UserMapper {
     User queryByEmailPsw(String email, String password);
     
     Integer actication(String email);
-
+    
+    /**
+     * 根据uid查询user对象
+     * @param uid
+     * @return
+     */
+    @Select("select uid, username, sex, email, picture, level, province, city, joindate, signature, balance from user where uid = #{uid}")
+    User getUserByUid(Integer uid);
+    
     /**
      * 注册
      * @param user
@@ -62,7 +74,7 @@ public interface UserMapper {
      * @param username
      * @return
      */
-    @Select("select * from user where username = #{username}")
+    @Select("select uid, username, sex, email, picture, level, province, city, joindate, signature, balance from user where username = #{username}")
     User queryByUsername(String username);
     
     /**
@@ -114,4 +126,42 @@ public interface UserMapper {
      */
     @Update("update user set exp = (exp + 20) where uid = #{uid}")
     Integer updExpByComm(Integer uid);
+    
+    /**
+     * 评论排行榜
+     * @return
+     */
+    List<User> getCommRank();
+    
+    /**
+     * 修改密码
+     * @param uid
+     * @param password
+     * @return
+     */
+    @Update("update user set password = #{password} where uid = #{uid}")
+    Integer changePwdByUid(Integer uid, String password);
+    
+    /**
+     * 查询所有省份
+     * @return
+     */
+    @Select("select * from province")
+    List<Province> queryAllProvince();
+    
+    /**
+     * 查询此省份下所有城市
+     * @param pid
+     * @return
+     */
+    @Select("select * from city where pid = #{pid}")
+    List<City> queryCitysByPid(Integer pid);
+    
+    /**
+     * 修改个人信息
+     * @param user
+     * @return
+     */
+    @Update("update user set email = #{email}, username = #{username}, sex = #{sex}, province = #{province}, city = #{city}, signature = #{signature} where uid = #{uid}")
+    Integer updInfo(User user);
 }

@@ -36,30 +36,7 @@ public class User implements Serializable {
     private String email;       //绑定邮箱
     private Integer act;        //邮箱是否激活
     private String actcode;     //邮箱激活码
-    
-    public User() {
-    }
-    
-    public User(Integer uid, String username, String password, String phone, String sex, String picture, Integer level, Integer exp, Integer province, Integer city, Date joindate, Date loginDate, Date end_date, String signature, Double balance, String email, Integer act, String actcode) {
-        this.uid = uid;
-        this.username = username;
-        this.password = password;
-        this.phone = phone;
-        this.sex = sex;
-        this.picture = picture;
-        this.level = level;
-        this.exp = exp;
-        this.province = province;
-        this.city = city;
-        this.joindate = joindate;
-        this.loginDate = loginDate;
-        this.end_date = end_date;
-        this.signature = signature;
-        this.balance = balance;
-        this.email = email;
-        this.act = act;
-        this.actcode = actcode;
-    }
+    private Integer commCount;  //评论总数
     
     public Integer getUid() {
         return uid;
@@ -205,6 +182,13 @@ public class User implements Serializable {
         this.actcode = actcode;
     }
     
+    public Integer getCommCount() {
+        return commCount;
+    }
+    
+    public void setCommCount(Integer commCount) {
+        this.commCount = commCount;
+    }
     
     @Override
     public String toString() {
@@ -245,6 +229,8 @@ public class User implements Serializable {
                 .append(act)
                 .append(", actcode=")
                 .append(actcode)
+                .append(", commCount=")
+                .append(commCount)
                 .append(']');
         return sb.toString();
     }

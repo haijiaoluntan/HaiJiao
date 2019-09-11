@@ -1,10 +1,13 @@
 
 package com.haijiao.service;
 
+import com.haijiao.pojo.City;
+import com.haijiao.pojo.Province;
 import com.haijiao.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
 
 public interface UserService {
     
@@ -35,5 +38,17 @@ public interface UserService {
     Integer updExpByComm(Integer uid);
     
     Integer earnBalance(Integer uid, Integer balance);
+    
+    List<User> getCommRank();
+    
+    User getUserByUid(Integer uid);
+    
+    Integer changePwdByUid(Integer uid, String password);
+    
+    List<Province> queryAllProvince();
+    
+    List<City> queryCitysByPid(Integer pid);
+    
+    Integer updInfo(User user);
 }
 

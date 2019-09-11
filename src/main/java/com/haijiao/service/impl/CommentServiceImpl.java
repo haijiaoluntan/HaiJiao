@@ -33,4 +33,9 @@ public class CommentServiceImpl implements CommentService {
     public Integer acceptComm(Integer cid) {
         return commentMapper.acceptComm(cid);
     }
+    
+    @Override
+    public List<Comment> getCommListByUid(Integer uid) {
+        return commentMapper.getCommListByUid(uid);
+    }
 }

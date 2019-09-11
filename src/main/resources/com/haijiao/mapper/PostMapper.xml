@@ -157,4 +157,54 @@
 
         where c.state = 1 and c.pid = #{pid};
     </select>
+
+    <!--  置顶列表  -->
+    <select id="getTopList" resultMap="showPostMap">
+
+        <include refid="showPost"/>
+
+        where c.top = 1;
+    </select>
+
+    <!--  首页展示列表  -->
+    <select id="getIndexPostList" resultMap="showPostMap">
+
+        <include refid="showPost"/>
+
+        <where>
+            <choose>
+                <when test="_parameter == 0">
+                    1 = 1
+                </when>
+                <when test="_parameter == 1">
+                    c.jie = 0
+                </when>
+                <when test="_parameter == 2">
+                    c.jie = 1
+                </when>
+                <when test="_parameter == 3">
+                    c.jing = 1
+                </when>
+            </choose>
+        </where>
+
+        order by c.pubdate desc limit 0, 10;
+    </select>
+
+    <!--  查询用户发表的所有帖子  -->
+    <select id="getPostsListByUid" resultMap="showPostMap">
+
+        <include refid="showPost"/>
+
+        where uid = #{uid} order by c.pubdate desc limit 0, 12;
+    </select>
+
+    <!--  我发的帖  -->
+    <select id="getPostsList" resultMap="showPostMap">
+
+        <include refid="showPost"/>
+
+        where uid = #{uid} order by c.pubdate desc;
+    </select>
+
 </mapper>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="fly,layui,前端社区">
     <meta name="description" content="Fly社区是模块化前端UI框架Layui的官网社区，致力于为web开发提供强劲动力">
+    <link rel="icon" type="image/x-ico" href="../images/hai-logo.jpg" />
     <link rel="stylesheet" href="../res/layui/css/layui.css">
     <link rel="stylesheet" href="../res/css/global.css">
 </head>
@@ -102,10 +103,9 @@
             <dl class="fly-panel fly-list-one" id="dl_week">
                 <dt class="fly-panel-title">本周热议</dt>
 
-                <!-- 无数据时 -->
-                <!--
+
                 <div class="fly-none">没有相关数据</div>
-                -->
+
             </dl>
 
             <div class="fly-panel">
@@ -293,7 +293,7 @@
 
             appendVal += `
                 <li>
-                    <a href="../user/home.html?username=${posts.username}" class="fly-avatar">
+                    <a href="../user/home.html?uid=${posts.user.uid}" class="fly-avatar">
                         <img src="../${posts.user.picture}"
                              alt="${posts.user.username}">
                     </a>
@@ -302,7 +302,7 @@
                         <a href="detail.html?pid=${posts.pid}">${posts.title}</a>
                     </h2>
                     <div class="fly-list-info">
-                        <a href="../user/home.html?username=${posts.username}" link>
+                        <a href="../user/home.html?uid=${posts.user.uid}" link>
                             <cite>${posts.user.username}</cite>
                             <!--
                             <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>

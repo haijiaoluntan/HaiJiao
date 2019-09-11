@@ -43,4 +43,11 @@ public interface CommentMapper {
      */
     @Update("update comment set accept = 1 where cid = #{cid}")
     Integer acceptComm(Integer cid);
+    
+    /**
+     * 用户最近的评论
+     * @param uid
+     * @return
+     */
+    List<Comment> getCommListByUid(Integer uid);
 }

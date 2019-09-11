@@ -2,6 +2,8 @@
 package com.haijiao.controller;
 
 
+import com.haijiao.pojo.City;
+import com.haijiao.pojo.Province;
 import com.haijiao.pojo.User;
 import com.haijiao.service.UserService;
 import com.haijiao.utils.JwtTokenUtil;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -152,5 +155,145 @@ public class UserController {
             map.put("msg","验证码错误");
             return new ResponseEntity<>(map,HttpStatus.OK);
         }
+    }
+    
+    /**
+     * 评论排行榜
+     * @return
+     */
+    @RequestMapping("/user/getCommRank")
+    public ResponseEntity<?> getCommRank() {
+    
+        List<User> commRank = userService.getCommRank();
+        return new ResponseEntity<>(commRank, HttpStatus.OK);
+    }
+    
+    /**
+     * 根据uid获得user对象
+     * @param uid
+     * @return
+     */
+    @RequestMapping("/user/getUserByUid")
+    public ResponseEntity<?> getUserByUid(Integer uid) {
+    
+        User user = userService.getUserByUid(uid);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+    
+    /**
+     * 检查原密码是否正确
+     * @param request
+     * @param pwd
+     * @return
+     */
+    @RequestMapping("/user/checkOldPwd")
+    public ResponseEntity<?> checkOldPwd(HttpServletRequest request, String pwd) {
+    
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        User user1 = userService.queryByEmailPsw(user.getEmail(), pwd);
+    
+        if (user1 != null) {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+    }
+    
+    /**
+     * 修改密码
+     * @param request
+     * @param newpass
+     * @return
+     */
+    @RequestMapping("/user/changePwd")
+    public ResponseEntity<?> changePwd(HttpServletRequest request, String newpass) {
+        
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        Integer count = userService.changePwdByUid(user.getUid(), newpass);
+        
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    
+    /**
+     * 查询所有省份选项
+     * @return
+     */
+    @RequestMapping("/user/getProvinceList")
+    public ResponseEntity<?> getProvinceList() {
+    
+        List<Province> list = userService.queryAllProvince();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    
+    /**
+     * 查询此省份下所有城市选项
+     * @param pid
+     * @return
+     */
+    @RequestMapping("/user/getCityList")
+    public ResponseEntity<?> getCityList(Integer pid) {
+    
+        List<City> list = userService.queryCitysByPid(pid);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    
+    /**
+     * 检查邮箱是否重复
+     * @param email
+     * @return
+     */
+    @RequestMapping("/user/checkEmail")
+    public ResponseEntity<?> checkEmail(String email) {
+    
+        User user = userService.queryByEmail(email);
+    
+        if (user != null) {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+    }
+    
+    /**
+     * 检查昵称是否重复
+     * @param username
+     * @return
+     */
+    @RequestMapping("/user/checkUsername")
+    public ResponseEntity<?> checkUsername(String username) {
+    
+        User user = userService.queryByUsername(username);
+    
+        if (user != null) {
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+    }
+    
+    /**
+     * 修改个人信息
+     * @param request
+     * @param user
+     * @return
+     */
+    @RequestMapping("/user/updInfo")
+    public ResponseEntity<?> updInfo(HttpServletRequest request, User user) {
+    
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user1 = userService.queryByUsername(claims.getIssuer());
+        
+        user.setUid(user1.getUid());
+        
+        Integer count = userService.updInfo(user);
+        
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 }

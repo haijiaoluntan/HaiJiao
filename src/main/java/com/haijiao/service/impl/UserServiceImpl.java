@@ -1,10 +1,14 @@
 package com.haijiao.service.impl;
 
 import com.haijiao.mapper.UserMapper;
+import com.haijiao.pojo.City;
+import com.haijiao.pojo.Province;
 import com.haijiao.pojo.User;
 import com.haijiao.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -68,6 +72,36 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer earnBalance(Integer uid, Integer balance) {
         return userMapper.earnBalance(uid, balance);
+    }
+    
+    @Override
+    public List<User> getCommRank() {
+        return userMapper.getCommRank();
+    }
+    
+    @Override
+    public User getUserByUid(Integer uid) {
+        return userMapper.getUserByUid(uid);
+    }
+    
+    @Override
+    public Integer changePwdByUid(Integer uid, String password) {
+        return userMapper.changePwdByUid(uid, password);
+    }
+    
+    @Override
+    public List<Province> queryAllProvince() {
+        return userMapper.queryAllProvince();
+    }
+    
+    @Override
+    public List<City> queryCitysByPid(Integer pid) {
+        return userMapper.queryCitysByPid(pid);
+    }
+    
+    @Override
+    public Integer updInfo(User user) {
+        return userMapper.updInfo(user);
     }
     
     /**

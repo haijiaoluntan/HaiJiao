@@ -193,4 +193,16 @@ public class CommentController {
         
         return new ResponseEntity<>(c, HttpStatus.OK);
     }
+    
+    /**
+     * 用户最近的评论
+     * @param uid
+     * @return
+     */
+    @RequestMapping("comm/getCommListByUid")
+    public ResponseEntity<?> getCommListByUid(Integer uid) {
+    
+        List<Comment> list = commentService.getCommListByUid(uid);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

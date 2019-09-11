@@ -104,6 +104,41 @@ public class PostController {
     }
     
     /**
+     * 置顶列表
+     * @return
+     */
+    @RequestMapping("/posts/getTopList")
+    public ResponseEntity<?> getTopList() {
+    
+        List<ShowPost> topList = postService.getTopList();
+        return new ResponseEntity<>(topList, HttpStatus.OK);
+    }
+    
+    /**
+     * 查询用户发表的所有帖子
+     * @param uid
+     * @return
+     */
+    @RequestMapping("/posts/getPostsListByUid")
+    public ResponseEntity<?> getPostsListByUid(Integer uid) {
+    
+        List<ShowPost> list = postService.getPostsListByUid(uid);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    
+    /**
+     * 首页展示列表
+     * @param state
+     * @return
+     */
+    @RequestMapping("/posts/getIndexList")
+    public ResponseEntity<?> getTopList(Integer state) {
+    
+        List<ShowPost> list = postService.getIndexPostList(state);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+    
+    /**
      * 本周热议
      *
      * @return
@@ -200,5 +235,22 @@ public class PostController {
         
         Integer count = postService.cancelTop(pid);
         return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    
+    /**
+     * 我发的帖
+     * @param request
+     * @return
+     */
+    @RequestMapping("/posts/getPostsList")
+    public ResponseEntity<?> getPostsList(HttpServletRequest request) {
+    
+        String token = request.getHeader(this.header);
+        Claims claims = jwtTokenUtil.parseJWT(token);
+        User user = userService.queryByUsername(claims.getIssuer());
+    
+        List<ShowPost> list = postService.getPostsList(user.getUid());
+        
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
