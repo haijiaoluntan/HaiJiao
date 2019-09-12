@@ -25,7 +25,7 @@ public interface UserMapper {
      * @param uid
      * @return
      */
-    @Select("select * from user where uid = #{uid}")
+//    @Select("select * from user where uid = #{uid}")
     User getUserByUid(Integer uid);
 
     /**

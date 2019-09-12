@@ -10,8 +10,11 @@ import com.haijiao.service.MessageService;
 import com.haijiao.service.UserService;
 import com.haijiao.utils.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +92,7 @@ public class UserController {
     
     /**
      * 判断余额是否够
+     *
      * @param request
      * @param reward
      * @return
@@ -95,111 +103,116 @@ public class UserController {
         String token = request.getHeader(this.header);
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user = userService.queryByUsername(claims.getIssuer());
-    
+        
         if (user.getBalance() < reward) {
             return new ResponseEntity<>(false, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(true, HttpStatus.OK);
         }
     }
-
+    
     /**
      * 注册
+     *
      * @param user
      * @return
      */
     @PostMapping("/reg")
-    public ResponseEntity<?> reg(User user){
+    public ResponseEntity<?> reg(User user) {
         System.out.println("进入邮箱注册方法");
         Map<String, String> map = new HashMap<>();
         Integer i = userService.addUser(user);
-        if(i==1){
-            map.put("info","1");
-            map.put("msg","注册成功");
-            map.put("user",user.getUsername());
-            map.put("pwd",user.getPassword());
-            return new ResponseEntity<>(map,HttpStatus.OK);
-        }else{
-            map.put("info","1");
-            map.put("msg","注册失败");
-            return new ResponseEntity<>(map,HttpStatus.OK);
+        if (i == 1) {
+            map.put("info", "1");
+            map.put("msg", "注册成功");
+            map.put("user", user.getUsername());
+            map.put("pwd", user.getPassword());
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } else {
+            map.put("info", "1");
+            map.put("msg", "注册失败");
+            return new ResponseEntity<>(map, HttpStatus.OK);
         }
     }
-
+    
     /**
      * 判断邮箱是否已被注册
+     *
      * @param email
      * @return
      */
     @GetMapping("/selemail")
-    public ResponseEntity<?> selemail(String email){
+    public ResponseEntity<?> selemail(String email) {
         System.out.println("进入查询邮箱的方法");
-        Map<String,String> map=new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         User user = userService.queryByEmail(email);
-        if(user==null){
-            map.put("msg","邮箱合法");
-            map.put("info","1");
-            return new ResponseEntity<>(map,HttpStatus.OK);
-        }else{
-            map.put("msg","邮箱已被注册");
-            map.put("info","2");
-            return new ResponseEntity<>(map,HttpStatus.OK);
+        if (user == null) {
+            map.put("msg", "邮箱合法");
+            map.put("info", "1");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } else {
+            map.put("msg", "邮箱已被注册");
+            map.put("info", "2");
+            return new ResponseEntity<>(map, HttpStatus.OK);
         }
     }
-
+    
     @PostMapping("/yz")
-    public ResponseEntity<?> yanzheng(String email,String yzm){
+    public ResponseEntity<?> yanzheng(String email, String yzm) {
         Map<String, String> map = new HashMap<>();
         String yanzm = userService.elemaily(email);
-        if(yanzm.equals(yzm)){
-            map.put("info","1");
-            map.put("msg","验证码正确");
-            return new ResponseEntity<>(map,HttpStatus.OK);
-        }else {
-            map.put("info","1");
-            map.put("msg","验证码错误");
-            return new ResponseEntity<>(map,HttpStatus.OK);
+        if (yanzm.equals(yzm)) {
+            map.put("info", "1");
+            map.put("msg", "验证码正确");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } else {
+            map.put("info", "1");
+            map.put("msg", "验证码错误");
+            return new ResponseEntity<>(map, HttpStatus.OK);
         }
     }
     
     /**
      * 评论排行榜
+     *
      * @return
      */
     @RequestMapping("/user/getCommRank")
     public ResponseEntity<?> getCommRank() {
-    
+        
         List<User> commRank = userService.getCommRank();
         return new ResponseEntity<>(commRank, HttpStatus.OK);
     }
     
     /**
      * 根据uid获得user对象
+     *
      * @param uid
      * @return
      */
     @RequestMapping("/user/getUserByUid")
     public ResponseEntity<?> getUserByUid(Integer uid) {
-    
+        
         User user = userService.getUserByUid(uid);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
     
     /**
      * 检查原密码是否正确
+     *
      * @param request
      * @param pwd
      * @return
      */
     @RequestMapping("/user/checkOldPwd")
     public ResponseEntity<?> checkOldPwd(HttpServletRequest request, String pwd) {
-    
+        
         String token = request.getHeader(this.header);
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user = userService.queryByUsername(claims.getIssuer());
-    
+        
         User user1 = userService.queryByEmailPsw(user.getEmail(), pwd);
-    
+        
         if (user1 != null) {
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -209,6 +222,7 @@ public class UserController {
     
     /**
      * 修改密码
+     *
      * @param request
      * @param newpass
      * @return
@@ -219,7 +233,7 @@ public class UserController {
         String token = request.getHeader(this.header);
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user = userService.queryByUsername(claims.getIssuer());
-    
+        
         Integer count = userService.changePwdByUid(user.getUid(), newpass);
         
         return new ResponseEntity<>(count, HttpStatus.OK);
@@ -227,41 +241,44 @@ public class UserController {
     
     /**
      * 查询所有省份选项
+     *
      * @return
      */
     @RequestMapping("/user/getProvinceList")
     public ResponseEntity<?> getProvinceList() {
-    
+        
         List<Province> list = userService.queryAllProvince();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     /**
      * 查询此省份下所有城市选项
+     *
      * @param pid
      * @return
      */
     @RequestMapping("/user/getCityList")
     public ResponseEntity<?> getCityList(Integer pid) {
-    
+        
         List<City> list = userService.queryCitysByPid(pid);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     /**
      * 检查邮箱是否重复
+     *
      * @param email
      * @return
      */
     @RequestMapping("/user/checkEmail")
     public ResponseEntity<?> checkEmail(HttpServletRequest request, String email) {
-    
+        
         String token = request.getHeader(this.header);
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user = userService.queryByUsername(claims.getIssuer());
-    
+        
         User user1 = userService.queryByEmail(email);
-    
+        
         if (user1 == null) {
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else if (email.equals(user.getEmail())) {
@@ -273,18 +290,19 @@ public class UserController {
     
     /**
      * 检查昵称是否重复
+     *
      * @param username
      * @return
      */
     @RequestMapping("/user/checkUsername")
     public ResponseEntity<?> checkUsername(HttpServletRequest request, String username) {
-    
+        
         String token = request.getHeader(this.header);
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user = userService.queryByUsername(claims.getIssuer());
         
         User user1 = userService.queryByUsername(username);
-    
+        
         if (user1 == null) {
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else if (username.equals(user.getUsername())) {
@@ -296,13 +314,14 @@ public class UserController {
     
     /**
      * 修改个人信息
+     *
      * @param request
      * @param user
      * @return
      */
     @RequestMapping("/user/updInfo")
     public ResponseEntity<?> updInfo(HttpServletRequest request, User user) {
-    
+        
         String token = request.getHeader(this.header);
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user1 = userService.queryByUsername(claims.getIssuer());
@@ -316,34 +335,37 @@ public class UserController {
     
     /**
      * 我的消息
+     *
      * @param request
      * @return
      */
     @RequestMapping("/user/getMessageByUid")
     public ResponseEntity<?> getMessageByUid(HttpServletRequest request) {
-    
+        
         String token = request.getHeader(this.header);
         Claims claims = jwtTokenUtil.parseJWT(token);
         User user = userService.queryByUsername(claims.getIssuer());
-    
+        
         List<Message> list = messageService.getMessageByUid(user.getUid());
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     /**
      * 删除消息
+     *
      * @param mid
      * @return
      */
     @RequestMapping("/user/delMsg")
     public ResponseEntity<?> delMsg(Integer mid) {
-    
+        
         Integer count = messageService.delMsg(mid);
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
     
     /**
      * 清空个人消息
+     *
      * @param uid
      * @return
      */
@@ -352,5 +374,43 @@ public class UserController {
         
         Integer count = messageService.delAllMsg(uid);
         return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    
+    @RequestMapping("/user/upload")
+    public ResponseEntity<?> upload(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, JSONException {
+        
+        Part part = request.getPart("f");
+        
+        // 指定要上传文件的目录，不存在，则创建
+        String foldername = "E:\\Software Development\\nginx-1.16.0\\html\\haijiao\\images\\user_avatar";
+        File folder = new File(foldername);
+        if (!folder.exists()) {
+            System.out.println("当前目录不存在");
+        }
+        //获得文件名
+        String name = part.getSubmittedFileName();
+        // 构造需要上传的文件对象
+        File file = new File(folder, name);
+        
+        
+        //try..with..resources语句（Java7+开始支持的语法），它不用显示关闭流
+        try (
+            InputStream in = part.getInputStream();
+            OutputStream out = new FileOutputStream(file);
+        ) {
+            IOUtils.copyLarge(in, out);
+        }
+        response.setContentType("text/html;charset=utf-8");
+        
+        JSONObject obj = new JSONObject();
+        obj.accumulate("code", 0);
+        obj.accumulate("msg", "ok");
+        
+        JSONObject data = new JSONObject();
+        data.accumulate("src", name);
+        obj.accumulate("data", data);
+        System.out.println("res:" + obj);
+        response.getWriter().print(obj);
+        return new ResponseEntity<>(obj, HttpStatus.OK);
     }
 }

@@ -153,11 +153,11 @@
                     <div class="layui-form-item">
                         <div class="avatar-add">
                             <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过50KB</p>
-                            <button type="button" class="layui-btn upload-img">
+                            <button type="button" class="layui-btn upload-img" id="pic-btn">
                                 <i class="layui-icon">&#xe67c;</i>上传头像
                             </button>
-                            <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-                            <span class="loading"></span>
+                            <img id="img_1" src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                            <span class="loading" id="picname"></span>
                         </div>
                     </div>
                 </div>
@@ -235,6 +235,24 @@
             loadCity(data.value);
 
             form.render('select');
+        });
+    });
+
+    layui.use('upload', function () {
+
+        let upload = layui.upload;
+        //执行实例
+        let uploadInst = upload.render({
+            elem: '#pic-btn' //绑定元素
+            ,url: HOST_URL + "user/upload" //上传接口
+            ,field:'f'
+            ,done: function(res){
+                $("#img_1").attr("src", "../images/user_avatar/"+res.data.src);
+                $("#picname").html('<span style="color: #8f8f8f;">上传成功!!!</span>');
+            }
+            ,error: function(){
+                //请求异常回调
+            }
         });
     });
 
